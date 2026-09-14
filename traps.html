@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exam traps — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="traps">
+  <div class="main">
+    <h1>Exam traps</h1>
+    <p class="lead">Read this the night before. Then sleep.</p>
+    <table>
+      <tr><th>#</th><th>Trap</th><th>Correct reflex</th></tr>
+      <tr><td>1</td><td>Prompt vs control</td><td>Safety/compliance → Guardrails, IAM, or A2I — not “tell the model not to”.</td></tr>
+      <tr><td>2</td><td>Bedrock vs SageMaker</td><td>No ML team + FMs = Bedrock. Custom training = SageMaker.</td></tr>
+      <tr><td>3</td><td>RAG vs fine-tune</td><td>Changing facts / citations = RAG. Style/format = prompt or fine-tune.</td></tr>
+      <tr><td>4</td><td>Retrieval vs generation</td><td>Fix the stage that actually failed.</td></tr>
+      <tr><td>5</td><td>Accuracy on rare events</td><td>Use precision, recall, or F1.</td></tr>
+      <tr><td>6</td><td>Must be exact</td><td>Payroll, tax, hard rules → not an LLM.</td></tr>
+      <tr><td>7</td><td>S3 as a vector DB</td><td>OpenSearch / Aurora / Neptune / RDS / Knowledge Bases.</td></tr>
+      <tr><td>8</td><td>MemoryDB</td><td>Removed from the 2026 in-scope list. Do not pick it.</td></tr>
+      <tr><td>9</td><td>Q vs AgentCore</td><td>Q/Kiro = productised assistant. AgentCore = you build agents.</td></tr>
+      <tr><td>10</td><td>Macie vs Guardrails vs Comprehend</td><td>S3 at rest / model I/O / text you send.</td></tr>
+      <tr><td>11</td><td>CloudTrail vs CloudWatch vs Artifact</td><td>API who-when / metrics / compliance PDFs.</td></tr>
+      <tr><td>12</td><td>Explainability required</td><td>Traditional ML + Clarify + Model Cards.</td></tr>
+      <tr><td>13</td><td>Batch vs real-time</td><td>Millions overnight = batch. User waiting = real-time.</td></tr>
+      <tr><td>14</td><td>Always guess</td><td>15 items do not count and you cannot see which. Answer all 65.</td></tr>
+      <tr><td>15</td><td>Multi-response</td><td>You must select every correct option. Partial = zero.</td></tr>
+    </table>
+    <div class="pager">
+      <a class="btn ghost" href="trees.html">‹ Trees</a>
+      <a class="btn" href="glossary.html">Glossary ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

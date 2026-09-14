@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — Agents</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lagent">
+  <div class="main">
+    <h1>Lesson 5 — Agents, tools, MCP, AgentCore</h1>
+    <p class="lead">2026 exam guide added this on purpose. Learn the nouns. You will not write the agent loop.</p>
+
+    <h2>Chatbot versus agent</h2>
+    <p>A normal FM call: user text in, model text out.<br>
+    An <b>agent</b>: the model decides it needs a tool (search, ticket API, calculator), calls it, reads the result, and continues. That loop is often called <b>ReAct</b> (reason + act).</p>
+
+    <h2>Pieces you must name</h2>
+    <ul>
+      <li><b>Tools / function calling</b> — APIs the agent is allowed to use.</li>
+      <li><b>Memory</b> — short-term (this chat) vs long-term (across sessions).</li>
+      <li><b>MCP (Model Context Protocol)</b> — a standard way to connect agents to external tools and data. The agent is a client; the tool is an MCP server.</li>
+      <li><b>Multi-agent</b> — specialist agents coordinated (research agent + writer agent). On AWS: <b>Strands Agents</b>.</li>
+      <li><b>Orchestration</b> — who runs the loop. AgentCore Runtime, or a fixed workflow when steps never change.</li>
+    </ul>
+
+    <h2>AgentCore (in-scope 2026)</h2>
+    <table>
+      <tr><th>Part</th><th>Job</th></tr>
+      <tr><td>Runtime</td><td>Serverless place the agent process runs</td></tr>
+      <tr><td>Gateway</td><td>MCP-compatible tool connectivity</td></tr>
+      <tr><td>Identity</td><td>Who the agent is; maps to least-privilege access</td></tr>
+      <tr><td>Policy</td><td>What tools and data it may touch — enforced <i>outside</i> the model’s “please”</td></tr>
+      <tr><td>Memory / Observability</td><td>State and traces</td></tr>
+    </table>
+    <div class="warn">A prompt-injected model must not be able to authorise a dangerous tool call. That is why Policy and IAM exist. Guardrails filter content; they do not replace identity.</div>
+
+    <h2>When not to use an agent</h2>
+    <p>If the process is always “extract → summarise → store,” that is a <b>fixed workflow</b>, not an open-ended agent. The exam still rewards “agent” when the next step depends on the question and many tools exist.</p>
+
+    <h2>Productised vs custom</h2>
+    <p><b>Amazon Q / Quick / Kiro</b> — you use an assistant AWS already built.<br>
+    <b>Bedrock Agents + AgentCore + Strands</b> — you build an agent for your APIs.</p>
+
+    <div class="pager">
+      <a class="btn ghost" href="lesson-bedrock.html">‹ Bedrock</a>
+      <a class="btn" href="d3.html">Domain 3 ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

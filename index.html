@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIF-C01 Study Lab — Home</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="home">
+  <div class="main" id="main">
+    <h1>AWS Certified AI Practitioner</h1>
+    <p class="lead">One local website. Every official topic, one page at a time, with an exam-style quiz on that topic. Then 7 mixed quizzes and 5 timed mocks. You do not need another course.</p>
+
+    <div class="cards" id="facts"></div>
+
+    <div class="ok">
+      <h3>How to pass with only this site</h3>
+      <ol>
+        <li>Read <a href="exam.html">Exam facts</a> once.</li>
+        <li>Use the left menu: <b>Learn</b> has the five domains. Finish every topic (lesson + quiz), then Domain 2–5.</li>
+        <li>Tick the <a href="plan.html">14-day plan</a> only when you can teach that topic.</li>
+        <li>Flashcards + every quiz until 80%+.</li>
+        <li>Mocks 1→5 under the timer. Book when Mock 5 is a comfortable pass.</li>
+      </ol>
+    </div>
+
+    <h2>Your progress (saved in this browser)</h2>
+    <div id="dash"></div>
+
+    <h2>This lab covers the 2026 exam (guide v1.1)</h2>
+    <p>Older videos miss these. They are in the tutorials, quizzes, and mocks:</p>
+    <table>
+      <tr><th>New objective</th><th>What this site teaches</th></tr>
+      <tr><td>Agentic AI + MCP</td><td>Agents plan, call tools, keep memory. MCP connects tools. AgentCore Identity / Policy.</td></tr>
+      <tr><td>Context engineering</td><td>Everything in the window: system prompt, retrieved docs, tools, history — not only the user sentence.</td></tr>
+      <tr><td>Token pricing</td><td>Input + output tokens drive Bedrock cost and latency.</td></tr>
+      <tr><td>Distillation</td><td>Small student copies a large teacher to cut inference cost.</td></tr>
+      <tr><td>Prompt Management</td><td>Version prompts in Bedrock instead of hard-coding only.</td></tr>
+      <tr><td>Grounding</td><td>RAG, citations, Guardrails contextual grounding, “I don’t know”.</td></tr>
+      <tr><td>New names</td><td>Nova, Q, Quick, Kiro, Strands, AgentCore, JumpStart, Transform, Aurora. MemoryDB is out.</td></tr>
+    </table>
+
+    <div class="btn-row">
+      <a class="btn" href="d1.html">Start Domain 1</a>
+      <a class="btn dark" href="mock.html?n=1">Jump to Mock 1</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/topics.js"></script>
+  <script>
+    document.getElementById("facts").innerHTML = [
+      ["65", "Questions (50 scored + 15 hidden)"],
+      ["90 min", "Clock on exam day"],
+      ["700", "Scaled pass mark / 1000"],
+      ["41", "Topic lessons with their own quizzes"]
+    ].map(function (x) {
+      return '<div class="stat"><b>' + x[0] + "</b><span>" + x[1] + "</span></div>";
+    }).join("");
+
+    var s = AIF.store.get();
+    var topicList = (AIF.topics || []);
+    var topicRead = topicList.filter(function (t) { return s.read["topic-" + t.id]; }).length;
+    var topicQuiz = topicList.filter(function (t) { return s.quiz["topic-" + t.id]; }).length;
+    var extras = ["exam","plan","lsvc","lbed","lagent","lrag","lprompt","lguard","services","scope","trees","traps","glossary"];
+    var extraRead = extras.filter(function (id) { return s.read[id]; }).length;
+    var planN = Object.keys(s.plan).filter(function (k) { return s.plan[k]; }).length;
+    var bankQuiz = ["d1","d2","d3","d4","d5","svc","mixed"].filter(function (k) { return s.quiz[k]; }).length;
+    var mockBest = [1,2,3,4,5].map(function (n) {
+      var arr = s.mocks[n] || [];
+      if (!arr.length) return null;
+      return arr.reduce(function (a, b) { return a.scaled > b.scaled ? a : b; });
+    });
+
+    var html = "<p>Official topics read: <b>" + topicRead + " / " + topicList.length +
+      "</b></p><div class='bar'><i style='width:" + AIF.pct(topicRead, topicList.length) + "%'></i></div>";
+    html += "<p>Topic quizzes submitted: <b>" + topicQuiz + " / " + topicList.length +
+      "</b></p><div class='bar'><i style='width:" + AIF.pct(topicQuiz, topicList.length) + "%'></i></div>";
+    html += "<p>Plan days ticked: <b>" + planN + " / 14</b></p><div class='bar'><i style='width:" +
+      AIF.pct(planN, 14) + "%'></i></div>";
+    html += "<p>Domain / mixed banks completed: <b>" + bankQuiz + " / 7</b></p><div class='bar'><i style='width:" +
+      AIF.pct(bankQuiz, 7) + "%'></i></div>";
+    html += "<p class='muted small'>Extra lesson pages opened: " + extraRead + " / " + extras.length + "</p>";
+    html += "<table><tr><th>Mock</th><th>Best scaled</th><th>Result</th></tr>";
+    mockBest.forEach(function (r, i) {
+      html += "<tr><td><a href='mock.html?n=" + (i + 1) + "'>Mock " + (i + 1) + "</a></td><td>" +
+        (r ? r.scaled : "—") + "</td><td>" + (r ? (r.pass ? "Pass" : "Fail") : "Not sat") + "</td></tr>";
+    });
+    html += "</table>";
+    document.getElementById("dash").innerHTML = html;
+  </script>
+</body>
+</html>

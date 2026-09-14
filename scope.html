@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Official blueprint coverage — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="scope">
+  <div class="main">
+    <h1>Official blueprint — fully mapped</h1>
+    <p class="lead">Checked against AWS Certified AI Practitioner exam guide <b>v1.1 (30 Apr 2026)</b>. This page is the leftover official list: every in-scope service and the thin objectives that used to be only a one-liner.</p>
+
+    <div class="ok">
+      <h3>Pass verdict</h3>
+      <p>All <b>5 domains</b> and all <b>13 task statements</b> are split into topic pages (each with an exam-style quiz), then retested in the 7 banks and 5 mocks. You can pass from this site alone. The exam is recognition-level (pick the service / pattern / risk), not coding.</p>
+    </div>
+
+    <h2>Task statements (nothing missing)</h2>
+    <table>
+      <tr><th>Task</th><th>Taught on</th></tr>
+      <tr><td>1.1 Terms · 1.2 use cases · 1.3 lifecycle</td><td><a href="d1.html">Domain 1 topic list</a></td></tr>
+      <tr><td>2.1 GenAI concepts · 2.2 limits · 2.3 AWS stack</td><td><a href="d2.html">Domain 2 topic list</a></td></tr>
+      <tr><td>3.1 FM design · 3.2 prompts · 3.3 train · 3.4 eval</td><td><a href="d3.html">Domain 3 topic list</a></td></tr>
+      <tr><td>4.1 Responsible systems · 4.2 explainability</td><td><a href="d4.html">Domain 4 topic list</a></td></tr>
+      <tr><td>5.1 Secure · 5.2 govern</td><td><a href="d5.html">Domain 5 topic list</a></td></tr>
+    </table>
+
+    <h2>Official in-scope services (complete list)</h2>
+    <p>You do <b>not</b> configure these. You pick the name that matches a one-line job. High-yield names are bold.</p>
+
+    <h3>Machine learning &amp; GenAI (learn these cold)</h3>
+    <table>
+      <tr><th>Service</th><th>Pick it when the stem wants…</th></tr>
+      <tr><td><b>Amazon Bedrock</b></td><td>Managed FMs, one API, no servers</td></tr>
+      <tr><td><b>Bedrock Knowledge Bases</b></td><td>Managed RAG</td></tr>
+      <tr><td><b>Bedrock Guardrails</b></td><td>Content / PII / denied topics / grounding</td></tr>
+      <tr><td><b>Bedrock Agents + AgentCore</b></td><td>Custom agents, tools, MCP, identity, policy</td></tr>
+      <tr><td><b>Amazon Nova</b></td><td>Amazon’s own FM family (text / image / video / speech)</td></tr>
+      <tr><td><b>Amazon SageMaker AI</b></td><td>Build, train, deploy custom ML</td></tr>
+      <tr><td><b>SageMaker JumpStart</b></td><td>One-click OSS / pre-trained models</td></tr>
+      <tr><td>SageMaker Canvas</td><td>No-code ML for analysts</td></tr>
+      <tr><td>SageMaker Clarify / Model Cards / Model Monitor</td><td>Bias, docs, drift</td></tr>
+      <tr><td><b>Amazon Q / Quick / Kiro</b></td><td>Workplace assistant / coding / agentic IDE</td></tr>
+      <tr><td><b>Strands Agents / AWS Transform</b></td><td>Multi-agent framework / code modernization</td></tr>
+      <tr><td>Amazon A2I</td><td>Human review</td></tr>
+      <tr><td>Comprehend / Lex / Kendra</td><td>NLP / chatbots / enterprise search</td></tr>
+      <tr><td>Rekognition / Textract</td><td>Vision / PDF forms</td></tr>
+      <tr><td>Transcribe / Polly / Translate</td><td>Speech↔text / language</td></tr>
+      <tr><td>Amazon Personalize</td><td>Product recommendations</td></tr>
+    </table>
+
+    <h3>Data &amp; analytics (know the job, not the console)</h3>
+    <table>
+      <tr><th>Service</th><th>Pick it when…</th></tr>
+      <tr><td>Amazon S3</td><td>Object store for docs, training files, invocation logs. <b>Not</b> a vector DB.</td></tr>
+      <tr><td>S3 Glacier</td><td>Cheap long-term archive of old AI logs or datasets</td></tr>
+      <tr><td>AWS Glue</td><td>ETL / catalog for ML data pipelines</td></tr>
+      <tr><td>AWS Glue DataBrew</td><td>No-code data cleaning before training</td></tr>
+      <tr><td>AWS Lake Formation</td><td>Govern who can see data lake tables</td></tr>
+      <tr><td>Amazon EMR</td><td>Big Spark/Hadoop processing</td></tr>
+      <tr><td>Amazon Redshift</td><td>Warehouse / SQL analytics on structured data</td></tr>
+      <tr><td>AWS Data Exchange</td><td>Subscribe to third-party datasets</td></tr>
+      <tr><td><b>Amazon OpenSearch Service</b></td><td>Search + vector store for RAG</td></tr>
+      <tr><td>Amazon Quick</td><td>Workforce GenAI / analytics assistant (2026 name on the guide)</td></tr>
+    </table>
+
+    <h3>Databases (vector vs not)</h3>
+    <table>
+      <tr><th>Service</th><th>Exam use</th></tr>
+      <tr><td><b>Aurora / RDS PostgreSQL</b></td><td>Yes — pgvector embeddings</td></tr>
+      <tr><td><b>Amazon Neptune</b></td><td>Yes — graph + some RAG / knowledge-graph use</td></tr>
+      <tr><td>Amazon DynamoDB</td><td>App key-value store — not a similarity search engine</td></tr>
+      <tr><td>Amazon DocumentDB</td><td>Mongo-compatible documents — not the default vector answer</td></tr>
+      <tr><td>Amazon ElastiCache</td><td>In-memory cache — not a vector DB on this exam</td></tr>
+    </table>
+    <div class="warn"><b>Amazon MemoryDB is out of scope</b> on the 2026 list. Do not pick it.</div>
+
+    <h3>Compute, containers, network, cost</h3>
+    <table>
+      <tr><th>Service</th><th>Pick it when…</th></tr>
+      <tr><td>AWS Lambda</td><td>Serverless glue: call a model, a tool, or preprocess a file</td></tr>
+      <tr><td>Amazon EC2</td><td>You run the instance (including GPU) yourself</td></tr>
+      <tr><td>Amazon ECS / EKS</td><td>You host a custom model or agent in containers</td></tr>
+      <tr><td>Amazon VPC</td><td>Private network around the app</td></tr>
+      <tr><td>AWS PrivateLink</td><td>Bedrock/S3 stay off the public internet</td></tr>
+      <tr><td>Amazon CloudFront</td><td>CDN in front of a public app — not an AI service</td></tr>
+      <tr><td>AWS Budgets / Cost Explorer</td><td>Alert on spend / analyse token or endpoint cost</td></tr>
+    </table>
+
+    <h3>Security &amp; governance (Domain 5 gold)</h3>
+    <table>
+      <tr><th>Service</th><th>Pick it when…</th></tr>
+      <tr><td>IAM</td><td>Who may invoke which model</td></tr>
+      <tr><td>AWS KMS</td><td>Customer-managed encryption keys</td></tr>
+      <tr><td>AWS Secrets Manager</td><td>API keys — never inside a prompt</td></tr>
+      <tr><td>Amazon Macie</td><td>PII already sitting in S3</td></tr>
+      <tr><td>Amazon Inspector</td><td>Vulnerabilities on compute</td></tr>
+      <tr><td>AWS CloudTrail</td><td>Who called which API when</td></tr>
+      <tr><td>Amazon CloudWatch</td><td>Metrics and alarms</td></tr>
+      <tr><td>AWS Config</td><td>Resource config drift</td></tr>
+      <tr><td>AWS Audit Manager</td><td>Ongoing audit evidence</td></tr>
+      <tr><td>AWS Artifact</td><td>Download AWS SOC/ISO/PCI PDFs</td></tr>
+      <tr><td>AWS Trusted Advisor</td><td>Account best-practice checks</td></tr>
+      <tr><td>AWS Well-Architected Tool</td><td>ML / GenAI lens review</td></tr>
+    </table>
+
+    <h2>2026 objectives — confirm you can teach these</h2>
+    <ul>
+      <li>Agentic AI, multi-agent, MCP, tool use, memory</li>
+      <li>Context engineering (window = prompt + docs + tools + history)</li>
+      <li>Token pricing (input + output) and prompt caching</li>
+      <li>Model distillation vs RAG vs fine-tune vs pre-train</li>
+      <li>Bedrock Prompt Management (version prompts)</li>
+      <li>Hallucination detection / grounding / confidence</li>
+      <li>AgentCore Identity and Policy</li>
+      <li>Q, Quick, Kiro, Strands, Nova, Transform, JumpStart, Aurora</li>
+    </ul>
+
+    <div class="exam">
+      <h3>What this exam will never ask you to do</h3>
+      <p>Write training code, tune hyperparameters, design a VPC from scratch, or implement a Glue job. If a distractor is “build your own vector database on EC2,” the managed service almost always wins.</p>
+    </div>
+
+    <div class="pager">
+      <a class="btn ghost" href="services.html">‹ Cheat sheet</a>
+      <a class="btn" href="trees.html">Decision trees ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

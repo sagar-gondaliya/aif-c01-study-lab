@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — Prompts</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lprompt">
+  <div class="main">
+    <h1>Lesson 7 — Prompts, temperature, and attacks</h1>
+    <p class="lead">Domain 3.2 plus the inference knobs from 3.1. Practice writing the words, not just reading them.</p>
+
+    <h2>A prompt has parts</h2>
+    <ul>
+      <li><b>Instruction</b> — what to do (“summarise in 5 bullets”).</li>
+      <li><b>Context</b> — facts, retrieved chunks, conversation history.</li>
+      <li><b>Input</b> — the user’s question.</li>
+      <li><b>Output format</b> — JSON, table, “cite sources.”</li>
+      <li><b>Negative prompt</b> — what not to do (“do not invent clause numbers”).</li>
+    </ul>
+    <p><b>Context engineering</b> is bigger than the instruction sentence. It is everything you stuff into the window: system prompt, tools, memory, RAG chunks.</p>
+
+    <h2>Techniques</h2>
+    <table>
+      <tr><th>Name</th><th>Teach it</th></tr>
+      <tr><td>Zero-shot</td><td>Instruction only</td></tr>
+      <tr><td>Single-shot / one-shot</td><td>One example</td></tr>
+      <tr><td>Few-shot</td><td>A few examples. Also called in-context learning. Weights do not change.</td></tr>
+      <tr><td>Chain-of-thought</td><td>“Think step by step” for math or multi-hop reasoning</td></tr>
+      <tr><td>Template</td><td>Reusable structure with variables</td></tr>
+      <tr><td>Prompt Management</td><td>Bedrock stores versions so you can roll forward/back without redeploying folklore</td></tr>
+    </table>
+    <p>Best practices from the guide: be specific and concise, experiment, use Guardrails for safety, try more than one wording.</p>
+
+    <h2>Knobs</h2>
+    <p><b>Temperature</b> low (0–0.3) for policy, support, RAG. High for brainstorming. <b>Top-p</b> is another creativity limiter. <b>Max tokens</b> caps length and output cost. <b>Stop sequences</b> cut the model off.</p>
+
+    <h2>Attacks</h2>
+    <table>
+      <tr><th>Name</th><th>What happened</th></tr>
+      <tr><td>Jailbreak</td><td>User talks the model past safety</td></tr>
+      <tr><td>Injection / hijack</td><td>A webpage or PDF says “ignore previous instructions”</td></tr>
+      <tr><td>Poisoning</td><td>Bad examples or bad KB documents</td></tr>
+      <tr><td>Exposure</td><td>The model leaks the system prompt or a secret</td></tr>
+    </table>
+    <p>Defence is infrastructure: Guardrails, treat untrusted text as data, never put secrets in prompts (Secrets Manager), least-privilege tools, grounding checks. A sentence in the system prompt is not a guarantee.</p>
+
+    <div class="pager">
+      <a class="btn ghost" href="lesson-rag.html">‹ RAG</a>
+      <a class="btn" href="d4.html">Domain 4 ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

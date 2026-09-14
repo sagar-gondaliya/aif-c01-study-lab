@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Decision trees — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="trees">
+  <div class="main">
+    <h1>Decision trees</h1>
+    <p class="lead">Walk these until they are automatic. Most scored items are one of these forks.</p>
+
+    <h2>1. We have documents and want answers</h2>
+    <ol>
+      <li>Need citations / private facts / changing docs → Bedrock Knowledge Bases (RAG)</li>
+      <li>Employees chatting over many SaaS sources with existing permissions → Q Business / Quick</li>
+      <li>Classic search without generation → Kendra</li>
+      <li>Must train a custom classifier on labels → SageMaker or Comprehend custom</li>
+    </ol>
+
+    <h2>2. We want to change model behaviour</h2>
+    <ol>
+      <li>Format / few examples → prompt / few-shot</li>
+      <li>Private facts → RAG</li>
+      <li>Stable style/domain with labeled pairs → fine-tune</li>
+      <li>Need cheaper/faster with similar quality → distillation</li>
+      <li>Brand-new FM → do not pre-train</li>
+    </ol>
+
+    <h2>3. Something unsafe happened</h2>
+    <table>
+      <tr><th>Symptom</th><th>Control</th></tr>
+      <tr><td>Hate / sexual / violence</td><td>Guardrails content filters</td></tr>
+      <tr><td>Banned topic (legal/medical advice)</td><td>Guardrails denied topics</td></tr>
+      <tr><td>Leaks SSN / email</td><td>Guardrails PII + Macie on stored data</td></tr>
+      <tr><td>Webpage says “ignore previous instructions”</td><td>Guardrails + treat untrusted text as data</td></tr>
+      <tr><td>Wrong facts not in our docs</td><td>Grounding + RAG</td></tr>
+      <tr><td>High-stakes error</td><td>A2I</td></tr>
+      <tr><td>Wrong team calling Claude Opus</td><td>IAM / SCP</td></tr>
+      <tr><td>Need SOC2 PDF</td><td>Artifact</td></tr>
+    </table>
+
+    <h2>4. Bedrock or SageMaker?</h2>
+    <p>Managed FMs, Knowledge Bases, Guardrails, Agents → Bedrock.<br>
+    Custom training, own containers, notebooks, full MLOps → SageMaker AI.</p>
+
+    <h2>5. Q / Kiro or AgentCore?</h2>
+    <p>Productised assistant you <b>use</b> → Amazon Q or Kiro.<br>
+    Custom agents you <b>build</b> with tools, identity, policy → AgentCore (+ Strands if multi-agent code).</p>
+
+    <div class="pager">
+      <a class="btn ghost" href="services.html">‹ Services</a>
+      <a class="btn" href="traps.html">Exam traps ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

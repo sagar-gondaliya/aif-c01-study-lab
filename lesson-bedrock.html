@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — Amazon Bedrock</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lbed">
+  <div class="main">
+    <h1>Lesson 4 — Amazon Bedrock (the exam’s home planet)</h1>
+    <p class="lead">If the stem says foundation model, chatbot, RAG, agents, or Guardrails and “no servers / no ML team,” the answer is almost always a Bedrock feature.</p>
+
+    <h2>What Bedrock is</h2>
+    <p>A fully managed API that lets you call foundation models from several providers through one interface. You do not manage GPUs. You request model access, then invoke.</p>
+    <p>Providers to recognise: <b>Amazon (Nova, Titan)</b>, Anthropic (Claude), Meta (Llama), Cohere, Mistral, AI21, Stability AI. Titan Image watermarking still appears in older notes — Amazon marks generated images for responsible-AI tracing.</p>
+    <div class="ok"><b>Exam fact:</b> Bedrock does not use your prompts or outputs to train the base provider models. Data stays in your account/region by default.</div>
+
+    <h2>Feature map (memorise the job)</h2>
+    <table>
+      <tr><th>Feature</th><th>Job</th></tr>
+      <tr><td>Invoke / Converse API</td><td>Send a prompt, get a completion (optionally streaming)</td></tr>
+      <tr><td>Knowledge Bases</td><td>Managed RAG: ingest, chunk, embed, retrieve, generate</td></tr>
+      <tr><td>Guardrails</td><td>Hard safety and grounding at runtime</td></tr>
+      <tr><td>Agents + AgentCore</td><td>Plan, call tools, keep memory, enforce identity/policy</td></tr>
+      <tr><td>Prompt Management</td><td>Store and version prompts</td></tr>
+      <tr><td>Model Evaluation</td><td>Compare models: quality, toxicity, human or LLM-as-judge</td></tr>
+      <tr><td>Customization</td><td>Fine-tune, continued pre-train, distillation</td></tr>
+      <tr><td>Batch inference</td><td>Cheaper when you can wait</td></tr>
+      <tr><td>Provisioned Throughput</td><td>Reserved capacity for steady high volume</td></tr>
+      <tr><td>Prompt caching</td><td>Reuse a long prefix; lower input cost and latency</td></tr>
+      <tr><td>Cross-region inference</td><td>Resilience / capacity — watch data residency</td></tr>
+    </table>
+
+    <h2>Bedrock versus SageMaker — say it until it is boring</h2>
+    <p><b>Bedrock:</b> consume FMs. Lowest barrier. Knowledge Bases, Guardrails, Agents included.<br>
+    <b>SageMaker AI:</b> you own training data science, instances, endpoints, custom algorithms, notebooks, pipelines.</p>
+    <p>JumpStart sits on the SageMaker side when you want a one-click open-source or custom weight that is not (only) a Bedrock catalog model.</p>
+
+    <h2>From your AIP notes — practitioner trim</h2>
+    <ul>
+      <li>Prefer Knowledge Bases over building OpenSearch + embeddings yourself unless the stem forces custom control.</li>
+      <li>On-demand = token bill. Provisioned = capacity bill. Streaming helps perceived latency, not always cost.</li>
+      <li>Cross-region inference can leave the original region. Residency questions care about that.</li>
+      <li>Do not pick “PartyRock” as a production architecture. It was a playground; the 2026 guide names Bedrock, JumpStart, Q, Quick, Kiro, Strands, AgentCore.</li>
+    </ul>
+
+    <div class="pager">
+      <a class="btn ghost" href="d2.html">‹ Domain 2</a>
+      <a class="btn" href="lesson-agents.html">Agents ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

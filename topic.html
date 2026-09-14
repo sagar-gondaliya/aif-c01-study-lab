@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topic — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="topic">
+  <div class="main">
+    <p class="muted small" id="crumb"></p>
+    <h1 id="title"></h1>
+    <p class="lead" id="lead"></p>
+    <div id="lesson"></div>
+    <h2>Exam-style quiz for this topic</h2>
+    <p class="muted">Same style as AIF-C01: short company story, one best answer unless marked otherwise.</p>
+    <div id="runner">
+      <div id="timer-wrap" style="display:none"><span id="timer" class="timer"></span></div>
+      <div class="palette" id="palette"></div>
+      <div id="qbox"></div>
+      <div class="btn-row">
+        <button class="btn ghost" id="prev-btn">Previous</button>
+        <button class="btn ghost" id="flag-btn">Flag for review</button>
+        <button class="btn" id="next-btn">Next</button>
+      </div>
+    </div>
+    <div id="results-panel" style="display:none">
+      <div class="ok">
+        <h3 id="res-head"></h3>
+        <p id="res-sub"></p>
+      </div>
+      <table id="res-table"></table>
+      <h2>Review</h2>
+      <div id="review"></div>
+      <p class="btn-row" id="after"></p>
+    </div>
+    <div class="pager" id="pager"></div>
+  </div>
+  <div class="overlay" id="submit-modal">
+    <div class="modal">
+      <h2>Submit topic quiz?</h2>
+      <p id="submit-msg"></p>
+      <div class="btn-row">
+        <button class="btn" id="confirm-submit">Submit</button>
+        <button class="btn ghost" id="cancel-submit">Keep working</button>
+      </div>
+    </div>
+  </div>
+  <h1 id="exam-title" style="display:none"></h1>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/topics.js"></script>
+  <script src="js/topic-app.js"></script>
+</body>
+</html>

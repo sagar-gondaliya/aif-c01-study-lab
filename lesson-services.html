@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — AWS AI application services</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lsvc">
+  <div class="main">
+    <h1>Lesson 2 — AWS AI services you must recognise</h1>
+    <p class="lead">These are the easiest points on the exam if you learn one job per name. Cover the left column and say the service out loud.</p>
+
+    <div class="exam">AWS style: “We have call recordings and want text, then sentiment.” Answer: <b>Transcribe + Comprehend</b>. Not Polly (that is the opposite direction). Not Rekognition (that is images).</div>
+
+    <h2>Language</h2>
+    <table>
+      <tr><th>Service</th><th>What it does</th><th>Story</th></tr>
+      <tr><td>Amazon Comprehend</td><td>NLP on text you already have: sentiment, entities, key phrases, language, PII, topics</td><td>Support tickets are angry or happy</td></tr>
+      <tr><td>Amazon Translate</td><td>Language A → language B</td><td>Product pages in 12 languages</td></tr>
+      <tr><td>Amazon Lex</td><td>Chatbot / voice bot with intents and slots (NLU)</td><td>Phone tree that understands “I want to reset my PIN”</td></tr>
+      <tr><td>Amazon Kendra</td><td>Enterprise search over documents (not generation by default)</td><td>“Find the 2023 policy PDF”</td></tr>
+    </table>
+
+    <h2>Speech</h2>
+    <table>
+      <tr><th>Service</th><th>What it does</th><th>Story</th></tr>
+      <tr><td>Amazon Transcribe</td><td>Speech → text (ASR). Batch or streaming. Custom vocabulary.</td><td>Turn meeting audio into a transcript</td></tr>
+      <tr><td>Amazon Polly</td><td>Text → speech. Neural voices, SSML.</td><td>Read a blog post aloud</td></tr>
+    </table>
+
+    <h2>Vision and documents</h2>
+    <table>
+      <tr><th>Service</th><th>What it does</th><th>Story</th></tr>
+      <tr><td>Amazon Rekognition</td><td>Images/video: objects, faces, celebrities, unsafe content, text-in-image</td><td>Moderate user-uploaded photos</td></tr>
+      <tr><td>Amazon Textract</td><td>OCR plus forms and tables from PDFs/scans</td><td>Extract fields from a scanned invoice</td></tr>
+    </table>
+
+    <h2>Personalisation</h2>
+    <p><b>Amazon Personalize</b> is the “Amazon.com recommendations” service. Real-time product or content ranking. It is not an LLM and not a chatbot.</p>
+
+    <h2>Build vs use a model</h2>
+    <table>
+      <tr><th>Service</th><th>Who uses it</th><th>Job</th></tr>
+      <tr><td>SageMaker Canvas</td><td>Analysts, no code</td><td>Click-together ML from a spreadsheet</td></tr>
+      <tr><td>SageMaker JumpStart</td><td>Builders who want a head start</td><td>One-click pre-trained or open-source models</td></tr>
+      <tr><td>SageMaker AI</td><td>Data science / MLOps</td><td>Train, tune, host, monitor your own models</td></tr>
+      <tr><td>Amazon Bedrock</td><td>App teams</td><td>Call many foundation models through one API, no servers</td></tr>
+    </table>
+
+    <h2>Assistants and agents (2026 names)</h2>
+    <table>
+      <tr><th>Name</th><th>You …</th></tr>
+      <tr><td>Amazon Q Business / Amazon Quick</td><td><b>Use</b> an employee assistant over company knowledge</td></tr>
+      <tr><td>Amazon Q Developer / Kiro</td><td><b>Use</b> a coding / agentic IDE assistant</td></tr>
+      <tr><td>Bedrock Agents + AgentCore</td><td><b>Build</b> a custom agent with tools, identity, policy</td></tr>
+      <tr><td>Strands Agents</td><td>Multi-agent framework (agents working together)</td></tr>
+      <tr><td>AWS Transform</td><td>Modernize old codebases with AI</td></tr>
+    </table>
+
+    <h2>Pairs that always appear together</h2>
+    <ul>
+      <li>Audio in → Transcribe. Text out loud → Polly. Never swap them.</li>
+      <li>PDF form fields → Textract. “What objects are in this photo?” → Rekognition.</li>
+      <li>Sentiment of a sentence → Comprehend. Translation → Translate.</li>
+      <li>Structured chatbot with slots → Lex. Open-ended company Q&amp;A → Q / Knowledge Bases.</li>
+    </ul>
+
+    <div class="note">
+      <h3>From your extra notes (AIP-C01) — keep only this much</h3>
+      <p>Those notes go deep on AppConfig, Step Functions circuit breakers, and MCP interceptors. For <b>this</b> exam you only need: pick the managed service, prefer Bedrock Knowledge Bases over a homemade vector DB, and never replace IAM or Guardrails with a prompt sentence.</p>
+    </div>
+
+    <p class="btn-row"><a class="btn" href="quiz.html?set=svc">Drill: pick the service (30)</a></p>
+    <div class="pager">
+      <a class="btn ghost" href="d1.html">‹ Domain 1</a>
+      <a class="btn" href="d2.html">Domain 2 ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

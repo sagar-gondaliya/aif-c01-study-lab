@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exam facts — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="exam">
+  <div class="main">
+    <h1>Exam facts</h1>
+    <p class="lead">Memorize the format so the question types do not surprise you. Then forget the clock-watching and learn domains.</p>
+
+    <table>
+      <tr><th>Fact</th><th>Value</th></tr>
+      <tr><td>Code</td><td>AIF-C01 — AWS Certified AI Practitioner</td></tr>
+      <tr><td>Level</td><td>Foundational</td></tr>
+      <tr><td>Who</td><td>People who <b>use</b> AI/ML on AWS. You do not need to build models.</td></tr>
+      <tr><td>Background</td><td>Up to about 6 months of AI/ML exposure on AWS</td></tr>
+      <tr><td>Duration</td><td>90 minutes</td></tr>
+      <tr><td>Questions</td><td>65 total = 50 scored + 15 unscored (hidden)</td></tr>
+      <tr><td>Types</td><td>Multiple choice, multiple response, ordering, matching</td></tr>
+      <tr><td>Pass</td><td>700 / 1000 scaled. Compensatory — overall score only.</td></tr>
+      <tr><td>Guessing</td><td>No penalty. Blank = wrong. Always answer.</td></tr>
+      <tr><td>Delivery</td><td>Pearson VUE centre or online proctored</td></tr>
+      <tr><td>Price</td><td>About USD 100</td></tr>
+      <tr><td>Validity</td><td>3 years (recertify by retake or MLA-C01)</td></tr>
+    </table>
+
+    <h2>Domain weights</h2>
+    <table>
+      <tr><th>Domain</th><th>Weight</th><th>~ scored items</th></tr>
+      <tr><td>1 Fundamentals of AI and ML</td><td>20%</td><td>~10</td></tr>
+      <tr><td>2 Fundamentals of GenAI</td><td>24%</td><td>~12</td></tr>
+      <tr><td>3 Applications of Foundation Models</td><td>28%</td><td>~14</td></tr>
+      <tr><td>4 Guidelines for Responsible AI</td><td>14%</td><td>~7</td></tr>
+      <tr><td>5 Security, Compliance, Governance</td><td>14%</td><td>~7</td></tr>
+    </table>
+    <p><b>Domains 2 + 3 = 52%.</b> If time is short, live there.</p>
+
+    <h2>What you will NOT be asked to do</h2>
+    <ul>
+      <li>Code or invent model algorithms</li>
+      <li>Do data / feature engineering</li>
+      <li>Tune hyperparameters or do statistical proofs</li>
+      <li>Build pipelines or implement security protocols from scratch</li>
+    </ul>
+    <p>You <b>will</b> be asked to pick the right service, pattern, metric, or risk for a business story.</p>
+
+    <h2>How to read a question (easy method)</h2>
+    <ol>
+      <li>Circle the <b>job</b> (translate? speech to text? stop legal advice? store embeddings?).</li>
+      <li>Circle constraints: no ML team, must explain to a regulator, stay in-region, user waiting, nightly batch.</li>
+      <li>Pick the <b>managed AWS name</b> for that job. DIY on EC2 is almost never right.</li>
+      <li>If they say <b>ensure / prevent / must not</b>, pick a lock (Guardrails, IAM, KMS, A2I), not a polite prompt.</li>
+      <li>If two answers work, pick the <b>cheaper / lower-ops</b> one (RAG before fine-tune, Bedrock before SageMaker).</li>
+    </ol>
+    <p>Multiple-response: tick <b>every</b> correct box. Ordering and matching: one wrong pair = zero. Blank = wrong. Always guess.</p>
+
+    <div class="exam">
+      <h3>How AWS writes the item</h3>
+      <p>A company wants X. Which option is best?</p>
+      <ol>
+        <li>The managed AWS service that matches the job</li>
+        <li>The lowest-ops option that still meets the requirement</li>
+        <li>A hard control (IAM, Guardrails, encryption, A2I) over “tell the model not to”</li>
+      </ol>
+    </div>
+
+    <h2>Question types in this lab’s mocks</h2>
+    <ul>
+      <li><b>Single</b> — one correct of four. Most items.</li>
+      <li><b>Multi</b> — two correct of five. Miss one and the item is wrong.</li>
+      <li><b>Order</b> — put 3–5 steps in the only correct sequence.</li>
+      <li><b>Match</b> — pair every prompt. No partial credit.</li>
+    </ul>
+
+    <div class="warn">
+      <h3>This lab vs exam day</h3>
+      <p>Each mock here is <b>50 scored-style questions in 90 minutes</b> (the real exam also hides 15 extra items in the same 90 minutes). Treat 700 scaled (~70%) as the pass line. The 15 hidden items on exam day do not count — you cannot see which they are, so answer all 65.</p>
+    </div>
+
+    <div class="pager">
+      <a class="btn ghost" href="index.html">‹ Home</a>
+      <a class="btn" href="plan.html">14-day plan ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

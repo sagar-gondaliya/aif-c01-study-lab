@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Score history — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="results">
+  <div class="main">
+    <h1>Score history</h1>
+    <p class="lead">Every quiz and mock you finish is stored only in this browser.</p>
+    <div id="box"></div>
+    <p class="btn-row"><button class="btn ghost" id="wipe">Clear all saved progress</button></p>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    function when(ts) { return new Date(ts).toLocaleString(); }
+    var s = AIF.store.get();
+    var html = "<h2>Mocks</h2><table><tr><th>Mock</th><th>When</th><th>Raw</th><th>Scaled</th><th>Result</th></tr>";
+    var any = false;
+    [1,2,3,4,5].forEach(function (n) {
+      (s.mocks[n] || []).forEach(function (r) {
+        any = true;
+        html += "<tr><td>" + n + "</td><td>" + when(r.when) + "</td><td>" + r.hits + "/" + r.total +
+          "</td><td>" + r.scaled + "</td><td>" + (r.pass ? "Pass" : "Fail") + "</td></tr>";
+      });
+    });
+    if (!any) html += "<tr><td colspan='5'>No mocks sat yet.</td></tr>";
+    html += "</table><h2>Quizzes</h2><table><tr><th>Set</th><th>When</th><th>Score</th></tr>";
+    var qk = Object.keys(s.quiz);
+    if (!qk.length) html += "<tr><td colspan='3'>No quizzes completed yet.</td></tr>";
+    qk.forEach(function (k) {
+      var r = s.quiz[k];
+      html += "<tr><td>" + k + "</td><td>" + when(r.when) + "</td><td>" + r.hits + "/" + r.total +
+        " (" + r.pct + "%)</td></tr>";
+    });
+    html += "</table>";
+    document.getElementById("box").innerHTML = html;
+    document.getElementById("wipe").onclick = function () {
+      if (confirm("Delete all ticks, quiz scores, and mock history on this browser?")) {
+        AIF.store.reset();
+        location.reload();
+      }
+    };
+  </script>
+</body>
+</html>

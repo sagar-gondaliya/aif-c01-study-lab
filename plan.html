@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>14-day plan — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="plan">
+  <div class="main">
+    <h1>14-day pass plan</h1>
+    <p class="lead">About 60–90 minutes a day. Tick a day only when you can teach the topic without notes. Ticks save in this browser.</p>
+    <div id="plan"></div>
+    <p class="btn-row"><button class="btn ghost" id="reset">Reset plan</button></p>
+    <div class="pager">
+      <a class="btn ghost" href="exam.html">‹ Exam facts</a>
+      <a class="btn" href="d1.html">Domain 1 ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    var DAYS = [
+      ["d1", "Day 1", "Exam facts + every Domain 1 topic page and its quiz", "d1.html"],
+      ["d2", "Day 2", "Finish any leftover Domain 1 topics (services, data/AWS)", "d1.html"],
+      ["d3", "Day 3", "Every Domain 2 topic: tokens, context, agents, platform", "d2.html"],
+      ["d4", "Day 4", "Re-do weak Domain 2 quizzes; Bedrock vs SageMaker vs Q", "d2.html"],
+      ["d5", "Day 5", "Domain 3 topics: FM pick, RAG, retrieval vs generation", "d3.html"],
+      ["d6", "Day 6", "Domain 3: customisation ladder + agents in apps", "d3.html"],
+      ["d7", "Day 7", "Domain 3: prompts, risks, Prompt Management", "d3.html"],
+      ["d8", "Day 8", "Domain 3: fine-tune / RLHF / distillation + eval", "d3.html"],
+      ["d9", "Day 9", "Every Domain 4 topic: Guardrails, Clarify, explainability", "d4.html"],
+      ["d10", "Day 10", "Every Domain 5 topic: IAM, Macie, Artifact, Scoping Matrix", "d5.html"],
+      ["d11", "Day 11", "Services, trees, traps + flashcards", "services.html"],
+      ["d12", "Day 12", "All 7 quizzes — list weak domains", "quiz.html?set=mixed"],
+      ["d13", "Day 13", "Mocks 1–3, review every miss", "mock.html?n=1"],
+      ["d14", "Day 14", "Mocks 4–5 + traps only, then rest", "mock.html?n=5"]
+    ];
+    function draw() {
+      var s = AIF.store.get();
+      document.getElementById("plan").innerHTML = DAYS.map(function (d) {
+        return '<p><label><input type="checkbox" data-id="' + d[0] + '"' +
+          (s.plan[d[0]] ? " checked" : "") + "> <b>" + d[1] + "</b> — " + d[2] +
+          ' · <a href="' + d[3] + '">open</a></label></p>';
+      }).join("");
+      document.querySelectorAll("#plan input").forEach(function (box) {
+        box.onchange = function () { AIF.store.setPlan(box.getAttribute("data-id"), box.checked); };
+      });
+    }
+    draw();
+    document.getElementById("reset").onclick = function () {
+      DAYS.forEach(function (d) { AIF.store.setPlan(d[0], false); });
+      draw();
+    };
+  </script>
+</body>
+</html>

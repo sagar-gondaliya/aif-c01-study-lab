@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — Guardrails &amp; responsible AI</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lguard">
+  <div class="main">
+    <h1>Lesson 8 — Guardrails and responsible AI (from your notes)</h1>
+    <p class="lead">Your AIP notes were strongest here. This is the Practitioner cut. Domain 4 + part of 5.</p>
+
+    <h2>The six features</h2>
+    <p><b>Bias, fairness, inclusivity, robustness, safety, veracity.</b> Add sustainability: do not default to the largest FM for a FAQ.</p>
+    <p>Datasets should be inclusive, diverse, curated, balanced. Legal risks: IP claims, biased output, lost trust, user harm, fluent lies.</p>
+
+    <h2>Guardrail types (memorise)</h2>
+    <ul>
+      <li><b>Content filters</b> — hate, insults, sexual, violence, misconduct</li>
+      <li><b>Denied topics</b> — “no legal / medical advice”</li>
+      <li><b>Word / regex</b> — internal code names</li>
+      <li><b>Sensitive information</b> — PII/PHI redact or block</li>
+      <li><b>Contextual grounding</b> — flag answers not in the retrieved docs</li>
+      <li><b>Automated reasoning</b> — logical / policy checks</li>
+    </ul>
+    <div class="warn">
+      <p>Stem: “prevent the model from giving legal advice” or “answers only from approved sources.”<br>
+      Answer: <b>Guardrails</b> (denied topic and/or grounding), not “add a sentence to the prompt.”<br>
+      Need to <i>detect</i> but not block? Monitoring mode, or Clarify on a batch.</p>
+    </div>
+
+    <h2>The rest of the toolbox</h2>
+    <table>
+      <tr><th>Need</th><th>Tool</th></tr>
+      <tr><td>Bias + why this score</td><td>SageMaker Clarify</td></tr>
+      <tr><td>Drift over time</td><td>SageMaker Model Monitor</td></tr>
+      <tr><td>Intended use, limits, data</td><td>Model Cards (and AWS AI Service Cards)</td></tr>
+      <tr><td>Compare models / toxicity</td><td>Bedrock Model Evaluation</td></tr>
+      <tr><td>Human must approve</td><td>Amazon A2I</td></tr>
+    </table>
+    <p>Evaluate before launch. Monitor after launch. Those are different stems.</p>
+    <p>Transparent = you can inspect process and docs. Explainable = you can say why <i>this</i> prediction. FMs are often weaker at explainability. If a regulator needs why, prefer traditional ML + Clarify.</p>
+
+    <div class="pager">
+      <a class="btn ghost" href="d4.html">‹ Domain 4</a>
+      <a class="btn" href="d5.html">Domain 5 ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

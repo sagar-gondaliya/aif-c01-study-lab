@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — RAG</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="lrag">
+  <div class="main">
+    <h1>Lesson 6 — RAG, the most important pattern</h1>
+    <p class="lead">This lesson absorbs the useful RAG parts of your AIP-C01 notes, cut down to Practitioner depth. Domain 3 lives or dies here.</p>
+
+    <h2>The idea in one breath</h2>
+    <p>The FM does not know your intranet. You <b>retrieve</b> the relevant passages, <b>augment</b> the prompt with them, then <b>generate</b>. That is grounding. Citations become possible. When the policy changes next month you re-ingest documents — you do not retrain a 70-billion-parameter model.</p>
+    <div class="code">Question
+  → turn the question into an embedding
+  → similarity search in a vector store
+  → take the top chunks
+  → prompt = instructions + chunks + question
+  → FM answers (ideally: “according to doc X”)</div>
+
+    <h2>AWS default</h2>
+    <p><b>Amazon Bedrock Knowledge Bases</b> does ingest, chunk, embed, store, retrieve, and generate. Point it at S3 (or a connector). If the stem says “minimise custom code,” this is the answer.</p>
+
+    <h2>Where embeddings live</h2>
+    <p>Official vector options: <b>OpenSearch Service</b>, <b>Aurora</b> (pgvector), <b>Neptune</b>, <b>RDS for PostgreSQL</b>.</p>
+    <ul>
+      <li>S3 holds the source files. It cannot do similarity search by itself.</li>
+      <li>MemoryDB is <b>out of scope</b> in 2026. Do not pick it.</li>
+      <li>DynamoDB / ElastiCache are not the exam’s vector answer.</li>
+    </ul>
+
+    <h2>Chunking (from your notes)</h2>
+    <ul>
+      <li><b>Fixed size</b> — simple, e.g. ~300 tokens. Fine for uniform docs.</li>
+      <li><b>Hierarchical (parent/child)</b> — retrieve a small hit, return the larger section. Legal contracts, manuals.</li>
+      <li><b>Semantic</b> — split when the topic changes.</li>
+    </ul>
+    <p>Irrelevant chunks → too large or mixed topics. Missing context → too small; add overlap or hierarchy.</p>
+
+    <h2>When retrieval is the problem (your notes, exam gold)</h2>
+    <ul>
+      <li><b>Hybrid search</b> — keywords (error codes, SKUs) plus vectors. OpenSearch does this.</li>
+      <li><b>Metadata filters</b> — year=2023, dept=Legal, before search.</li>
+      <li><b>Re-ranking</b> — fetch 50, keep the best 5 with a second model.</li>
+      <li>Vector indexes do <b>not</b> auto-update. New S3 objects need an ingestion job.</li>
+    </ul>
+    <div class="exam">
+      <h3>The trap you will see</h3>
+      <p>Wrong documents in the prompt → fix retrieval (chunk, hybrid, filter, re-rank).<br>
+      Right documents, wrong sentence → fix generation (prompt, temperature, model, Guardrails grounding).</p>
+    </div>
+
+    <h2>RAG versus fine-tune versus prompt</h2>
+    <p>Changing facts, citations, private knowledge → <b>RAG</b>.<br>
+    Format and a few examples → <b>prompt / few-shot</b>.<br>
+    Stable style or domain voice with labeled pairs → <b>fine-tune</b>.<br>
+    Need a cheaper student model → <b>distillation</b>.<br>
+    Build a new FM → almost never.</p>
+
+    <div class="pager">
+      <a class="btn ghost" href="d3.html">‹ Domain 3</a>
+      <a class="btn" href="lesson-prompts.html">Prompts ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

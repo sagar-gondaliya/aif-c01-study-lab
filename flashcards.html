@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flashcards — AIF-C01</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body data-page="cards">
+  <div class="main">
+    <h1>Flashcards</h1>
+    <p class="lead">80 cards. Reveal, mark known, keep looping the rest. Known list saves here.</p>
+    <p class="muted" id="meta"></p>
+    <div class="flash" id="card"><div class="q" id="qtext"></div></div>
+    <div class="btn-row">
+      <button class="btn ghost" id="prev">Previous</button>
+      <button class="btn" id="flip">Reveal</button>
+      <button class="btn dark" id="know">Known · next</button>
+      <button class="btn ghost" id="next">Still learning · next</button>
+    </div>
+    <p><button class="btn ghost" id="reset">Reset known cards</button></p>
+    <div class="pager">
+      <a class="btn ghost" href="glossary.html">‹ Glossary</a>
+      <a class="btn" href="quiz.html?set=d1">Domain 1 quiz ›</a>
+    </div>
+  </div>
+  <script src="js/progress.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/banks/flashcards.js"></script>
+  <script>
+    var cards = AIF.cards || [];
+    var i = 0, show = false;
+    var known = (AIF.store.get().cards.known || []).slice();
+    function draw() {
+      if (!cards.length) return;
+      var c = cards[((i % cards.length) + cards.length) % cards.length];
+      document.getElementById("qtext").className = show ? "a" : "q";
+      document.getElementById("qtext").textContent = show ? c.a : c.q;
+      document.getElementById("flip").textContent = show ? "Hide" : "Reveal";
+      document.getElementById("meta").textContent =
+        "Card " + ((((i % cards.length) + cards.length) % cards.length) + 1) + " / " +
+        cards.length + " · Domain " + c.domain + " · Known " + known.length;
+    }
+    function go(d) { i += d; show = false; draw(); }
+    document.getElementById("flip").onclick = function () { show = !show; draw(); };
+    document.getElementById("prev").onclick = function () { go(-1); };
+    document.getElementById("next").onclick = function () { go(1); };
+    document.getElementById("know").onclick = function () {
+      var c = cards[((i % cards.length) + cards.length) % cards.length];
+      if (known.indexOf(c.q) === -1) known.push(c.q);
+      AIF.store.setCards(known);
+      go(1);
+    };
+    document.getElementById("reset").onclick = function () {
+      known = []; AIF.store.setCards(known); draw();
+    };
+    draw();
+  </script>
+</body>
+</html>
