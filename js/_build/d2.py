@@ -87,15 +87,16 @@ def topics():
             "Token pricing, latency, and prompt caching",
             "New in v1.1. They will ask how tokens change cost and speed.",
             meaning(
-                "Bedrock on-demand bills <b>input tokens + output tokens</b> (plus cache tokens if you use prompt caching).",
+                "On Bedrock you usually pay for <b>input tokens</b> (what you send) plus <b>output tokens</b> (what the model writes). Longer text = more money and often slower replies.",
                 [
-                    "A large RAG pack or 40 few-shot examples on every call raises <b>input</b> cost and latency.",
-                    "High max output tokens raises <b>output</b> cost. Cap length for yes/no jobs.",
-                    "Simple FAQ → smaller/cheaper model (Nova Micro / Haiku-class).",
-                    "<b>Prompt caching</b> discounts a repeated prefix (same system prompt every request).",
-                    "<b>Batch inference</b> is cheaper when you can wait. <b>Provisioned Throughput</b> is reserved capacity for steady high volume.",
+                    "A huge pack of documents or 40 examples on every call raises <b>input</b> cost.",
+                    "A high “max output tokens” setting lets the model write a long answer and raises <b>output</b> cost. For yes/no, set a small max.",
+                    "A simple FAQ should use a <b>small cheap model</b> (Nova Micro / Haiku-class), not the largest model.",
+                    "<b>Prompt caching</b> — AWS gives a discount when the same first part of the prompt is sent again and again.",
+                    "<b>Batch</b> — cheaper if you can wait until later. <b>Provisioned Throughput</b> — you reserve capacity for busy 24/7 traffic. Do not buy it for a quiet bot.",
                 ],
-                "A support bot sends the same 8,000-token policy pack with every user sentence. Cost jumps because of input tokens. Cache that prefix, or retrieve only the top chunks. Do not buy Provisioned Throughput for a bot that runs twice a day.",
+                "1. A support bot sends the same 8,000-token policy text with every user sentence. The bill jumps because of <b>input tokens</b>. Turn on prompt caching, or fetch only the needed chunks.<br>"
+                "2. Do not buy Provisioned Throughput if the bot runs twice a day.",
             )
             + exam(
                 "“Bills exploded after they stuffed 40 examples into every call” = input tokens. "
@@ -163,14 +164,18 @@ def topics():
             "FM lifecycle and typical GenAI use cases",
             "You select and adapt. You almost never pre-train.",
             meaning(
-                "You select and adapt a foundation model. You almost never pre-train one from scratch.",
+                "A <b>foundation model (FM)</b> is a large model already trained by a vendor. You pick it and adapt it. You almost never train a new one from zero.",
                 [
-                    "Guide lifecycle: data selection → model selection → pre-training → optional fine-tune → evaluate → deploy → feedback.",
-                    "On the exam, the usual path is: pick a model → prompt / RAG → maybe fine-tune → evaluate.",
-                    "Typical jobs: chat, search/Q&amp;A, summarisation, rewrite, code, images, agents that call APIs.",
-                    "“Build our own GPT from zero on our tiny corpus” is almost always wrong.",
+                    "Full lifecycle on the guide: pick data → pick model → pre-train → optional fine-tune → evaluate → deploy → collect feedback.",
+                    "What you actually do on the exam: pick a model → write a prompt and/or add RAG → maybe fine-tune → evaluate.",
+                    "Typical jobs: chat, Q&amp;A on docs, short summaries, rewrite, code, images, an agent that calls APIs.",
+                    "“Build our own GPT from scratch on our small files” is almost always the wrong answer.",
                 ],
-                "A retailer wants shoppers to ask “will this SKU ship to this ZIP?” against product PDFs that change weekly. Select a Bedrock model, add a Knowledge Base (RAG), evaluate answers, then collect thumbs-down feedback. Do not pre-train a new FM.",
+                "Shoppers ask “will this SKU ship to this ZIP?” against product PDFs that change every week.<br>"
+                "1. Pick a model on <b>Bedrock</b>.<br>"
+                "2. Put the PDFs in a <b>Knowledge Base</b> (RAG = fetch the right page, then answer).<br>"
+                "3. Check answers, then use thumbs-down feedback to improve.<br>"
+                "Do not pre-train a new FM.",
             )
             + exam(
                 "If they describe “teach the model a whole new internet of data from zero,” that is pre-train — almost always the wrong recommendation. "
@@ -231,14 +236,15 @@ def topics():
             "Context engineering (not only prompt engineering)",
             "v1.1 added this. The window is a backpack — you choose what goes in.",
             meaning(
-                "Prompt engineering is the wording. Context engineering is everything you put in the window.",
+                "<b>Prompt engineering</b> is how you write the instruction. <b>Context engineering</b> is everything you put into one request, not only that sentence.",
                 [
-                    "<b>Prompt engineering</b> — instructions and examples.",
-                    "<b>Context engineering</b> — system prompt + user message + retrieved chunks + tool results + memory + chat history + output schema.",
-                    "A perfect sentence still fails if retrieval pulls the wrong object or you dump 80 noisy chunks.",
-                    "Do not “fix” a context problem by only raising temperature.",
+                    "<b>Prompt engineering</b> — the instruction and any examples you type.",
+                    "<b>Context engineering</b> — the instruction + the user question + retrieved document pieces + API results + chat history + the output format you asked for.",
+                    "A perfect sentence still fails if you attach the wrong PDF pieces or 60 extra pieces.",
+                    "Do not “fix” this by only raising temperature (that only makes wording more random).",
                 ],
-                "The bot has a clear system prompt but every call includes 60 unrelated Knowledge Base chunks. Answers wander. Cut retrieval to the top relevant passages and pass only the last few turns of history — that is context engineering.",
+                "The bot has a clear instruction, but every call also dumps 60 unrelated Knowledge Base pieces. Answers wander.<br>"
+                "Keep only the top matching pieces, plus the last few chat turns. That is context engineering.",
             )
             + exam(
                 "“Answers ignore the new price list we uploaded” is often retrieval/context, not “the model is dumb.” "
@@ -309,15 +315,16 @@ def topics():
             "Agentic AI, tools, memory, MCP",
             "An agent does not only answer. It plans, acts, and comes back.",
             meaning(
-                "An agent does not only answer. It plans, calls tools, reads the result, and continues until the goal is done.",
+                "An <b>agent</b> does not only chat. It plans steps, calls other systems, reads the result, and continues until the job is finished.",
                 [
-                    "<b>Tools</b> — APIs, databases, search, Lambda. Function calling.",
-                    "<b>Short-term memory</b> — this session. <b>Long-term memory</b> — across sessions.",
-                    "<b>MCP</b> — standard way to connect an agent to external tools and data. Recognise it; do not implement interceptors.",
-                    "<b>Multi-agent</b> — specialist agents coordinated (Strands). <b>Orchestration</b> — the control loop (AgentCore Runtime, or a fixed workflow).",
-                    "Use an agent when steps depend on the question. Use a fixed workflow when every job is extract → transform → store.",
+                    "<b>Tool / API</b> — another program the agent can call (Jira, a database, <b>Lambda</b> = a short AWS function).",
+                    "<b>Short-term memory</b> — this chat only. <b>Long-term memory</b> — remembered next week.",
+                    "<b>MCP</b> — a standard way to plug tools into an agent. You only need the name, not the code.",
+                    "<b>Strands</b> — a framework for several specialist agents. <b>AgentCore</b> — AWS runtime to run custom agents.",
+                    "Use an agent when the next step depends on the question. Use a fixed workflow when every file always follows the same steps.",
                 ],
-                "A change-management bot must pick among Jira, ServiceNow, and CloudWatch APIs, then open an incident. That is an agent. A nightly job that always runs Textract → Translate → Redshift is a workflow, not an agent.",
+                "1. A bot must choose among Jira, CloudWatch, or ServiceNow, then open a ticket → <b>agent</b> (Bedrock Agents / AgentCore).<br>"
+                "2. Every night: Textract reads a PDF → Translate → save in Redshift, always in that order → <b>workflow</b>, not an agent.",
             )
             + table(
                 ["Use an agent when…", "Use a fixed workflow when…"],
@@ -393,16 +400,18 @@ def topics():
             "Strengths, limits, and how to pick a model",
             "Task 2.2 is honest about what GenAI cannot do.",
             meaning(
-                "GenAI is fast to try and good at language. It is not exact, not fully explainable, and not always up to date.",
+                "GenAI is good at language and fast to try. It is not always correct, not fully explainable, and not always up to date.",
                 [
-                    "<b>Strengths</b> — adaptable, conversational, generates content, little labeled data needed.",
-                    "<b>Hallucination</b> — fluent but false (invented ticket ID or case citation).",
-                    "<b>Nondeterminism</b> — same prompt, different wording (worse at high temperature).",
-                    "<b>Weak interpretability</b> — hard to say why this token was chosen.",
-                    "<b>Stale knowledge</b> — cutoff date unless you add RAG or a live API.",
-                    "Also: IP, privacy, and bias risk. Pick a model using modality, quality, latency, cost, context length, language, compliance.",
+                    "<b>Strengths</b> — writes text, talks in a conversation, works with little labeled data.",
+                    "<b>Hallucination</b> — the text looks confident but is wrong (a fake ticket ID).",
+                    "<b>Nondeterminism</b> — the same question can get different wording. Worse if <b>temperature</b> (randomness) is high.",
+                    "<b>Weak interpretability</b> — you cannot easily say why it chose those words.",
+                    "<b>Stale knowledge</b> — it only knows up to its training date unless you add RAG or a live API.",
+                    "Also watch IP, privacy, and bias. Pick a model by: type (text/image), quality, speed, cost, language, compliance.",
                 ],
-                "An IAM policy bot invents an action that does not exist → hallucination. The same prompt at temperature 0.9 returns three different JSON shapes → nondeterminism. The model’s cutoff is last year and you need this week’s instance prices → RAG or a pricing API, not a larger model alone.",
+                "1. An IAM bot invents an API action that does not exist → <b>hallucination</b>.<br>"
+                "2. Same prompt at temperature 0.9 returns three different JSON shapes → <b>nondeterminism</b>.<br>"
+                "3. Training ended last year; you need this week’s EC2 prices → add RAG or a pricing API. A bigger model alone does not fix that.",
             )
             + h2("How they want you to choose a model")
             + p(
@@ -481,13 +490,16 @@ def topics():
             "Business metrics for GenAI",
             "They ask whether the project is worth it — not only BLEU.",
             meaning(
-                "A high ROUGE score does not mean the project is worth running. The exam also asks business metrics.",
+                "A high text score (ROUGE/BLEU) does not mean the project is worth the money. The exam also asks business numbers.",
                 [
-                    "Name these: <b>ROI</b>, cost per user / per interaction, development cost, CSAT / feedback, engagement, productivity, ARPU, CLV, task completion, conversion rate.",
-                    "Evaluate the whole app (retrieval + prompt + tools), not only the raw FM.",
-                    "A demo nobody uses, or a bot that costs more than the minutes it saves, fails this task.",
+                    "<b>ROI</b> — did we save more money than we spent?",
+                    "<b>Cost per interaction</b> — what one chat costs.",
+                    "<b>CSAT / task completion</b> — was the user happy, and was the ticket actually solved?",
+                    "<b>ARPU / CLV / conversion</b> — revenue per user, long-term value, did they buy or sign up?",
+                    "Judge the <b>whole app</b> (search + prompt + tools), not only the raw model.",
                 ],
-                "Finance asks if a Knowledge Base bot saves more support hours than it costs each quarter → ROI / cost per interaction, not BLEU. Users abandon after one turn without a resolved ticket → task completion and CSAT.",
+                "1. Finance asks if a Knowledge Base bot saves more support hours than it costs → <b>ROI</b>, not BLEU (BLEU is a translation score).<br>"
+                "2. Users leave after one message and the ticket is still open → low <b>task completion</b> and CSAT.",
             )
             + exam(
                 "“Leadership wants to know if the bot pays for itself” = ROI / cost per interaction, not BLEU. "
@@ -553,15 +565,17 @@ def topics():
             "AWS GenAI platform map",
             "Task 2.3 is “which AWS door do I open?” This is high yield.",
             meaning(
-                "Task 2.3 is which AWS door you open. Data, IAM, and region stay in your account.",
+                "This task is only: which AWS product do you open? Your data and IAM stay in your account.",
                 [
-                    "<b>Bedrock</b> — many FMs, one API, no servers. Prompts are not used to train the provider’s base models.",
-                    "<b>SageMaker AI</b> — you train/host. <b>JumpStart</b> — one-click open-source / pre-trained.",
-                    "<b>Q Business / Quick</b> — employee assistant over company docs/SaaS. <b>Q Developer / Kiro</b> — coding help.",
-                    "<b>Bedrock Agents + AgentCore</b> — you build custom agents. <b>Strands</b> — multi-agent framework. <b>Transform</b> — modernize old code.",
-                    "No ML team + fastest FM access → Bedrock. Custom algorithm / own GPUs → SageMaker.",
+                    "<b>Bedrock</b> — many large models, one API, AWS runs the servers. Your prompts are not used to train the vendor’s base model.",
+                    "<b>SageMaker AI</b> — you train or host your own model. <b>JumpStart</b> — one-click ready / open-source models.",
+                    "<b>Q Business / Quick</b> — staff ask questions over company docs. <b>Q Developer / Kiro</b> — help write code.",
+                    "<b>Bedrock Agents + AgentCore</b> — you build a custom agent. <b>Strands</b> — several agents together. <b>Transform</b> — modernize old code.",
+                    "No ML team → Bedrock. You need custom training and notebooks → SageMaker.",
                 ],
-                "A two-person team wants Claude and Llama through one managed API with no GPU fleet → Bedrock. Data scientists need notebooks and custom training → SageMaker. Staff need Q&amp;A over Confluence and Slack with existing permissions → Q Business / Quick.",
+                "1. Two people want Claude and Llama, no GPU servers → <b>Bedrock</b>.<br>"
+                "2. Data scientists need notebooks and custom training → <b>SageMaker</b>.<br>"
+                "3. Staff ask HR questions over Confluence with their existing logins → <b>Q Business / Quick</b>.",
             )
             + table(
                 ["You want", "Pick"],
