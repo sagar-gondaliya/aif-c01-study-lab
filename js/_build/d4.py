@@ -10,8 +10,14 @@ def topics():
             "Features of responsible AI and sustainability",
             "Task 4.1 starts with the word list. Learn it like Domain 1 terms.",
             meaning(
-                "Responsible AI features they name: <b>bias</b> (systematic unfair error), <b>fairness</b> (comparable outcomes), <b>inclusivity</b>, <b>robustness</b> (holds up under messy or adversarial input), <b>safety</b>, <b>veracity</b> (truthfulness). "
-                "Also <b>sustainability</b> / environmental cost: huge models and long contexts burn more energy — prefer smaller models, caching, batch, and not pre-training from scratch when a prompt will do."
+                "Task 4.1 starts with these words. Learn them like Domain 1 terms.",
+                [
+                    "<b>Bias</b> — systematic error that favours or harms a group. <b>Fairness</b> — comparable outcomes across groups.",
+                    "<b>Inclusivity</b> — diverse users and data. <b>Robustness</b> — still works on messy or adversarial input.",
+                    "<b>Safety</b> — avoids harm. <b>Veracity</b> — truthfulness (not encryption).",
+                    "<b>Sustainability</b> — large models and long contexts use more energy. Prefer a smaller model, caching, or batch when that is enough.",
+                ],
+                "A résumé screener scores one demographic much worse with no job-related feature → fairness/bias. A 24/7 FAQ bot runs Nova Micro instead of Premier → cost, latency, and sustainability. A bot states a false IAM action as fact → veracity failed.",
             )
             + exam(
                 "They give a story (“the loan model rejects one postcode”) and ask which principle is broken (fairness/bias). "
@@ -78,8 +84,13 @@ def topics():
             "Legal risks and dataset quality",
             "GenAI creates new legal and trust problems. Datasets must not be a dirty grab-bag.",
             meaning(
-                "Legal/business risks they want: <b>IP claims</b> (copyrighted training or outputs), <b>biased outputs</b>, <b>lost customer trust</b>, <b>end-user harm</b>, <b>hallucinations presented as fact</b>, privacy/PII leaks. "
-                "Datasets should be <b>inclusive, diverse, curated, and balanced</b> — and collected/used with rights and purpose limits."
+                "GenAI creates legal and trust risk. Datasets must not be a dirty dump.",
+                [
+                    "Name the risks: <b>IP / copyright</b>, biased outputs, lost trust, end-user harm, hallucinations treated as fact, PII leaks.",
+                    "Datasets should be inclusive, diverse, curated, balanced, and used with rights.",
+                    "Open-source weights help transparency. They do not automatically remove bias or IP risk.",
+                ],
+                "A generator copies a copyrighted vendor manual almost word-for-word → IP risk. A face dataset is almost only one age and skin tone → not diverse/balanced. A chatbot invents a refund rule and a customer acts on it → hallucination + harm.",
             )
             + exam(
                 "“Marketing used a model that copies a living artist’s style and a lawsuit arrives” = IP risk. "
@@ -151,8 +162,14 @@ def topics():
             "Amazon Bedrock Guardrails (the lock)",
             "If the stem says ensure / prevent / must not — this is usually the answer.",
             meaning(
-                "Guardrails are <b>runtime filters</b> on model input and output. They are a hard control. A prompt is a polite request. "
-                "Know the types: <b>content filters</b> (hate, insults, sexual, violence, misconduct), <b>denied topics</b>, <b>word filters</b>, <b>PII / sensitive information</b> filters, <b>contextual grounding</b> checks, and help against prompt attacks."
+                "If the stem says ensure / prevent / must not, pick Guardrails, not a polite prompt.",
+                [
+                    "Guardrails are <b>runtime filters</b> on model input and output. A prompt is a soft request.",
+                    "Types: content filters (hate, sexual, violence), denied topics, word lists, PII filters, contextual grounding, prompt-attack help.",
+                    "Guardrails = <b>what content</b> is allowed. IAM = <b>who</b> can call the model.",
+                    "Macie finds PII in S3. Comprehend finds PII in text you send it. Guardrails filter live model I/O.",
+                ],
+                "A bank must block investment advice, not merely ask the model to refuse → denied topics. Outputs must never include national IDs → PII filter. IAM already limits who can invoke Claude, but users still trick it into medical dosing → add Guardrails; IAM is not a content filter.",
             )
             + exam(
                 "“Must not give legal advice” = denied topic (plus maybe A2I), not “please don’t.” "
@@ -217,7 +234,16 @@ def topics():
             "Clarify, Model Monitor, Model Cards, A2I, toxicity",
             "Each responsible-AI tool has one job. Do not mix them.",
             meaning(
-                "Know these names cold:"
+                "Each responsible-AI tool has one job. Do not mix them.",
+                [
+                    "<b>Clarify</b> — bias + feature reasons for a prediction.",
+                    "<b>Model Monitor</b> — drift and quality in production.",
+                    "<b>Model Cards / AI Service Cards</b> — document intended use, data, limits.",
+                    "<b>Bedrock Model Evaluation</b> — compare quality / toxicity.",
+                    "<b>A2I</b> — a human reviews low-confidence or high-risk output.",
+                    "High bias (underfit) = inaccurate for everyone. High variance (overfit) = fails on new data. Demographic bias = unfair outcomes.",
+                ],
+                "A credit model must show which columns pushed a decline → Clarify. Precision fell after a new product launch → Model Monitor. A clinician must approve a low-confidence extraction → A2I. “Which FM is less toxic?” → Bedrock Model Evaluation.",
             )
             + table(
                 ["Tool", "Job"],
@@ -302,10 +328,14 @@ def topics():
             "Transparent versus explainable",
             "Task 4.2 is this distinction. FMs are often less explainable than a tree.",
             meaning(
-                "<b>Transparent</b> means you can inspect how the system was built: data sources, design, Model Cards, limitations, intended use. "
-                "<b>Explainable</b> means you can say <b>why this prediction</b> happened (feature importance, Clarify, smaller/linear/tree models). "
-                "A giant FM can be documented (transparent-ish) and still not explain a single token. "
-                "Tradeoff: the most accurate model may be the least interpretable. If a regulator needs reasons, prefer traditional ML + Clarify + cards — not a black-box FM."
+                "Transparent and explainable are different words on this exam.",
+                [
+                    "<b>Transparent</b> — you can inspect how it was built: data sources, design, Model Cards, limits, intended use.",
+                    "<b>Explainable</b> — you can say why <i>this</i> prediction happened (Clarify, feature importance, a tree or linear model).",
+                    "An FM can have a Model Card and still not explain one token.",
+                    "The most accurate model may be the least interpretable. Regulator needs reasons → classic ML + Clarify, not Claude.",
+                ],
+                "You publish data sources and known limits for a fraud model → transparency (Model Card). A regulator asks why <i>this</i> application scored 0.91 → explainability (Clarify). CloudTrail tells you who called the API. That is audit, not feature attribution.",
             )
             + exam(
                 "“Publish a card of limits and data” = transparency. "
@@ -373,8 +403,14 @@ def topics():
             "Human-centred design for AI",
             "People stay in the loop for high stakes. The UI should show limits.",
             meaning(
-                "Human-centred design on this exam: show <b>why</b> or at least that the answer is AI-generated, allow <b>feedback</b>, keep a <b>human for high-stakes</b> decisions (A2I), make the system usable and inclusive, and do not hide uncertainty. "
-                "Users should be able to challenge or override the model. Do not present a hallucination as a button labelled “official policy.”"
+                "People stay in the loop for high stakes. The UI must not hide that the answer is generated.",
+                [
+                    "Show citations or that the reply is AI-generated. Allow a “this was wrong” control.",
+                    "Keep a human for high-stakes output (A2I). Users must be able to override.",
+                    "Do not label a guess as “official policy” or “verified legal advice.”",
+                    "Inclusivity is also the product: accessible UI, languages, test with diverse users.",
+                ],
+                "A benefits bot shows the source paragraph under each answer and a report button → human-centred. Loan decline letters need a specialist before send → A2I. The UI stamps every chatbot reply “verified legal advice” → irresponsible; it hides uncertainty.",
             )
             + exam(
                 "“Show citations under each answer” = human-centred + grounding. "

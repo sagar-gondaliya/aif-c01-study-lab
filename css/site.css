@@ -148,6 +148,15 @@ tr:nth-child(even) { background: #f5f5f5; }
 .ok { background: var(--ok); border-left-color: var(--green); }
 .exam { background: var(--info); border-left-color: #2196f3; }
 .box h3, .example h3, .note h3, .warn h3, .ok h3, .exam h3 { margin-top: 0; }
+.info-sec { margin: 0 0 12px; }
+.info-sec:last-child { margin-bottom: 0; }
+.info-k {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #3d6b4f; margin: 0 0 4px;
+}
+.info-sec p { margin: 0 0 4px; }
+.info-sec ul { margin: 4px 0 0 18px; }
+.info-sec li { margin: 3px 0; }
 
 pre, .code {
   background: #fff; border: 1px solid #ddd; padding: 12px 14px;

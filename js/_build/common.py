@@ -7,8 +7,14 @@ def box(cls, title, html):
     return f'<div class="{cls}"><h3>{title}</h3>{html}</div>'
 
 
-def meaning(p):
-    return box("ok", "Information", f"<p>{p}</p>")
+def meaning(what, points, example):
+    items = "".join(f"<li>{x}</li>" for x in points)
+    html = (
+        '<div class="info-sec"><div class="info-k">What</div><p>' + what + "</p></div>"
+        '<div class="info-sec"><div class="info-k">Key points</div><ul>' + items + "</ul></div>"
+        '<div class="info-sec"><div class="info-k">Technical example</div><p>' + example + "</p></div>"
+    )
+    return box("ok", "Information", html)
 
 
 def exam(p):

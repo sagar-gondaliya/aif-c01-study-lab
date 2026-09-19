@@ -10,15 +10,16 @@ def topics():
             "GenAI vocabulary you must say out loud",
             "If you cannot define token, embedding, and context window, Domain 2 will feel random.",
             meaning(
-                "A <b>token</b> is a chunk of text the model reads or writes — not exactly a word. Pricing and limits are in tokens. "
-                "Rough English rule: about 4 characters or 0.75 words per token. "
-                "The <b>context window</b> is the maximum tokens of input plus output the model can see at once. "
-                "An <b>embedding</b> is a numeric vector that captures meaning; similar meaning → similar vectors. "
-                "A <b>vector store</b> keeps those vectors for similarity search. "
-                "<b>Chunking</b> splits documents so they fit embedding and retrieval. "
-                "A <b>transformer LLM</b> is the usual architecture (self-attention). "
-                "<b>Multimodal</b> means more than one type (text + image + video + speech). "
-                "<b>Diffusion</b> models typically generate images or video from noise."
+                "These nouns show up in cost, RAG, and model-choice questions. Say them exactly.",
+                [
+                    "<b>Token</b> — a chunk of text the model reads or writes. Bills and limits use tokens, not words. About 4 characters / 0.75 English words per token.",
+                    "<b>Context window</b> — max tokens of input + output the model can see at once.",
+                    "<b>Embedding</b> — a numeric vector of meaning. Similar text → similar vectors.",
+                    "<b>Vector store</b> — holds embeddings for similarity search (OpenSearch, Aurora pgvector, Neptune, RDS PostgreSQL). S3 is not this.",
+                    "<b>Chunking</b> — split a long document so each piece can be embedded and retrieved.",
+                    "<b>Multimodal</b> — more than one type (text + image). <b>Diffusion</b> — typical image/video generator.",
+                ],
+                "A 200-page runbook cannot be pasted into Claude. You hit the context window. Split it, embed chunks, store them in OpenSearch or a Bedrock Knowledge Base, then retrieve only the top matches for each question.",
             )
             + exam(
                 "They swap “words” for “tokens” in cost questions. They ask why two sentences are “close” (embeddings). "
@@ -85,13 +86,15 @@ def topics():
             "Token pricing, latency, and prompt caching",
             "New in v1.1. They will ask how tokens change cost and speed.",
             meaning(
-                "Bedrock on-demand ≈ <b>input tokens + output tokens</b> (plus cache tokens if you use prompt caching). "
-                "Long RAG prompts and huge few-shot packs raise <b>input</b> cost and often latency. "
-                "High max-output tokens raise <b>output</b> cost. "
-                "Smaller/cheaper models (Nova Micro, Haiku-class) win on simple jobs. "
-                "<b>Prompt caching</b> discounts a repeated prefix (system prompt, large static handbook). "
-                "<b>Batch inference</b> is cheaper when you can wait. "
-                "<b>Provisioned Throughput</b> is reserved capacity for steady high volume — you pay for the reservation, not only tokens."
+                "Bedrock on-demand bills <b>input tokens + output tokens</b> (plus cache tokens if you use prompt caching).",
+                [
+                    "A large RAG pack or 40 few-shot examples on every call raises <b>input</b> cost and latency.",
+                    "High max output tokens raises <b>output</b> cost. Cap length for yes/no jobs.",
+                    "Simple FAQ → smaller/cheaper model (Nova Micro / Haiku-class).",
+                    "<b>Prompt caching</b> discounts a repeated prefix (same system prompt every request).",
+                    "<b>Batch inference</b> is cheaper when you can wait. <b>Provisioned Throughput</b> is reserved capacity for steady high volume.",
+                ],
+                "A support bot sends the same 8,000-token policy pack with every user sentence. Cost jumps because of input tokens. Cache that prefix, or retrieve only the top chunks. Do not buy Provisioned Throughput for a bot that runs twice a day.",
             )
             + exam(
                 "“Bills exploded after they stuffed 40 examples into every call” = input tokens. "
@@ -159,9 +162,14 @@ def topics():
             "FM lifecycle and typical GenAI use cases",
             "You select and adapt. You almost never pre-train.",
             meaning(
-                "FM lifecycle on the guide: data selection → model selection → <b>pre-training</b> → optional <b>fine-tuning</b> → evaluation → deployment → <b>feedback</b> → improve. "
-                "Your job in real life (and on the exam) is: select a model, prompt it, add RAG, maybe fine-tune, then evaluate. "
-                "Typical use cases: chat, search/Q&A, summarisation, rewrite, code, images, agents that call tools."
+                "You select and adapt a foundation model. You almost never pre-train one from scratch.",
+                [
+                    "Guide lifecycle: data selection → model selection → pre-training → optional fine-tune → evaluate → deploy → feedback.",
+                    "On the exam, the usual path is: pick a model → prompt / RAG → maybe fine-tune → evaluate.",
+                    "Typical jobs: chat, search/Q&amp;A, summarisation, rewrite, code, images, agents that call APIs.",
+                    "“Build our own GPT from zero on our tiny corpus” is almost always wrong.",
+                ],
+                "A retailer wants shoppers to ask “will this SKU ship to this ZIP?” against product PDFs that change weekly. Select a Bedrock model, add a Knowledge Base (RAG), evaluate answers, then collect thumbs-down feedback. Do not pre-train a new FM.",
             )
             + exam(
                 "If they describe “teach the model a whole new internet of data from zero,” that is pre-train — almost always the wrong recommendation. "
@@ -178,7 +186,7 @@ def topics():
                     "Select → adapt → evaluate → deploy/feedback.",
                 ),
                 q_single(
-                    "A newspaper wants one-paragraph summaries of 20-page hearings. This is mainly which GenAI use case?",
+                    "An SRE team wants one-paragraph summaries of 20-page incident reports. This is mainly which GenAI use case?",
                     ["Time-series forecasting", "Summarisation", "Face liveness", "Cost Explorer"],
                     1,
                     "Long → short text is summarisation.",
@@ -222,9 +230,14 @@ def topics():
             "Context engineering (not only prompt engineering)",
             "v1.1 added this. The window is a backpack — you choose what goes in.",
             meaning(
-                "<b>Prompt engineering</b> is how you write the instruction and examples. "
-                "<b>Context engineering</b> is everything that occupies the context window: system prompt, user message, <b>retrieved chunks</b>, tool results, memory, chat history, output schema. "
-                "A perfect sentence still fails if you retrieve the wrong PDF or dump 80 noisy chunks."
+                "Prompt engineering is the wording. Context engineering is everything you put in the window.",
+                [
+                    "<b>Prompt engineering</b> — instructions and examples.",
+                    "<b>Context engineering</b> — system prompt + user message + retrieved chunks + tool results + memory + chat history + output schema.",
+                    "A perfect sentence still fails if retrieval pulls the wrong object or you dump 80 noisy chunks.",
+                    "Do not “fix” a context problem by only raising temperature.",
+                ],
+                "The bot has a clear system prompt but every call includes 60 unrelated Knowledge Base chunks. Answers wander. Cut retrieval to the top relevant passages and pass only the last few turns of history — that is context engineering.",
             )
             + exam(
                 "“Answers ignore the new price list we uploaded” is often retrieval/context, not “the model is dumb.” "
@@ -295,11 +308,15 @@ def topics():
             "Agentic AI, tools, memory, MCP",
             "An agent does not only answer. It plans, acts, and comes back.",
             meaning(
-                "An <b>agent</b> plans steps, <b>calls tools</b> (APIs, databases, search, code), reads the result, and continues (ReAct: Reason + Act) until the goal is done. "
-                "<b>Short-term memory</b> is the session. <b>Long-term memory</b> lasts across sessions. "
-                "<b>Multi-agent</b> = specialist agents coordinated (Strands is the framework name). "
-                "<b>MCP</b> (Model Context Protocol) is a standard way to connect agents to external tools and data. "
-                "<b>Orchestration</b> is the control loop (AgentCore Runtime, or a fixed workflow)."
+                "An agent does not only answer. It plans, calls tools, reads the result, and continues until the goal is done.",
+                [
+                    "<b>Tools</b> — APIs, databases, search, Lambda. Function calling.",
+                    "<b>Short-term memory</b> — this session. <b>Long-term memory</b> — across sessions.",
+                    "<b>MCP</b> — standard way to connect an agent to external tools and data. Recognise it; do not implement interceptors.",
+                    "<b>Multi-agent</b> — specialist agents coordinated (Strands). <b>Orchestration</b> — the control loop (AgentCore Runtime, or a fixed workflow).",
+                    "Use an agent when steps depend on the question. Use a fixed workflow when every job is extract → transform → store.",
+                ],
+                "A change-management bot must pick among Jira, ServiceNow, and CloudWatch APIs, then open an incident. That is an agent. A nightly job that always runs Textract → Translate → Redshift is a workflow, not an agent.",
             )
             + table(
                 ["Use an agent when…", "Use a fixed workflow when…"],
@@ -319,7 +336,7 @@ def topics():
             ),
             [
                 q_single(
-                    "A travel bot must choose among flight, hotel, and weather APIs depending on the question, then finish the booking. What pattern?",
+                    "An ops bot must choose among Jira, CloudWatch, and ServiceNow APIs depending on the question, then open the ticket. What pattern?",
                     ["A single nightly Glue job with no decisions", "An agent with tool use", "Amazon Forecast only", "S3 Glacier"],
                     1,
                     "Unknown steps + tools = agent.",
@@ -375,8 +392,16 @@ def topics():
             "Strengths, limits, and how to pick a model",
             "Task 2.2 is honest about what GenAI cannot do.",
             meaning(
-                "<b>Strengths:</b> adaptable, conversational, generates content, fast to prototype, works with little labeled data. "
-                "<b>Limits you must name:</b> hallucinations (fluent but wrong), nondeterminism (same prompt, different answers — worse at high temperature), weak interpretability, stale knowledge (cutoff unless RAG or tools), IP / privacy / bias risk."
+                "GenAI is fast to try and good at language. It is not exact, not fully explainable, and not always up to date.",
+                [
+                    "<b>Strengths</b> — adaptable, conversational, generates content, little labeled data needed.",
+                    "<b>Hallucination</b> — fluent but false (invented ticket ID or case citation).",
+                    "<b>Nondeterminism</b> — same prompt, different wording (worse at high temperature).",
+                    "<b>Weak interpretability</b> — hard to say why this token was chosen.",
+                    "<b>Stale knowledge</b> — cutoff date unless you add RAG or a live API.",
+                    "Also: IP, privacy, and bias risk. Pick a model using modality, quality, latency, cost, context length, language, compliance.",
+                ],
+                "An IAM policy bot invents an action that does not exist → hallucination. The same prompt at temperature 0.9 returns three different JSON shapes → nondeterminism. The model’s cutoff is last year and you need this week’s instance prices → RAG or a pricing API, not a larger model alone.",
             )
             + h2("How they want you to choose a model")
             + p(
@@ -416,7 +441,7 @@ def topics():
                     "High temperature + sampling = variation.",
                 ),
                 q_single(
-                    "A model’s training cutoff is last year; they need this week’s ferry times. What do they add?",
+                    "A model’s training cutoff is last year; they need this week’s EC2 prices. What do they add?",
                     ["Only raise temperature", "RAG or a live tool, not a bigger stale model alone", "Delete Guardrails", "Use Glacier"],
                     1,
                     "Stale knowledge → retrieve or tool.",
@@ -455,8 +480,13 @@ def topics():
             "Business metrics for GenAI",
             "They ask whether the project is worth it — not only BLEU.",
             meaning(
-                "Beyond model scores, AWS wants <b>business</b> language: ROI, cost per user or per interaction, development cost, customer satisfaction / feedback, engagement, productivity, ARPU, customer lifetime value (CLV), task completion. "
-                "A pretty demo that nobody uses, or that costs more than the hours it saves, fails Domain 2 even if ROUGE is high."
+                "A high ROUGE score does not mean the project is worth running. The exam also asks business metrics.",
+                [
+                    "Name these: <b>ROI</b>, cost per user / per interaction, development cost, CSAT / feedback, engagement, productivity, ARPU, CLV, task completion, conversion rate.",
+                    "Evaluate the whole app (retrieval + prompt + tools), not only the raw FM.",
+                    "A demo nobody uses, or a bot that costs more than the minutes it saves, fails this task.",
+                ],
+                "Finance asks if a Knowledge Base bot saves more support hours than it costs each quarter → ROI / cost per interaction, not BLEU. Users abandon after one turn without a resolved ticket → task completion and CSAT.",
             )
             + exam(
                 "“Leadership wants to know if the bot pays for itself” = ROI / cost per interaction, not BLEU. "
@@ -522,8 +552,15 @@ def topics():
             "AWS GenAI platform map",
             "Task 2.3 is “which AWS door do I open?” This is high yield.",
             meaning(
-                "AWS sells a platform so data, IAM, regions, and compliance stay in your account. "
-                "Bedrock does <b>not</b> use your prompts to train the base provider models — a favourite fact."
+                "Task 2.3 is which AWS door you open. Data, IAM, and region stay in your account.",
+                [
+                    "<b>Bedrock</b> — many FMs, one API, no servers. Prompts are not used to train the provider’s base models.",
+                    "<b>SageMaker AI</b> — you train/host. <b>JumpStart</b> — one-click open-source / pre-trained.",
+                    "<b>Q Business / Quick</b> — employee assistant over company docs/SaaS. <b>Q Developer / Kiro</b> — coding help.",
+                    "<b>Bedrock Agents + AgentCore</b> — you build custom agents. <b>Strands</b> — multi-agent framework. <b>Transform</b> — modernize old code.",
+                    "No ML team + fastest FM access → Bedrock. Custom algorithm / own GPUs → SageMaker.",
+                ],
+                "A two-person team wants Claude and Llama through one managed API with no GPU fleet → Bedrock. Data scientists need notebooks and custom training → SageMaker. Staff need Q&amp;A over Confluence and Slack with existing permissions → Q Business / Quick.",
             )
             + table(
                 ["You want", "Pick"],

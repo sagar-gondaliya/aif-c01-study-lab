@@ -10,11 +10,15 @@ def topics():
             "AI, ML, deep learning, GenAI, agents — the stack",
             "Memorize the nesting. Almost every Domain 1 stem starts here.",
             meaning(
-                "AI is the big umbrella: machines doing work that used to need human intelligence. "
-                "Machine learning is a way to get AI by <b>learning patterns from data</b> instead of writing every rule. "
-                "Deep learning is ML that uses multi-layer neural networks. "
-                "Generative AI is deep learning that <b>creates</b> new text, images, code, audio, or video. "
-                "Agentic AI is GenAI that <b>plans, calls tools, and acts</b> until a goal is done — not just a one-shot answer."
+                "These terms nest. AI is the umbrella. ML is AI that learns from data. Deep learning is ML with neural networks. GenAI creates new content. Agentic AI plans, calls APIs, and finishes a goal.",
+                [
+                    "<b>AI</b> — software that does tasks that used to need human judgment (vision, language, prediction).",
+                    "<b>ML</b> — the system learns patterns from data instead of hard-coded if/else rules.",
+                    "<b>Deep learning</b> — ML with multi-layer neural networks.",
+                    "<b>GenAI</b> — creates new text, code, images, audio, or video.",
+                    "<b>Agentic AI</b> — GenAI that calls tools (APIs, databases) and continues until the job is done.",
+                ],
+                "A ticketing system: SageMaker trains a classifier that labels a ticket as <i>billing / outage / access</i> (ML). Bedrock drafts the reply (GenAI). A Bedrock agent then calls the orders API, applies the refund, and writes the result back to the ticket (agentic).",
             )
             + exam(
                 "They give a one-line job and ask which <b>layer</b> it is. "
@@ -45,7 +49,7 @@ def topics():
             ),
             [
                 q_single(
-                    "A coastal ferry kiosk prints a unique safety poem for each sailing from a large language model. Which layer of the stack is this?",
+                    "A CI pipeline uses an LLM to draft a unique release-notes paragraph from the git log. Which layer of the stack is this?",
                     [
                         "Classic unsupervised clustering",
                         "Generative AI (creates new text)",
@@ -73,7 +77,7 @@ def topics():
                     "Model = learned artifact. Algorithm = how you train it. Inference = using it.",
                 ),
                 q_single(
-                    "A museum wants software that reads handwritten labels in photos. Which capability is that?",
+                    "A warehouse app must read handwritten SKU codes from photos of labels. Which capability is that?",
                     ["Time-series forecasting", "Computer vision (and likely OCR)", "Reinforcement learning for chess", "Token pricing"],
                     1,
                     "Understanding images is computer vision. Text-in-image is often Rekognition or Textract on the exam.",
@@ -111,11 +115,15 @@ def topics():
             "Learning types: supervised, unsupervised, reinforcement",
             "Read the data first: labels? rewards? Then pick the learning type.",
             meaning(
-                "<b>Supervised</b> = each example has a known answer (label). You predict a category (classification) or a number (regression). "
-                "<b>Unsupervised</b> = no labels. You group (clustering) or find oddballs (anomaly detection). "
-                "<b>Reinforcement</b> = an agent tries actions and gets rewards (games, robots, RLHF for LLMs). "
-                "<b>Semi-supervised</b> = a few labels plus lots of unlabeled data. "
-                "<b>Self-supervised</b> = the model makes its own labels (mask a token, predict it) — this is how FMs are pre-trained."
+                "Pick the learning type from the data. Labels, no labels, or a reward signal.",
+                [
+                    "<b>Supervised</b> — each row has the answer. Category = classification. Number = regression.",
+                    "<b>Unsupervised</b> — no labels. Group rows (clustering) or find odd rows (anomaly detection).",
+                    "<b>Reinforcement</b> — the system tries actions and gets a reward (robots, RLHF for LLMs).",
+                    "<b>Semi-supervised</b> — a few labels plus a large unlabeled set.",
+                    "<b>Self-supervised</b> — the model makes its own labels (predict the next token). This is how FMs are pre-trained.",
+                ],
+                "Support tickets already tagged <i>P1 / P2 / P3</i> → supervised classification. VPC flow logs with no incident tags, group similar traffic → unsupervised clustering. An LLM where humans pick the safer of two replies → RLHF (reinforcement).",
             )
             + exam(
                 "Story always hides the hint: “labeled tickets,” “no labels,” “reward when the robot docks,” “only 2% of rows are tagged.” "
@@ -138,19 +146,19 @@ def topics():
             ),
             [
                 q_single(
-                    "A bakery has photos already tagged “burnt / good / raw” and wants a model that labels new photos. Which learning type?",
+                    "PCB photos are already tagged “pass / fail / rework.” The team wants a model that labels new photos. Which learning type?",
                     ["Unsupervised clustering", "Supervised classification", "Reinforcement with a dock reward", "Self-supervised video generation only"],
                     1,
                     "Named labels and a category output = supervised classification.",
                 ),
                 q_single(
-                    "A bike-share has ride logs with no “good / bad rider” tags and wants natural groups of commuters. Which approach?",
+                    "VPC flow logs have no incident tags. The team wants natural groups of similar traffic. Which approach?",
                     ["Supervised regression of tax rates", "Unsupervised clustering", "RLHF on a legal brief", "Batch Translate"],
                     1,
                     "No labels + grouping = unsupervised clustering.",
                 ),
                 q_single(
-                    "A drone learns to land by trying angles and receiving a score after each landing. Which learning type?",
+                    "An autoscaler tries instance sizes and receives a reward when p95 latency and cost both improve. Which learning type?",
                     ["Supervised classification", "Unsupervised clustering", "Reinforcement learning", "Prompt caching"],
                     2,
                     "Actions plus a reward signal = reinforcement learning.",
@@ -191,10 +199,14 @@ def topics():
             "Data types: labeled, structured, unstructured",
             "The exam uses data shape to push you toward traditional ML or an FM.",
             meaning(
-                "<b>Labeled</b> data has the answer attached. <b>Unlabeled</b> does not. "
-                "<b>Structured</b> data lives in tables (rows/columns). "
-                "<b>Unstructured</b> is text, images, video, audio, PDFs. "
-                "Also know <b>tabular</b>, <b>time-series</b>, <b>image</b>, and <b>text</b> as named types on the guide."
+                "The exam uses data shape to push you to classic ML or to an FM.",
+                [
+                    "<b>Labeled</b> — the answer is on the row (fraud / not fraud). <b>Unlabeled</b> — no answer column.",
+                    "<b>Structured / tabular</b> — rows and columns (CSV, Redshift, DynamoDB items).",
+                    "<b>Unstructured</b> — text, images, video, audio, PDFs in S3.",
+                    "Also named on the guide: <b>time-series</b>, <b>image</b>, <b>text</b>.",
+                ],
+                "A DynamoDB table of orders with a <i>chargeback</i> flag is labeled structured data → SageMaker classifier. Three years of PDF contracts in S3 with no tags, and users need Q&amp;A → unstructured → Bedrock + Knowledge Bases.",
             )
             + exam(
                 "“CSV of sales with a price column” + predict the number = traditional supervised ML. "
@@ -221,9 +233,9 @@ def topics():
                     "Rows, columns, and a known target = labeled structured/tabular.",
                 ),
                 q_single(
-                    "A theatre has 20 years of scanned playbills and wants visitors to ask questions in plain English. Why is an FM a better first thought than a small tabular classifier?",
+                    "A company has 20 years of scanned contracts in S3 and wants staff to ask questions in plain English. Why is an FM a better first thought than a small tabular classifier?",
                     [
-                        "Playbills are unstructured text/images and there is no huge labeled class set",
+                        "Contracts are unstructured text/images and there is no huge labeled class set",
                         "Scans are already a Redshift star schema",
                         "FMs always guarantee exact box-office totals",
                         "MemoryDB is required for PDFs",
@@ -276,11 +288,14 @@ def topics():
             "Inference types: real-time, batch, async, serverless",
             "Who is waiting, and how many rows? That picks the inference style.",
             meaning(
-                "<b>Inference</b> is using a trained model. "
-                "<b>Real-time</b> = a user or checkout is waiting (chat, fraud at pay). "
-                "<b>Batch</b> = score millions overnight; nobody is staring at a spinner. "
-                "<b>Asynchronous</b> = the job takes seconds to minutes (long video, fat PDF); the caller picks up later. "
-                "<b>Serverless</b> = no servers to nurse; pay per request; good for spiky traffic (Bedrock on-demand is the exam example)."
+                "Inference is using a trained model on new data. The exam asks who is waiting and how many rows.",
+                [
+                    "<b>Real-time</b> — a user or API caller is waiting (chat, fraud check at payment).",
+                    "<b>Batch</b> — score millions overnight. No one watches a spinner.",
+                    "<b>Asynchronous</b> — the job takes minutes (long video, 400-page PDF). Caller picks up later.",
+                    "<b>Serverless</b> — no instances to manage; pay per request. Bedrock on-demand is the usual example.",
+                ],
+                "Checkout calls a SageMaker endpoint and must get allow/deny in under a second → real-time. Glue + a nightly job scores 12 million CloudTrail events → batch. Textract on a 300-page scan, result lands in S3 after 10 minutes → asynchronous. A chatbot on Bedrock with unknown traffic and no GPU fleet → serverless.",
             )
             + exam(
                 "Circle “customer is on the phone,” “nightly for 40 million rows,” “video takes 8 minutes,” or “traffic is unknown and they refuse to manage instances.”"
@@ -342,8 +357,14 @@ def topics():
             "When AI is right — and when it is not",
             "Not every business problem should use a model. This is easy points.",
             meaning(
-                "Use AI/ML when patterns in data beat hand-written rules: messy language, images, recommendations, forecasts, flexible Q&A. "
-                "Do <b>not</b> use AI when you need a <b>guaranteed exact</b> answer (tax, payroll, a compliance formula), when SQL or a rule already solves it, when cost dwarfs benefit, when you have no data, or when a regulator demands full explainability that a giant FM cannot give."
+                "Use AI when patterns in data beat hand-written rules. Do not use it when the result must be exact every time.",
+                [
+                    "<b>Use AI/ML</b> — language, images, recommendations, forecasts, flexible Q&amp;A over documents.",
+                    "<b>Do not use GenAI</b> — tax, payroll, a statutory formula, or any output that must match a published table.",
+                    "Skip AI if SQL or an if/else already solves it, if cost is higher than the value, or if you have no data.",
+                    "If a regulator needs feature-level reasons, prefer traditional ML + Clarify, not a large FM.",
+                ],
+                "VAT on an invoice must match the tax table → rules engine / code, not Claude. Routing inbound emails to <i>billing / legal / ops</i> from messy text → Comprehend or an FM. A credit decline must show which columns drove the score → SageMaker + Clarify.",
             )
             + exam(
                 "They plant words like “must be exact,” “statutory formula,” “already a simple IF,” or “no historical data.” "
@@ -428,7 +449,13 @@ def topics():
             "AWS AI application services (pick the name)",
             "These are the easiest scored questions if you memorize the job line.",
             meaning(
-                "AWS already trained many models for common jobs. You do not train Rekognition. You <b>call the service that matches the verb</b> in the story."
+                "These are pre-trained application APIs. You do not train them. You pick the service that matches the verb in the question.",
+                [
+                    "Circle the job: speech→text, text→speech, language A→B, faces in an image, forms from a PDF, chatbot slots, recommendations.",
+                    "Do not pick Bedrock for a job that already has a dedicated API (faces = Rekognition, not Claude).",
+                    "SageMaker / Canvas = you train a custom model. JumpStart = one-click pre-trained / open-source models.",
+                ],
+                "Call recordings in S3 must become searchable text → Amazon Transcribe. A scanned invoice must become JSON fields → Amazon Textract. An IVR that books a change window and collects date + account ID → Amazon Lex.",
             )
             + exam(
                 "The stem is almost a dictionary: “speech to text,” “text to speech,” “language A to B,” “faces in a photo,” “forms from a PDF,” “chatbot slots,” “product recommendations.” Circle the verb, pick the brand name."
@@ -462,13 +489,13 @@ def topics():
             ),
             [
                 q_single(
-                    "A radio archive must turn presenter MP3s into searchable transcripts. Which service?",
+                    "A contact centre must turn call recordings in S3 into searchable transcripts. Which service?",
                     ["Amazon Polly", "Amazon Transcribe", "Amazon Rekognition", "Amazon Personalize"],
                     1,
                     "Speech → text is Transcribe. Polly is the opposite.",
                 ),
                 q_single(
-                    "A museum app needs a calm spoken guide from written wall text. Which service?",
+                    "An accessibility feature must read on-screen error text aloud. Which service?",
                     ["Amazon Transcribe", "Amazon Polly", "Amazon Textract", "Amazon Forecast"],
                     1,
                     "Text → speech is Polly.",
@@ -480,13 +507,13 @@ def topics():
                     "Forms and tables from scans = Textract.",
                 ),
                 q_single(
-                    "A shop wants “customers who bought this teakettle also bought…” without building a model. Which service?",
+                    "An ecommerce API wants “customers who bought this SKU also bought…” without training a custom model. Which service?",
                     ["Amazon Personalize", "Amazon Inspector", "AWS Artifact", "Amazon Macie"],
                     0,
                     "Recommendations = Personalize.",
                 ),
                 q_multi(
-                    "A hotel wants a voice bot that books rooms (dates, names) and also translates the confirmation into Japanese. Which TWO services fit the jobs?",
+                    "A helpdesk wants a voice bot that opens a change ticket (date, account ID) and also translates the confirmation into Japanese. Which TWO services fit the jobs?",
                     ["Amazon Lex", "Amazon Translate", "Amazon Inspector", "AWS Trusted Advisor", "Amazon Forecast"],
                     [0, 1],
                     "Lex = chatbot/slots. Translate = language A → B.",
@@ -507,8 +534,15 @@ def topics():
             "Traditional ML versus a foundation model",
             "Same business goal, two toolboxes. The constraints pick the box.",
             meaning(
-                "<b>Traditional ML</b> (often SageMaker / Canvas): you train a model on <b>your</b> labeled data for one job — price, churn, fraud. Good when you need numbers, explainability, or a tight regulated table. "
-                "<b>Foundation model</b> (often Bedrock): a huge pre-trained model you adapt with prompts, RAG, or light customisation. Good when input is language or images, you need generation or flexible Q&A, and you lack a giant labeled set."
+                "Same business goal, two toolboxes. Constraints pick the box.",
+                [
+                    "<b>Traditional ML</b> (SageMaker / Canvas) — you train on your labeled table for one job: churn, fraud, price.",
+                    "Use it when you need a number, feature reasons, or a regulated tabular decision.",
+                    "<b>Foundation model</b> (Bedrock) — a large pre-trained model you adapt with prompts, RAG, or light fine-tuning.",
+                    "Use it for language/images, generation, or Q&amp;A when you do not have a huge labeled set.",
+                    "No ML team + many FMs via one API → Bedrock. Custom training loop / own containers → SageMaker.",
+                ],
+                "80,000 labeled loan rows and the bank must show which features caused a decline → SageMaker + Clarify. Engineers paste error logs and want a draft runbook, no labeled “correct runbook” set → Bedrock.",
             )
             + exam(
                 "Look for “must explain to a regulator,” “small CSV,” “need a draft email,” “no data science team,” “PDFs change every week.”"
@@ -538,7 +572,7 @@ def topics():
                     "Tabular + explanations = classic ML + Clarify-style tools.",
                 ),
                 q_single(
-                    "A tourism board has messy blogs and wants a chatbot that drafts itineraries. No labeled “correct trip” dataset. Best first toolbox?",
+                    "A platform team has messy runbooks in S3 and wants a chatbot that drafts incident replies. No labeled “correct reply” dataset. Best first toolbox?",
                     ["Train a linear model on three columns", "A foundation model (prompt / RAG)", "Only Amazon Forecast", "A Glacier vault"],
                     1,
                     "Unstructured + generation + no labels = FM.",
@@ -582,12 +616,15 @@ def topics():
             "Metrics, underfitting, overfitting",
             "Accuracy lies on rare events. Fit tells you if the model is too simple or too memorised.",
             meaning(
-                "<b>Accuracy</b> = correct / total — looks great if 99% of rows are “normal.” "
-                "<b>Precision</b> = of the ones you flagged, how many were right (care when false positives hurt). "
-                "<b>Recall</b> = of the real positives, how many you caught (care when misses hurt). "
-                "<b>F1</b> = balance of precision and recall. "
-                "<b>Underfit</b> (high bias): bad on train <i>and</i> test — model too simple. "
-                "<b>Overfit</b> (high variance): great on train, poor on new data — memorised noise."
+                "Classic ML metrics. Accuracy lies when the rare class is what you care about.",
+                [
+                    "<b>Accuracy</b> — correct / total. Looks high if 99% of rows are “normal.”",
+                    "<b>Precision</b> — of the alerts you raised, how many were real (false positives are costly).",
+                    "<b>Recall</b> — of the real positives, how many you caught (misses are costly).",
+                    "<b>F1</b> — one number that balances precision and recall.",
+                    "<b>Underfit</b> — high error on train and test (model too simple). <b>Overfit</b> — great on train, poor on new data.",
+                ],
+                "Fraud is 0.2% of payments. A model that always says “not fraud” is ~99.8% accurate and useless. If missing fraud is worse than extra reviews, maximise recall. If extra blocks of good cards anger customers, protect precision.",
             )
             + exam(
                 "Cancer / fraud / avalanche = maximise recall. Spam filter that must not bury real mail = precision. "
@@ -650,10 +687,14 @@ def topics():
             "ML lifecycle and MLOps (conceptual)",
             "You will not build the pipeline. You must name the stage and how the model is hosted.",
             meaning(
-                "The loop they want: <b>collect → explore → prepare → train → evaluate → deploy → monitor → retrain</b>. "
-                "MLOps words on the guide: experimentation, repeatable processes, scalable systems, technical debt, production readiness, monitoring, retraining. "
-                "How it reaches users: a <b>managed API</b> (Bedrock, Q, Rekognition — exam default) or a <b>self-hosted</b> endpoint (SageMaker / your containers). "
-                "Where FMs come from: open-source (JumpStart/Bedrock), provider FMs on Bedrock (Nova, Claude…), or custom-trained (rare, expensive, usually SageMaker)."
+                "You do not build the pipeline. You name the stage and how the model is hosted.",
+                [
+                    "Usual order: <b>collect → explore (EDA) → prepare → train → evaluate → deploy → monitor → retrain</b>.",
+                    "MLOps words: experimentation, repeatable process, production readiness, monitoring, retraining.",
+                    "<b>Managed API</b> — Bedrock, Q, Rekognition (exam default). <b>Self-hosted</b> — SageMaker endpoint or your containers.",
+                    "FM sources: provider models on Bedrock, open-source via JumpStart/Bedrock, or train your own (rare, SageMaker).",
+                ],
+                "A fraud model’s precision drops after a new SKU launches → you skipped <b>monitor / retrain</b>. A two-person team needs face detection with no GPU ops → Rekognition managed API, not a custom SageMaker training job.",
             )
             + exam(
                 "Ordering questions love the lifecycle. “Accuracy dropped after a holiday promotion” = monitor then retrain, not “buy Artifact.” "
@@ -676,7 +717,7 @@ def topics():
                     "Drift after launch = monitor + retrain.",
                 ),
                 q_single(
-                    "A charity wants face detection with no ML staff. How should the model be consumed?",
+                    "A security team wants face detection on badge photos with no ML staff. How should the model be consumed?",
                     ["Self-hosted custom CUDA on laptops", "Managed API (Amazon Rekognition)", "Pre-train a vision FM from zero", "Amazon Forecast"],
                     1,
                     "Managed application API is the default.",
@@ -714,7 +755,14 @@ def topics():
             "AWS data, compute, and cost around ML",
             "Leftover official names: you only need the one-line job.",
             meaning(
-                "These services appear in the in-scope list. You will not configure them. You pick the name that matches a sentence."
+                "In-scope data, compute, and cost names. You pick the one-line job. You do not configure the console.",
+                [
+                    "S3 stores files and logs. It is <b>not</b> a vector database.",
+                    "DataBrew = no-code clean. Glue = ETL/catalog. Lake Formation = who can see lake tables. EMR = big Spark. Redshift = warehouse SQL. Data Exchange = buy a third-party dataset.",
+                    "Lambda = short function. EC2 = you manage the VM. ECS/EKS = containers. CloudFront = CDN.",
+                    "Budgets = spend alert. Cost Explorer = history of cost.",
+                ],
+                "Analysts must clean a messy CSV before Canvas, no Spark code → Glue DataBrew. Policy PDFs sit in S3 and you need meaning search → add embeddings + OpenSearch / Aurora / Knowledge Bases, not S3 alone.",
             )
             + table(
                 ["Need", "Pick"],
