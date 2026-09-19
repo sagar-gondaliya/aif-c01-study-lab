@@ -8,42 +8,42 @@
       lead: "Basic words. If you can say these out loud, Domain 1 questions become easy.",
       groups: [
         {
-          name: "The AI stack (what sits inside what)",
+          name: "The AI stack (read top to bottom)",
           rows: [
-            { term: "AI (Artificial Intelligence)", meaning: "Software that does work a person used to do with their brain — read a picture, read text, write something, or guess a result. AI is the big umbrella. ML, deep learning, GenAI, and agents all sit inside AI.", example: "A company wants software that writes customer-support emails, checks grammar, and suggests a reply. That is AI. The exam asks: is this AI, ML, or a simple if-then rule?" },
+            { term: "AI (Artificial Intelligence)", meaning: "Software that does work a person used to do with their brain — read a picture, read text, write something, or guess a result. AI is the big umbrella. Everything below sits inside AI.", example: "A company wants software that writes customer-support emails, checks grammar, and suggests a reply. That is AI. The exam asks: is this AI, ML, or a simple if-then rule?" },
             { term: "ML (Machine Learning)", meaning: "A type of AI that learns from lots of past data. You do not write every rule. You give examples. The computer finds the pattern and then uses that pattern on new data.", example: "You have 10 million stock rows. The machine studies the pattern and then scores tomorrow’s risk. That is ML. A fixed Excel formula that always says “if price > 100 then sell” is a rule, not ML." },
-            { term: "Deep learning", meaning: "A type of ML that uses a neural network — many layers of math stacked on each other. You do not build the network on this exam. You only name it when the story talks about many layers or images/speech.", example: "A factory uses a multi-layer neural net to spot cracks in photos of parts. The exam word is deep learning, not “agent” and not Amazon Polly." },
-            { term: "Neural network", meaning: "The math stack inside deep learning. Inputs go through layers of nodes and come out as a score or a label. You will not be asked to code one.", example: "“Many hidden layers look at a passport photo” = neural network / deep learning." },
-            { term: "Generative AI (GenAI)", meaning: "AI that writes new content — text, code, image, audio, or video. It does not only label an old photo. It creates something new.", example: "A system drafts delay announcements in three tones from a short brief. That is GenAI. A system that only labels a tweet “delayed / on time” is classification, not generation." },
-            { term: "Agentic AI / agent", meaning: "GenAI that does not only chat. It plans steps, calls other systems (tools), reads the result, and continues until the job is done.", example: "A bot picks Jira or CloudWatch, opens a ticket, then waits for the reply. That is an agent. A nightly job that always does extract → store is a workflow, not an agent." },
-            { term: "Model", meaning: "The finished file the computer learned. After training, this is what you run to get a score or a sentence.", example: "The fraud model is the thing that outputs 0.91 risk on a new payment." },
-            { term: "Algorithm", meaning: "The method used to train the model. You name that a method exists. You do not pick a learning rate on this exam.", example: "They used a classification algorithm on labeled fraud rows. You will not be asked to implement it." },
-            { term: "Training", meaning: "The learning step. The machine looks at past data and updates itself so it can do the job later.", example: "You train on last year’s tickets, then use the model on this week’s tickets." },
-            { term: "Inference", meaning: "Using the trained model on new data. This is the live / production step.", example: "A card is swiped. The model scores it now. That score is inference, not training." },
-            { term: "Foundation model (FM)", meaning: "A large model already trained by a vendor on a huge pile of text or images. You pick it and adapt it. You almost never train one from zero.", example: "Claude, Llama, or Amazon Nova on Bedrock. “Build our own GPT from scratch on our small files” is almost always wrong." },
-            { term: "LLM (Large Language Model)", meaning: "An FM that is especially good at text and code.", example: "A chatbot that writes SQL from a question is using an LLM." },
-            { term: "Computer vision", meaning: "AI that understands pictures or video.", example: "Read a cheque image or find a face. Rekognition is the usual AWS service." },
-            { term: "NLP (Natural Language Processing)", meaning: "AI that understands human language — sentiment, entities, language detect.", example: "“Is this review positive?” = NLP. Amazon Comprehend is the usual AWS service." }
+            { term: "Training", meaning: "The learning step in ML. The machine looks at past data and updates itself so it can do the job later.", example: "You train on last year’s tickets, then use what it learned on this week’s tickets." },
+            { term: "Model", meaning: "The finished file after training. This is what you run to get a score or a sentence.", example: "The fraud model is the thing that outputs 0.91 risk on a new payment." },
+            { term: "Algorithm", meaning: "The method used during training to build the model. You only name that a method exists. You do not pick a learning rate on this exam.", example: "They used a classification algorithm on labeled fraud rows. You will not be asked to implement it." },
+            { term: "Inference", meaning: "Using the trained model on new data. This is the live / production step — after training is finished.", example: "A card is swiped. The model scores it now. That score is inference, not training." },
+            { term: "Neural network", meaning: "A way to do ML with layers of small math units called nodes. Data goes in the first layer, each layer changes it a bit, and a score or a label comes out the last layer. You will not be asked to code one.", example: "“Many hidden layers look at a passport photo and output match / no match.” That setup is a neural network." },
+            { term: "Deep learning", meaning: "A type of ML that uses a neural network with many layers (that is the “deep” part). You only name it when the story talks about many layers, images, or speech. You do not build the network on this exam.", example: "A factory uses a multi-layer neural network to spot cracks in photos of parts. The exam word is deep learning, not “agent” and not Amazon Polly." },
+            { term: "Computer vision", meaning: "AI that understands pictures or video. Many computer-vision systems use deep learning.", example: "Read a cheque image or find a face. Rekognition is the usual AWS service." },
+            { term: "NLP (Natural Language Processing)", meaning: "AI that understands human language — sentiment, names, language detect. Many NLP systems also use deep learning.", example: "“Is this review positive?” = NLP. Amazon Comprehend is the usual AWS service." },
+            { term: "Generative AI (GenAI)", meaning: "AI that writes new content — text, code, image, audio, or video. It does not only label an old photo. It creates something new. Most GenAI you see on the exam is a large deep-learning model.", example: "A system drafts delay announcements in three tones from a short brief. That is GenAI. A system that only labels a tweet “delayed / on time” is classification, not generation." },
+            { term: "Foundation model (FM)", meaning: "A large GenAI model already trained by a vendor on a huge pile of text or images. You pick it and adapt it. You almost never train one from zero.", example: "Claude, Llama, or Amazon Nova on Bedrock. “Build our own GPT from scratch on our small files” is almost always wrong." },
+            { term: "LLM (Large Language Model)", meaning: "A foundation model that is especially good at text and code.", example: "A chatbot that writes SQL from a question is using an LLM." },
+            { term: "Agentic AI / agent", meaning: "GenAI that does not only chat. It plans steps, calls other systems (tools), reads the result, and continues until the job is done.", example: "A bot picks Jira or CloudWatch, opens a ticket, then waits for the reply. That is an agent. A nightly job that always does extract → store is a workflow, not an agent." }
           ]
         },
         {
-          name: "How the machine learns",
+          name: "How the machine learns (data first, then the method)",
           rows: [
-            { term: "Supervised learning", meaning: "You give labeled examples: input and the known answer. The model learns to copy that mapping.", example: "Each email is marked spam or not spam. Predict a number (price) or a category (fraud / ok) — both are supervised." },
-            { term: "Unsupervised learning", meaning: "No labels. The machine finds groups or strange points by itself.", example: "Years of shopping baskets with no VIP tags. You want natural shopper groups. That is clustering (unsupervised)." },
-            { term: "Reinforcement learning", meaning: "The machine tries actions and gets a reward or a penalty. It learns what pays off. RLHF for chatbots is this family.", example: "A robot arm gets a point when a box is placed correctly. Or humans pick the better of two chatbot replies (RLHF)." },
-            { term: "Semi-supervised learning", meaning: "A few labels plus a lot of unlabeled data. Used when labels cost a lot of money.", example: "Doctors labeled 500 scans; you have 50,000 unlabeled scans." },
-            { term: "Self-supervised learning", meaning: "The model makes its own labels from the data (hide a word, guess the word). This is how many FMs are pre-trained.", example: "The exam may say “the model hides a token and predicts it.” That is self-supervised pre-training, not RAG." },
-            { term: "Classification", meaning: "Supervised job: predict a category.", example: "Spam / not spam. Intact / damaged / blocked meter photo. Not a dollar amount." },
-            { term: "Regression", meaning: "Supervised job: predict a number.", example: "Length of stay in hours. Next quarter’s claim amount in dollars. Minutes of delay." },
-            { term: "Clustering", meaning: "Unsupervised job: make groups when you have no group names yet.", example: "Segment donors or shoppers with no segment column in the file." },
-            { term: "Anomaly detection", meaning: "Find the odd row — a spike, a fault, a weird login.", example: "Unlabeled clickstreams; find unusual exam-period traffic. Often unsupervised." },
             { term: "Labeled data", meaning: "Each row already has the answer written (spam, $42, damaged).", example: "If they have labels, think supervised. If they do not, think clustering." },
             { term: "Unlabeled data", meaning: "Rows with no answer column.", example: "Raw PDFs, raw baskets, raw logs." },
             { term: "Structured data", meaning: "Tables with rows and columns.", example: "A CSV of policy features. Traditional ML loves this." },
             { term: "Unstructured data", meaning: "Text, images, audio, video. No neat columns.", example: "Call recordings, contracts, photos. FMs and AWS AI services shine here." },
-            { term: "Tabular data", meaning: "Spreadsheet-style data.", example: "Analysts with a churn spreadsheet and no code → SageMaker Canvas." },
-            { term: "Time-series data", meaning: "Values over time.", example: "Hourly meter readings. Forecast-style jobs." }
+            { term: "Tabular data", meaning: "Spreadsheet-style structured data.", example: "Analysts with a churn spreadsheet and no code → SageMaker Canvas." },
+            { term: "Time-series data", meaning: "Values over time.", example: "Hourly meter readings. Forecast-style jobs." },
+            { term: "Supervised learning", meaning: "You give labeled examples: input and the known answer. The model learns to copy that mapping.", example: "Each email is marked spam or not spam. Predict a number (price) or a category (fraud / ok) — both are supervised." },
+            { term: "Classification", meaning: "A supervised job: predict a category.", example: "Spam / not spam. Intact / damaged / blocked meter photo. Not a dollar amount." },
+            { term: "Regression", meaning: "A supervised job: predict a number.", example: "Length of stay in hours. Next quarter’s claim amount in dollars. Minutes of delay." },
+            { term: "Unsupervised learning", meaning: "No labels. The machine finds groups or strange points by itself.", example: "Years of shopping baskets with no VIP tags. You want natural shopper groups." },
+            { term: "Clustering", meaning: "An unsupervised job: make groups when you have no group names yet.", example: "Segment donors or shoppers with no segment column in the file." },
+            { term: "Anomaly detection", meaning: "Find the odd row — a spike, a fault, a weird login. Often unsupervised.", example: "Unlabeled clickstreams; find unusual exam-period traffic." },
+            { term: "Semi-supervised learning", meaning: "A few labeled rows plus a lot of unlabeled data. Used when labels cost a lot of money.", example: "Doctors labeled 500 scans; you have 50,000 unlabeled scans." },
+            { term: "Self-supervised learning", meaning: "The model makes its own labels from the data (hide a word, guess the word). This is how many foundation models are first trained.", example: "The exam may say “the model hides a token and predicts it.” That is self-supervised pre-training, not RAG." },
+            { term: "Reinforcement learning", meaning: "The machine tries actions and gets a reward or a penalty. It learns what pays off. Later you will see RLHF, which uses this idea for chatbots.", example: "A robot arm gets a point when a box is placed correctly." }
           ]
         },
         {
@@ -56,14 +56,14 @@
           ]
         },
         {
-          name: "Classic ML metrics (do not mix with ROUGE / BLEU)",
+          name: "Classic ML metrics (mistakes first, then the scores)",
           rows: [
-            { term: "Accuracy", meaning: "How many predictions were correct, divided by all predictions. Looks great when one class is rare.", example: "Fraud is 0.4% of payments. A model that says “all legitimate” is 99.6% accurate and still useless. Do not pick accuracy as the headline." },
-            { term: "Precision", meaning: "Of the rows we flagged as yes, how many were really yes. High precision = fewer false alarms.", example: "A review queue is expensive. Raise precision so analysts are not flooded." },
-            { term: "Recall", meaning: "Of the rows that were really yes, how many did we catch. High recall = fewer misses.", example: "Missing cancer or missing fraud is very bad. Extra reviews are cheap. Maximise recall." },
-            { term: "F1 score", meaning: "One number that balances precision and recall.", example: "They want one score that does not ignore either side." },
             { term: "False positive", meaning: "We said yes, but it was no. A false alarm.", example: "A good email marked as spam." },
             { term: "False negative", meaning: "We said no, but it was yes. A miss.", example: "A fraud payment marked safe." },
+            { term: "Accuracy", meaning: "How many predictions were correct, divided by all predictions. Looks great when one class is rare.", example: "Fraud is 0.4% of payments. A model that says “all legitimate” is 99.6% accurate and still useless. Do not pick accuracy as the headline." },
+            { term: "Precision", meaning: "Of the rows we flagged as yes, how many were really yes. High precision = fewer false positives (false alarms).", example: "A review queue is expensive. Raise precision so analysts are not flooded." },
+            { term: "Recall", meaning: "Of the rows that were really yes, how many did we catch. High recall = fewer false negatives (misses).", example: "Missing cancer or missing fraud is very bad. Extra reviews are cheap. Maximise recall." },
+            { term: "F1 score", meaning: "One number that balances precision and recall.", example: "They want one score that does not ignore either side." },
             { term: "Conversion", meaning: "A business number: did the user buy, sign up, or finish the task? Not a model-quality score.", example: "Did the new search box increase sign-ups? Conversion, not ROUGE." },
             { term: "ROI", meaning: "Did we save or earn more money than we spent?", example: "Finance asks if the bot saves more support hours than it costs. ROI, not BLEU." },
             { term: "CSAT / task completion", meaning: "Was the user happy, and was the ticket actually solved?", example: "Users leave after one message and the ticket is still open. Low task completion." }
@@ -72,15 +72,15 @@
         {
           name: "Fit, data work, and when not to use AI",
           rows: [
-            { term: "Underfitting (high bias)", meaning: "The model is too simple. Error is high on old data and on new data.", example: "Bad on last year’s spreadsheet and on this season’s SKUs." },
-            { term: "Overfitting (high variance)", meaning: "The model memorised the training file. Great on train, poor on new data.", example: "Perfect on last year’s campaign, collapses on new products." },
             { term: "Exploratory data analysis (EDA)", meaning: "Look at the data first: missing values, outliers, class balance. You do not train yet.", example: "A data scientist plots nulls and class counts before any training job." },
-            { term: "Feature engineering", meaning: "Build a useful new column from raw fields.", example: "From last-purchase date you create “days since last purchase.” That is feature engineering, not EDA alone." },
+            { term: "Feature engineering", meaning: "After you understand the data, build a useful new column from raw fields.", example: "From last-purchase date you create “days since last purchase.” That is feature engineering, not EDA alone." },
             { term: "Label quality", meaning: "Wrong or messy labels ruin supervised models even if the algorithm is good.", example: "Two teams marked the same ticket as “urgent” and “low.” The model cannot learn a clean rule." },
             { term: "Representativeness", meaning: "Training rows must look like live traffic.", example: "You trained only on one city. Live users are worldwide. The model fails." },
+            { term: "Underfitting (high bias)", meaning: "The model is too simple. Error is high on old data and on new data.", example: "Bad on last year’s spreadsheet and on this season’s SKUs." },
+            { term: "Overfitting (high variance)", meaning: "The model memorised the training file. Great on train, poor on new data.", example: "Perfect on last year’s campaign, collapses on new products." },
             { term: "When not to use AI / GenAI", meaning: "If the answer is already in a published table, or must be exact every time, use a rule. An LLM can invent.", example: "Payroll tax table, hazardous-materials table, published tariff. Do not let an LLM “interpret” it." },
             { term: "MLOps (conceptual)", meaning: "A repeatable path: collect → prepare → train → evaluate → deploy → monitor → retrain. You will not build the pipeline.", example: "“Who watches the live model after launch?” = monitor / Model Monitor, not “we trained once and forgot.”" },
-            { term: "Retrain", meaning: "Train again when data or quality changes.", example: "After a new product line, scores drift. Retrain or refresh the data." }
+            { term: "Retrain", meaning: "Train again when data or quality changes. The last step in that MLOps loop.", example: "After a new product line, scores drift. Retrain or refresh the data." }
           ]
         },
         {
@@ -112,24 +112,24 @@
       lead: "Tokens, windows, agents, and which AWS door you open.",
       groups: [
         {
-          name: "GenAI vocabulary",
+          name: "GenAI vocabulary (read top to bottom)",
           rows: [
             { term: "Token", meaning: "A small piece of text the model reads or writes. AWS bills and limits use tokens, not whole words. About 4 letters, or about ¾ of an English word, per token.", example: "A finance lead asks why the bill tracks tokens, not pages. Longer pasted scripts = more input tokens = more money." },
-            { term: "Input tokens", meaning: "What you send: the instruction, the user question, retrieved pages, chat history.", example: "A huge RAG dump or 40 examples on every call raises input cost." },
-            { term: "Output tokens", meaning: "What the model writes. A high max-tokens setting lets it write a long answer and raises cost.", example: "Answers are novels. Cap max output tokens for yes/no." },
+            { term: "Input tokens", meaning: "Tokens you send: the instruction, the user question, retrieved pages, chat history.", example: "A huge RAG dump or 40 examples on every call raises input cost." },
+            { term: "Output tokens", meaning: "Tokens the model writes. A high max-tokens setting lets it write a long answer and raises cost.", example: "Answers are novels. Cap max output tokens for yes/no." },
             { term: "Context window", meaning: "The maximum tokens of input plus output the model can see in one request. When it is full, old turns fall off.", example: "A 200-page runbook cannot be pasted whole. A long chat drops the start. Split and retrieve (RAG)." },
-            { term: "Embedding", meaning: "The text turned into a list of numbers that capture meaning. Similar meaning → similar numbers.", example: "“Similar title search that understands meaning, not keywords” = store embeddings." },
-            { term: "Vector", meaning: "That list of numbers. One embedding is one vector.", example: "The exam may say “compute and store vectors besides the raw PDFs.”" },
-            { term: "Vector store / vector database", meaning: "A database that searches those numbers (closest meaning). On the guide: OpenSearch, Aurora (pgvector), Neptune, RDS PostgreSQL.", example: "S3 only stores files. MemoryDB is not on the 2026 list. Do not pick S3 or MemoryDB as the vector DB." },
-            { term: "Chunking", meaning: "Cut a long document into smaller pieces so each piece can be stored and found.", example: "An 80-page contract as one chunk makes search noisy. Use smaller chunks, maybe with overlap." },
-            { term: "Prompt engineering", meaning: "How you write the instruction and any examples.", example: "“Return only this JSON” is prompt engineering." },
-            { term: "Context engineering", meaning: "Everything you put into one request: instruction + user question + retrieved pieces + API results + chat history + output format. The sentence is only one part.", example: "A beautiful prompt plus 80 unrelated chunks. Answers wander. Missing context engineering, not Artifact." },
-            { term: "Multimodal", meaning: "More than one type: text + image, or video, or speech.", example: "A poster from a sentence needs an image model, not Nova Micro text-only." },
-            { term: "Diffusion model", meaning: "A common way to generate images or video (start from noise, become a picture).", example: "Synthetic defect images. Diffusion / image GenAI, not an LLM classifier." },
-            { term: "Transformer", meaning: "The usual architecture behind modern language FMs. You only recognise the name.", example: "They will not ask you to implement attention." },
-            { term: "System prompt", meaning: "The hidden instruction the app sends first (role, rules, format). Do not put secrets here.", example: "If a fetched page says “ignore the system prompt,” that is injection." },
+            { term: "System prompt", meaning: "The hidden instruction the app sends first (role, rules, format). Those words also use input tokens. Do not put secrets here.", example: "If a fetched page says “ignore the system prompt,” that is injection." },
+            { term: "Prompt engineering", meaning: "How you write the instruction and any examples in that request.", example: "“Return only this JSON” is prompt engineering." },
+            { term: "Modality", meaning: "The type of input or output: text, image, video, speech.", example: "Need a poster → image modality, not a text-only model." },
+            { term: "Multimodal", meaning: "More than one modality: text + image, or video, or speech.", example: "A poster from a sentence needs an image model, not Nova Micro text-only." },
             { term: "Latency", meaning: "How long the user waits for the reply. Long prompts and large models are slower.", example: "A simple FAQ should use a small cheap model for speed and cost." },
-            { term: "Modality", meaning: "The type of input or output: text, image, video, speech.", example: "Need a poster → image modality, not a text-only Micro model." }
+            { term: "Chunking", meaning: "Cut a long document into smaller pieces so each piece can fit in the context window and be found later.", example: "An 80-page contract as one chunk makes search noisy. Use smaller chunks, maybe with overlap." },
+            { term: "Embedding", meaning: "A chunk of text turned into a list of numbers that capture meaning. Similar meaning → similar numbers.", example: "“Similar title search that understands meaning, not keywords” = store embeddings." },
+            { term: "Vector", meaning: "That list of numbers. One embedding is one vector.", example: "The exam may say “compute and store vectors besides the raw PDFs.”" },
+            { term: "Vector store / vector database", meaning: "A database that searches those vectors (closest meaning). On the guide: OpenSearch, Aurora (pgvector), Neptune, RDS PostgreSQL.", example: "S3 only stores files. MemoryDB is not on the 2026 list. Do not pick S3 or MemoryDB as the vector DB." },
+            { term: "Context engineering", meaning: "Everything you put into the context window: system prompt + user question + retrieved chunks + API results + chat history + output format. Prompt engineering is only the instruction part.", example: "A beautiful prompt plus 80 unrelated chunks. Answers wander. Missing context engineering, not Artifact." },
+            { term: "Transformer", meaning: "The usual architecture behind modern language foundation models. You only recognise the name.", example: "They will not ask you to implement attention." },
+            { term: "Diffusion model", meaning: "A common way to generate images or video (start from noise, become a picture).", example: "Synthetic defect images. Diffusion / image GenAI, not an LLM classifier." }
           ]
         },
         {
@@ -149,21 +149,21 @@
         {
           name: "Agents and the AWS GenAI platform",
           rows: [
+            { term: "ReAct", meaning: "Reason + Act: think, call a tool, read the result, repeat. This is how an agent works, not a one-shot chat.", example: "They describe a loop of thought → tool → observation. That is an agent." },
+            { term: "Agent vs workflow", meaning: "Agent = next step depends on the question. Workflow = same steps every time (extract → translate → store).", example: "Every night Textract → Translate → Redshift. That is a pipeline, not an open-ended agent." },
             { term: "Tool / function calling", meaning: "Another program the agent can call: Jira, a database, Lambda (a short AWS function), an orders API.", example: "The agent calls refunds. It must not call payroll — that is a tool allow-list (AgentCore Policy)." },
             { term: "Short-term memory", meaning: "This chat only. Forgotten when the session ends.", example: "The bot remembers the city you typed two minutes ago." },
             { term: "Long-term memory", meaning: "Remembered next week, across sessions.", example: "The user returns and the bot still knows their boat name." },
-            { term: "MCP (Model Context Protocol)", meaning: "A standard way to plug tools and data into an agent. You only need the name, not the code. Do not implement interceptors.", example: "“We do not want a new HTTP wrapper every sprint” = MCP." },
             { term: "Orchestration", meaning: "The control loop that runs the agent: think, call a tool, read, repeat.", example: "AgentCore Runtime, or a fixed workflow if steps never change." },
-            { term: "Strands Agents", meaning: "A framework for several specialist agents working together.", example: "Research writer + editor agents coordinated. Not MemoryDB." },
-            { term: "Agent vs workflow", meaning: "Agent = next step depends on the question. Workflow = same steps every time (extract → translate → store).", example: "Every night Textract → Translate → Redshift. That is a pipeline, not an open-ended agent." },
+            { term: "MCP (Model Context Protocol)", meaning: "A standard way to plug tools and data into an agent. You only need the name, not the code. Do not implement interceptors.", example: "“We do not want a new HTTP wrapper every sprint” = MCP." },
             { term: "Amazon Bedrock", meaning: "Many large models, one API, AWS runs the servers. Your prompts are not used to train the vendor’s base model. Lowest barrier if you have no ML team.", example: "Claude and Llama, no GPU servers → Bedrock. Not SageMaker Training as the only path." },
             { term: "Amazon Q Business / Amazon Quick", meaning: "Staff ask questions over company docs with existing logins. A ready product. You do not assemble AgentCore.", example: "Q&A over Confluence next week. Not “build a custom agent.”" },
             { term: "Amazon Q Developer / Kiro", meaning: "Help write code. Q Developer is the coding assistant. Kiro is the newer agentic IDE direction.", example: "In-IDE suggestions. Not a customer-facing knowledge bot (that is Q Business)." },
             { term: "Bedrock Agents + AgentCore", meaning: "You build a custom production agent. AgentCore has Runtime, Identity, Policy, Memory, Guardrails, and a gateway/MCP idea.", example: "Call an internal orders API and read a policy Knowledge Base. Q Business is not enough." },
+            { term: "Strands Agents", meaning: "A framework for several specialist agents working together.", example: "Research writer + editor agents coordinated. Not MemoryDB." },
             { term: "AWS Transform", meaning: "Modernise old applications / code. Not a chatbot.", example: "A 1990s Java outage-management stack." },
-            { term: "Amazon MemoryDB (out of scope)", meaning: "Do not pick MemoryDB as the RAG / vector store on the 2026 guide.", example: "If MemoryDB is an option for “where do embeddings live?”, it is a trap." },
             { term: "Amazon Titan (older material)", meaning: "Older Amazon FMs. The exam may still mention Titan embeddings or image watermarking. Nova is the current Amazon FM family to pick first.", example: "If they say embeddings / watermark and Titan is the option, that can still be right. For new text chat, think Nova or another Bedrock provider." },
-            { term: "ReAct", meaning: "Reason + Act: the agent thinks, calls a tool, reads the result, repeats.", example: "They describe a loop of thought → tool → observation. That is an agent, not a one-shot chat." }
+            { term: "Amazon MemoryDB (out of scope)", meaning: "Do not pick MemoryDB as the RAG / vector store on the 2026 guide.", example: "If MemoryDB is an option for “where do embeddings live?”, it is a trap." }
           ]
         }
       ]
@@ -187,36 +187,35 @@
         {
           name: "RAG and grounding",
           rows: [
-            { term: "RAG (Retrieval-Augmented Generation)", meaning: "Find the right pieces of your documents, put them in the request, then let the model write. The answer is tied to your files, not only old training.", example: "IAM policies change every sprint. Put the latest files in a Knowledge Base. Do not retrain the whole model each sprint." },
-            { term: "Bedrock Knowledge Bases", meaning: "AWS loads the files, splits them, embeds them, stores them, and fetches them. The default RAG product.", example: "Managed ingest + retrieve + generate. You do not have to wire OpenSearch by hand unless they say so." },
-            { term: "Grounding", meaning: "The answer stays on the sources. Citations. “I don’t know if it is not in the docs.” Guardrails can check this.", example: "The model invents a 20% discount that is not in the rate card. Turn on grounding / “answer only from the docs.”" },
-            { term: "Citation", meaning: "Show which paragraph the answer came from.", example: "A benefits bot shows the source under each answer." },
-            { term: "Retrieval failed", meaning: "The pieces found are the wrong topic, or the file was never uploaded.", example: "The new security PDF was never ingested. Every answer is last quarter’s rule. Fix ingest / chunking / filters. Do not fine-tune an empty bucket." },
-            { term: "Generation failed", meaning: "The right pieces were found, but the model ignored them or invented extra.", example: "The Knowledge Base returned the correct table; the model still invented a discount. Fix prompt, temperature, grounding — not “upload the file” (it is already there)." },
-            { term: "Hybrid search / re-rank / metadata filter", meaning: "Ways to improve retrieval: mix keyword + vector, score chunks again, filter by date or type.", example: "Search returns whole contracts. Add metadata (contract type, date) and smaller chunks." },
+            { term: "Amazon S3 (files, not a vector DB)", meaning: "S3 stores objects (PDFs, logs). It is not a vector database. A Knowledge Base can read files from S3, then embed them into a real vector store.", example: "“PDFs already live in S3 so S3 is the index” is wrong." },
+            { term: "RAG (Retrieval-Augmented Generation)", meaning: "Find the right chunks of your documents, put them in the request, then let the model write. The answer is tied to your files, not only old training.", example: "IAM policies change every sprint. Put the latest files in a Knowledge Base. Do not retrain the whole model each sprint." },
+            { term: "Bedrock Knowledge Bases", meaning: "AWS loads the files (often from S3), chunks them, embeds them, stores the vectors, and fetches them. The default RAG product.", example: "Managed ingest + retrieve + generate. You do not have to wire OpenSearch by hand unless they say so." },
             { term: "Amazon OpenSearch Service", meaning: "A listed vector store for RAG.", example: "Valid store. S3 is not." },
             { term: "Amazon Aurora (pgvector)", meaning: "A listed vector store (Postgres with vectors).", example: "Valid on the guide." },
             { term: "Amazon Neptune", meaning: "A listed store (graph; used in some RAG designs on the guide).", example: "Valid. Do not pick MemoryDB." },
             { term: "Amazon RDS for PostgreSQL", meaning: "A listed vector option.", example: "Valid. S3 still only holds the raw files." },
-            { term: "Amazon S3 (files, not a vector DB)", meaning: "S3 stores objects. A Knowledge Base can read from S3, then embed into a real vector store.", example: "“PDFs already live in S3 so S3 is the index” is wrong." }
+            { term: "Citation", meaning: "Show which paragraph the answer came from.", example: "A benefits bot shows the source under each answer." },
+            { term: "Grounding", meaning: "The answer stays on those sources. “I don’t know if it is not in the docs.” Guardrails can check this.", example: "The model invents a 20% discount that is not in the rate card. Turn on grounding / “answer only from the docs.”" },
+            { term: "Retrieval failed", meaning: "The chunks found are the wrong topic, or the file was never uploaded.", example: "The new security PDF was never ingested. Every answer is last quarter’s rule. Fix ingest / chunking / filters. Do not fine-tune an empty bucket." },
+            { term: "Generation failed", meaning: "The right chunks were found, but the model ignored them or invented extra.", example: "The Knowledge Base returned the correct table; the model still invented a discount. Fix prompt, temperature, grounding — not “upload the file” (it is already there)." },
+            { term: "Hybrid search / re-rank / metadata filter", meaning: "Ways to improve retrieval: mix keyword + vector, score chunks again, filter by date or type.", example: "Search returns whole contracts. Add metadata (contract type, date) and smaller chunks." }
           ]
         },
         {
           name: "Customisation ladder (cheap → expensive)",
           rows: [
-            { term: "Prompt / few-shot / in-context learning", meaning: "Put 1–few examples in the request. Weights do not change. Cheapest first step for style and format.", example: "Five examples of the JSON ticket schema → few-shot. This is not fine-tuning." },
-            { term: "Zero-shot", meaning: "Instruction only. No example.", example: "They show a prompt with no sample output." },
-            { term: "One-shot", meaning: "One example in the prompt.", example: "One filled JSON plus “return only this schema.”" },
-            { term: "Few-shot", meaning: "A few examples in the prompt.", example: "Three sample tickets." },
+            { term: "Zero-shot", meaning: "Instruction only. No example in the prompt. Weights do not change.", example: "They show a prompt with no sample output." },
+            { term: "One-shot", meaning: "One example in the prompt. Still not training. Weights do not change.", example: "One filled JSON plus “return only this schema.”" },
+            { term: "Few-shot / in-context learning", meaning: "A few examples in the prompt. Cheapest first step for style and format. This is not fine-tuning.", example: "Five examples of the JSON ticket schema." },
             { term: "Chain-of-thought", meaning: "Ask it to work step by step. Good for multi-step logic.", example: "Compare two IAM policies before yes/no." },
             { term: "Negative prompt", meaning: "“Do not do X.” This is only a request. Guardrails is the hard block.", example: "The stem says ensure it never mentions hostnames. A “please don’t” sentence is not enough." },
             { term: "Prompt template", meaning: "A reusable prompt with blanks (ticket id, severity).", example: "Same structure every time; fill variables." },
             { term: "Bedrock Prompt Management", meaning: "Save versions of a prompt and roll back. Not only hard-coded text in an app.", example: "Three teams overwrite production prompts. Nobody can roll back Friday. They were missing Prompt Management." },
+            { term: "Transfer learning", meaning: "Start from a model that is already trained, not from empty weights. Fine-tune and CPT both do this.", example: "You adapt an FM; you do not start random." },
             { term: "Fine-tune / instruction tune", meaning: "Change the model’s saved weights using labeled pairs (user ask → good reply). Good for a stable tone. Not the first fix for facts that change daily.", example: "10,000 stable “incident → runbook” pairs." },
-            { term: "Transfer learning", meaning: "Start from a model that is already trained, not from empty weights.", example: "You adapt an FM; you do not start random." },
             { term: "Continued pre-training (CPT)", meaning: "More training on a large pile of unlabeled domain text so the model absorbs jargon.", example: "A huge unlabeled set of internal RFCs. That is CPT, not RAG (RAG fetches at question time)." },
+            { term: "RLHF", meaning: "A person picks the better of two replies. A reward model then aligns the FM. This uses the reinforcement-learning idea from Domain 1.", example: "Labelers choose the safer chatbot reply so it refuses risky IAM changes." },
             { term: "Distillation", meaning: "A small model copies a large teacher so inference is cheaper and faster.", example: "Nova Micro speed with Premier-class behaviour in the mobile app." },
-            { term: "RLHF", meaning: "A person picks the better of two replies. A reward model aligns the FM.", example: "Labelers choose the safer chatbot reply so it refuses risky IAM changes." },
             { term: "Pre-train from scratch", meaning: "Build a new large model. Almost never the AIF answer. Cost and time are huge.", example: "“Build our own GPT on our small files” = wrong." }
           ]
         },
@@ -261,24 +260,24 @@
         {
           name: "Hard controls and AWS tools",
           rows: [
+            { term: "PII (personally identifiable information)", meaning: "Data that can name a person: SSN, email, passport, national ID.", example: "You will see three tools: Macie finds PII in S3. Guardrails filters PII in the live chat. Comprehend finds PII in text you send it." },
             { term: "Bedrock Guardrails", meaning: "A filter that runs on every call. Checks what goes in and what comes out. A prompt is only a request. If the question says ensure / prevent / must not, pick Guardrails.", example: "A bank must block investment advice. Denied topics, not “please don’t.”" },
-            { term: "Content filters", meaning: "Guardrails type: hate, sexual, violence.", example: "They describe harmful language in the output." },
-            { term: "Denied topics", meaning: "Guardrails type: whole topics are blocked (legal advice, medical dosing).", example: "Must not give legal advice." },
-            { term: "Word lists", meaning: "Guardrails type: block or allow specific words.", example: "Never mention internal hostnames." },
-            { term: "PII filter (Guardrails)", meaning: "Hide personal data in the live chat (SSN, email, national ID).", example: "Outputs must never include national IDs. Macie is for PII already sitting in S3." },
-            { term: "Contextual grounding check", meaning: "Guardrails type: stay on the retrieved sources.", example: "Must not answer off the Knowledge Base." },
+            { term: "Content filters", meaning: "A Guardrails type: hate, sexual, violence.", example: "They describe harmful language in the output." },
+            { term: "Denied topics", meaning: "A Guardrails type: whole topics are blocked (legal advice, medical dosing).", example: "Must not give legal advice." },
+            { term: "Word lists", meaning: "A Guardrails type: block or allow specific words.", example: "Never mention internal hostnames." },
+            { term: "PII filter (Guardrails)", meaning: "A Guardrails type: hide PII in the live chat.", example: "Outputs must never include national IDs. Macie is for PII already sitting in S3." },
+            { term: "Contextual grounding check", meaning: "A Guardrails type: stay on the retrieved sources.", example: "Must not answer off the Knowledge Base." },
             { term: "Guardrails vs IAM", meaning: "Guardrails = what text is allowed. IAM = which person or role may call the model.", example: "IAM already limits who can invoke Claude, but users still trick it into medical dosing. Add Guardrails. IAM is not a content filter." },
+            { term: "Drift", meaning: "Live data or quality no longer matches training.", example: "After a new firmware, comment-moderation quality drops though the endpoint is green." },
             { term: "SageMaker Clarify", meaning: "Finds bias and shows which columns pushed a prediction (explainability).", example: "A credit model must show which columns pushed this decline." },
-            { term: "SageMaker Model Monitor", meaning: "Watches live quality. Alerts if the data or accuracy changes (drift).", example: "Precision fell after a new product launch. Endpoint is still green." },
-            { term: "SageMaker Model Cards", meaning: "A short document: intended use, data, known limits. Transparency. Cards do not encrypt.", example: "Publish data sources and limits for a fraud model." },
+            { term: "SageMaker Model Monitor", meaning: "Watches live quality. Alerts if data or accuracy drifts.", example: "Precision fell after a new product launch. Endpoint is still green." },
+            { term: "SageMaker Model Cards", meaning: "A short document: intended use, data, known limits. This is transparency. Cards do not encrypt.", example: "Publish data sources and limits for a fraud model." },
             { term: "AI Service Cards", meaning: "AWS’s own transparency write-up for an AWS AI service (for example Rekognition).", example: "Works-council review of Rekognition. Not your Model Card, not Artifact (Artifact is SOC/ISO PDFs)." },
-            { term: "Amazon A2I (Augmented AI)", meaning: "A person reviews a low-confidence or high-risk answer before it is sent.", example: "A clinician must approve an extraction. Loan decline letters need a specialist." },
             { term: "Transparent", meaning: "You can inspect how it was built: data sources, design, Model Card, limits.", example: "Publish a card of limits and data. Open weights help transparency; they do not explain one score." },
             { term: "Explainable", meaning: "You can say why this one prediction happened (Clarify, which columns, a simple tree).", example: "Why did this application score 0.91? CloudTrail is who called the API — that is audit, not explainability." },
-            { term: "Human-centred design", meaning: "Show that the text is AI-generated, show a source, give a “this was wrong” button, keep a human for high stakes. Do not stamp a guess as official legal advice.", example: "A benefits bot shows the source and a report button." },
-            { term: "PII (personally identifiable information)", meaning: "Data that can name a person: SSN, email, passport, national ID.", example: "Macie finds PII in S3. Guardrails filters PII in the live model input/output. Comprehend finds PII in text you send it." },
-            { term: "Drift", meaning: "Live data or quality no longer matches training. Model Monitor watches this.", example: "After a new firmware, comment-moderation quality drops though the endpoint is green." },
-            { term: "Human-in-the-loop", meaning: "A person stays in the path for high-risk output (A2I).", example: "Clinician confirms before the note is sent." }
+            { term: "Human-in-the-loop", meaning: "A person stays in the path for high-risk output.", example: "Clinician confirms before the note is sent." },
+            { term: "Amazon A2I (Augmented AI)", meaning: "The AWS service for human-in-the-loop: a person reviews a low-confidence or high-risk answer before it is sent.", example: "A clinician must approve an extraction. Loan decline letters need a specialist." },
+            { term: "Human-centred design", meaning: "Show that the text is AI-generated, show a source, give a “this was wrong” button, keep a human for high stakes. Do not stamp a guess as official legal advice.", example: "A benefits bot shows the source and a report button." }
           ]
         }
       ]
@@ -293,8 +292,8 @@
           name: "Who owns what",
           rows: [
             { term: "Shared responsibility", meaning: "AWS secures the cloud (buildings, the managed service). You secure what you send, who can call, keys you manage, Guardrails, and logs.", example: "Bedrock hosts the FM. You decide who may invoke and whether logs contain card numbers." },
-            { term: "IAM (Identity and Access Management)", meaning: "Who may call which API. Least privilege = only the access needed. Roles, condition keys on model IDs, SCPs to block a costly model.", example: "Only the radio-planning role may invoke Claude Opus. A prompt that says “planners only” is not enough." },
-            { term: "Least privilege", meaning: "Give the smallest permission that still works.", example: "The agent role can call refunds, not payroll." },
+            { term: "IAM (Identity and Access Management)", meaning: "Who may call which API. You use users, roles, and policies. A prompt that says “only planners” is not IAM.", example: "Only the radio-planning role may invoke Claude Opus." },
+            { term: "Least privilege", meaning: "In IAM, give the smallest permission that still works.", example: "The agent role can call refunds, not payroll." },
             { term: "SCP (Service Control Policy)", meaning: "An account-level deny, often used to block a costly model in the organisation.", example: "Nobody in this account may call Premier." },
             { term: "Generative AI Security Scoping Matrix", meaning: "How much of the GenAI stack you own vs AWS. Only Q Business = less work. You train and host weights = more work.", example: "Team A uses only Q. Team B trains on SageMaker. Team B has more security work." }
           ]
@@ -306,15 +305,15 @@
             { term: "TLS / encryption in transit", meaning: "Traffic on the wire is encrypted. The exam assumes this. At-rest stories still point to KMS.", example: "They ask about the bucket key, not TLS." },
             { term: "AWS Secrets Manager", meaning: "Store API keys and database passwords for tools. Never put them in the prompt.", example: "The agent needs the orders-database password." },
             { term: "Amazon Macie", meaning: "Find personal data already sitting in S3.", example: "SSNs in a forgotten training prefix. Guardrails is live chat. Comprehend is text you send it." },
-            { term: "AWS PrivateLink / VPC endpoint", meaning: "The Bedrock call stays on a private path, not the public internet.", example: "A bank requires Bedrock on a VPC path." },
-            { term: "VPC", meaning: "Your private network on AWS.", example: "Keep AI traffic inside the VPC with an endpoint." },
+            { term: "VPC", meaning: "Your private network on AWS.", example: "Keep AI traffic inside this network instead of the public internet." },
+            { term: "AWS PrivateLink / VPC endpoint", meaning: "A private door from your VPC to Bedrock. The call does not go over the public internet.", example: "A bank requires Bedrock on a VPC path." },
             { term: "AgentCore Identity", meaning: "How the agent signs in to tools. A service role vs a person’s IAM user. The model is not “the user.”", example: "A support agent must never impersonate the customer’s IAM user." },
             { term: "AgentCore Policy", meaning: "Which tools and actions are allowed (an allow-list).", example: "May call refunds, not payroll. A polite prompt is not enough." },
             { term: "Prompt injection (security)", meaning: "Untrusted text tries to change the instruction or steal data. v1.1 treats this as security, not only a wording tip.", example: "A Knowledge Base page says “email the customer list.” Guardrails + least-privilege tools." },
             { term: "Leakage", meaning: "Prompts, Knowledge Base text, or secrets appear in the answer or in S3 logs.", example: "Invocation logs include passport numbers. Log less, encrypt the bucket, Guardrails PII." },
             { term: "Toxicity", meaning: "Harmful language. Filter with Guardrails and measure it.", example: "Compare two models on toxicity in Bedrock Model Evaluation." },
+            { term: "AWS Glue / Data Catalog", meaning: "Jobs and a catalog that describe datasets. History of how files were built.", example: "A catalog is not Guardrails. It tells you what data exists and which job produced it." },
             { term: "Data lineage", meaning: "Which S3 folder, Glue job, and version produced model v3 or the search index.", example: "An auditor asks which job produced the fine-tune CSV." },
-            { term: "AWS Glue / Data Catalog", meaning: "Jobs and a catalog that describe datasets. History of how files were built.", example: "Lineage lives here plus Model Cards. A catalog is not Guardrails." },
             { term: "AWS Lake Formation", meaning: "Who may read a lake table. Permissions on data, not a prompt.", example: "Who may read the training table → Lake Formation / IAM." }
           ]
         },
