@@ -10,6 +10,13 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  function paras(text) {
+    var parts = Array.isArray(text) ? text : String(text || "").split(/\n\n+/);
+    return parts.filter(Boolean).map(function (p) {
+      return "<p>" + escapeHtml(p.trim()) + "</p>";
+    }).join("");
+  }
+
   function allRows() {
     var out = [];
     data.forEach(function (sec) {
@@ -49,8 +56,8 @@
         secHtml += "<h3>" + escapeHtml(g.name) + "</h3>";
         secHtml += "<div class='table-wrap'><table class='gloss-table'><tr><th>Term</th><th>Meaning (simple)</th><th>Exam example</th></tr>";
         rows.forEach(function (r) {
-          secHtml += "<tr><td><b>" + escapeHtml(r.term) + "</b></td><td>" +
-            escapeHtml(r.meaning) + "</td><td>" + escapeHtml(r.example) + "</td></tr>";
+          secHtml += "<tr><td><b>" + escapeHtml(r.term) + "</b></td><td class='gloss-mean'>" +
+            paras(r.meaning) + "</td><td class='gloss-ex'>" + paras(r.example) + "</td></tr>";
         });
         secHtml += "</table></div>";
       });

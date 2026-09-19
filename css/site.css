@@ -264,7 +264,9 @@ select {
 .gloss-table th:nth-child(1), .gloss-table td:nth-child(1) { width: 22%; }
 .gloss-table th:nth-child(2), .gloss-table td:nth-child(2) { width: 39%; }
 .gloss-table th:nth-child(3), .gloss-table td:nth-child(3) { width: 39%; }
-.gloss-table td { font-size: 13.5px; }
+.gloss-table td { font-size: 14px; line-height: 1.5; }
+.gloss-mean p, .gloss-ex p { margin: 0 0 8px; }
+.gloss-mean p:last-child, .gloss-ex p:last-child { margin-bottom: 0; }
 
 .overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 50;
