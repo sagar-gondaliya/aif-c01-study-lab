@@ -20,7 +20,7 @@
     var typeLabel = {
       single: "Multiple choice · one answer",
       multi: "Multiple response · select ALL that apply",
-      order: "Ordering · put the steps in the correct order",
+      order: "Ordering · put the steps in the correct order, then Next",
       match: "Matching · pair every item"
     };
     return (
@@ -139,6 +139,29 @@
     var left = seconds;
     var timerId = null;
     var submitted = false;
+    var advanceTimer = null;
+
+    function clearAdvance() {
+      if (advanceTimer) {
+        clearTimeout(advanceTimer);
+        advanceTimer = null;
+      }
+    }
+
+    function goNext() {
+      clearAdvance();
+      if (i < questions.length - 1) {
+        i++;
+        draw();
+      } else {
+        showSubmit();
+      }
+    }
+
+    function scheduleAdvance() {
+      clearAdvance();
+      advanceTimer = setTimeout(goNext, 380);
+    }
 
     $("exam-title").textContent = title;
     if (timed) {
@@ -171,7 +194,11 @@
         return '<button type="button" class="' + cls + '" data-go="' + idx + '">' + (idx + 1) + "</button>";
       }).join("");
       p.querySelectorAll("[data-go]").forEach(function (b) {
-        b.onclick = function () { i = +b.getAttribute("data-go"); draw(); };
+        b.onclick = function () {
+          clearAdvance();
+          i = +b.getAttribute("data-go");
+          draw();
+        };
       });
     }
 
@@ -189,6 +216,9 @@
       paintPalette();
       $("prev-btn").disabled = i === 0;
       $("next-btn").textContent = i === questions.length - 1 ? "Review & submit" : "Next";
+      if ($("next-btn")) {
+        $("next-btn").style.display = q.type === "order" ? "" : "none";
+      }
     }
 
     function bind(q) {
@@ -196,14 +226,18 @@
         $("qbox").querySelectorAll(".choice").forEach(function (btn) {
           btn.onclick = function () {
             var n = +btn.getAttribute("data-i");
-            if (q.type === "single") answers[i] = [n];
-            else {
-              var p = answers[i].slice();
-              var at = p.indexOf(n);
-              if (at === -1) p.push(n); else p.splice(at, 1);
-              answers[i] = p;
+            if (q.type === "single") {
+              answers[i] = [n];
+              draw();
+              scheduleAdvance();
+              return;
             }
+            var p = answers[i].slice();
+            var at = p.indexOf(n);
+            if (at === -1) p.push(n); else p.splice(at, 1);
+            answers[i] = p;
             draw();
+            if (answers[i].length >= q.answer.length) scheduleAdvance();
           };
         });
       } else if (q.type === "order") {
@@ -232,13 +266,20 @@
           sel.onchange = function () {
             var idx = +sel.getAttribute("data-i");
             answers[i][idx] = sel.value === "" ? null : +sel.value;
+            paintPalette();
+            if (qFilled(q, answers[i])) scheduleAdvance();
+            else clearAdvance();
           };
         });
       }
     }
 
-    $("prev-btn").onclick = function () { if (i > 0) { i--; draw(); } };
+    $("prev-btn").onclick = function () {
+      clearAdvance();
+      if (i > 0) { i--; draw(); }
+    };
     $("next-btn").onclick = function () {
+      clearAdvance();
       if (i < questions.length - 1) { i++; draw(); }
       else showSubmit();
     };
@@ -261,6 +302,7 @@
     function finish() {
       if (submitted) return;
       submitted = true;
+      clearAdvance();
       if (timerId) clearInterval(timerId);
       var hits = 0;
       var byD = { 1: { t: 0, c: 0 }, 2: { t: 0, c: 0 }, 3: { t: 0, c: 0 }, 4: { t: 0, c: 0 }, 5: { t: 0, c: 0 } };
