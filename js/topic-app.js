@@ -15,7 +15,9 @@
   document.getElementById("crumb").textContent = "Domain " + t.domain + " · Official task " + t.task;
   document.getElementById("title").textContent = t.title;
   document.getElementById("lead").textContent = t.lead;
-  document.getElementById("lesson").innerHTML = t.body;
+  document.getElementById("lesson").innerHTML =
+    '<p class="ok">Learn every word for this domain in the <a href="glossary.html#d' +
+    t.domain + '">keyword tables</a>. This page is the quiz only.</p>';
   document.getElementById("exam-title").textContent = t.title + " quiz";
 
   var prev = list[idx - 1];

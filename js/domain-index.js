@@ -11,7 +11,7 @@
   var box = document.getElementById("dbox");
   var meta = titles[d];
   var html = "<h1>" + meta[0] + "</h1><p class='lead'>" + meta[1] +
-    ". Open every topic. Each page has a short lesson and a 6-question exam-style quiz.</p>";
+    ". Read the <a href='glossary.html#d" + d + "'>keyword table</a> first. Each topic page is a quiz only.</p>";
   html += '<div class="topic-list">';
   list.forEach(function (t, i) {
     html += '<a class="topic-row" href="topic.html?id=' + t.id + '">' +

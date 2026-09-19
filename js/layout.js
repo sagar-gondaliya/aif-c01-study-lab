@@ -10,6 +10,7 @@
       { href: "plan.html", id: "plan", t: "14-day plan" }
     ]},
     { id: "learn", g: "Learn · 5 domains", items: [
+      { href: "glossary.html", id: "glossary", t: "All keywords" },
       { href: "d1.html", id: "d1", t: "Domain 1 · AI & ML", pct: "20%", domain: 1 },
       { href: "d2.html", id: "d2", t: "Domain 2 · GenAI", pct: "24%", domain: 2 },
       { href: "d3.html", id: "d3", t: "Domain 3 · FMs", pct: "28%", domain: 3 },
@@ -29,7 +30,6 @@
       { href: "scope.html", id: "scope", t: "Official in-scope list" },
       { href: "trees.html", id: "trees", t: "Decision trees" },
       { href: "traps.html", id: "traps", t: "Exam traps" },
-      { href: "glossary.html", id: "glossary", t: "Glossary" },
       { href: "flashcards.html", id: "cards", t: "Flashcards" }
     ]},
     { id: "practice", g: "Practice quizzes", items: [
@@ -87,7 +87,7 @@
 
   function defaultOpen(ctx) {
     var extraIds = { lsvc: 1, lbed: 1, lagent: 1, lrag: 1, lprompt: 1, lguard: 1 };
-    var refIds = { services: 1, scope: 1, trees: 1, traps: 1, glossary: 1, cards: 1 };
+    var refIds = { services: 1, scope: 1, trees: 1, traps: 1, cards: 1 };
     return {
       start: true,
       learn: true,
