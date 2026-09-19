@@ -723,5 +723,219 @@ window.AIF.mocks[3] = [
     ],
     answer: [0, 1],
     explain: "CloudTrail is the API audit trail. Config records how resources change. TTS and recommenders are not governance planes."
+  },
+  {
+    id: "m3q51",
+    domain: 1,
+    type: "single",
+    stem: "A hospital wants one score that balances precision and recall for a rare-disease flag. Which metric?",
+    choices: [
+      "F1 score",
+      "BLEU",
+      "Token count",
+      "ROUGE-1 only"
+    ],
+    answer: [0],
+    explain: "F1 is the harmonic mean of precision and recall. BLEU and ROUGE score generated text, not a medical classifier."
+  },
+  {
+    id: "m3q52",
+    domain: 1,
+    type: "single",
+    stem: "Shoppers wait at checkout while a model scores card-not-present risk. The page must return a score in under two seconds. Which inference pattern?",
+    choices: [
+      "Real-time (synchronous) inference",
+      "Overnight batch inference",
+      "Offline notebook scoring only",
+      "AWS Artifact download"
+    ],
+    answer: [0],
+    explain: "A user is blocked on the answer, so real-time. Batch is for jobs nobody waits on."
+  },
+  {
+    id: "m3q53",
+    domain: 1,
+    type: "multi",
+    stem: "Which TWO statements correctly separate supervised learning from reinforcement learning?",
+    choices: [
+      "Supervised learning learns from labeled examples",
+      "Reinforcement learning learns from rewards after actions in an environment",
+      "Reinforcement learning is the only way to do RAG",
+      "Supervised learning always requires a foundation model",
+      "Both replace IAM"
+    ],
+    answer: [0, 1],
+    explain: "Supervised = labeled pairs. RL = trial, reward, update. RAG is retrieval plus generation, not a synonym for RL."
+  },
+  {
+    id: "m3q54",
+    domain: 2,
+    type: "single",
+    stem: "Finance sees two Bedrock line items: a huge prompt with retrieved PDFs, and a long generated email. Which statement is correct?",
+    choices: [
+      "Retrieved PDFs mainly raise input tokens; the long email raises output tokens",
+      "Only output tokens are ever billed",
+      "Only IAM users are billed, not tokens",
+      "Amazon Macie zeros both charges"
+    ],
+    answer: [0],
+    explain: "Input tokens cover what you send, including RAG. Output tokens cover what the model writes."
+  },
+  {
+    id: "m3q55",
+    domain: 2,
+    type: "single",
+    stem: "A team wants agents to attach internal tools through a standard protocol instead of a new HTTP wrapper every sprint. Which name is on the 2026 guide?",
+    choices: [
+      "MCP (Model Context Protocol)",
+      "Amazon MemoryDB as the protocol",
+      "AWS Artifact",
+      "Amazon Inspector CVE IDs"
+    ],
+    answer: [0],
+    explain: "MCP is the standard tool/data hook-up. You recognise the name; you do not implement interceptors on this exam."
+  },
+  {
+    id: "m3q56",
+    domain: 2,
+    type: "single",
+    stem: "An enterprise wants to modernise a 1990s Java monolith as part of a wider AWS programme, not chat over PDFs. Which exam-guide service name fits modernisation?",
+    choices: [
+      "AWS Transform",
+      "Amazon Q Business only",
+      "Amazon Rekognition",
+      "Amazon Polly"
+    ],
+    answer: [0],
+    explain: "Transform is the modernisation name on the guide. Q Business is workplace Q&A. Vision and TTS are not app modernisation."
+  },
+  {
+    id: "m3q57",
+    domain: 2,
+    type: "multi",
+    stem: "Which TWO Amazon Nova-style picks match a simple FAQ versus a hard reasoning job?",
+    choices: [
+      "Nova Micro-class for cheap, fast text FAQs",
+      "Premier-class for the hardest reasoning or as a teacher model",
+      "Nova Reel for every yes/no FAQ",
+      "Amazon MemoryDB as a Nova model",
+      "AWS Artifact as a Nova model"
+    ],
+    answer: [0, 1],
+    explain: "Micro is small/cheap text. Premier is the hard/teacher end. Reel is video. Artifact and MemoryDB are not models."
+  },
+  {
+    id: "m3q58",
+    domain: 3,
+    type: "single",
+    stem: "A builder asks the model to compare two IAM policies step by step before giving a yes or no. What prompt technique is that?",
+    choices: [
+      "Chain-of-thought",
+      "Zero-shot with no reasoning request",
+      "Distillation",
+      "Prompt caching of KMS keys"
+    ],
+    answer: [0],
+    explain: "Chain-of-thought asks for intermediate steps. Distillation changes weights. Caching is a cost feature, not a reasoning style."
+  },
+  {
+    id: "m3q59",
+    domain: 3,
+    type: "single",
+    stem: "A firm has a large unlabeled pile of internal RFCs and wants the model to absorb the jargon, not only retrieve quotes at question time. Which heavier step is that?",
+    choices: [
+      "Continued pre-training (CPT)",
+      "A one-shot prompt",
+      "Amazon Macie",
+      "AWS Artifact"
+    ],
+    answer: [0],
+    explain: "CPT continues language-model training on a domain corpus. RAG fetches files at query time and does not soak the weights in jargon."
+  },
+  {
+    id: "m3q60",
+    domain: 3,
+    type: "single",
+    stem: "A legal bot must stop as soon as it writes a marker such as END_JSON. Which inference parameter forces that halt?",
+    choices: [
+      "A stop sequence",
+      "Raising temperature",
+      "Amazon Personalize",
+      "AWS Glue crawlers"
+    ],
+    answer: [0],
+    explain: "Stop sequences tell the model to halt when a marker appears. Temperature changes variation, not a hard stop token."
+  },
+  {
+    id: "m3q61",
+    domain: 3,
+    type: "multi",
+    stem: "A new security circular was never uploaded to the Knowledge Base, so every answer is last quarter's rule. Which TWO fixes treat this as a retrieval / ingest problem?",
+    choices: [
+      "Ingest the new circular and re-index",
+      "Check chunking and metadata filters after the file is in",
+      "Raise temperature so the model invents the new rule",
+      "Fine-tune on an empty bucket",
+      "Turn off IAM"
+    ],
+    answer: [0, 1],
+    explain: "If the file was never there, ingest and retrieval design are first. Temperature and fine-tune do not add a missing PDF."
+  },
+  {
+    id: "m3q62",
+    domain: 4,
+    type: "single",
+    stem: "Low-confidence clinical extractions must be approved by a clinician before they reach the chart. Besides Guardrails, which AWS pattern keeps a human in the loop?",
+    choices: [
+      "Amazon A2I (Augmented AI)",
+      "Amazon Polly",
+      "Amazon Forecast",
+      "AWS Artifact"
+    ],
+    answer: [0],
+    explain: "A2I is human review for low-confidence or high-risk output. TTS, forecasting, and AWS compliance PDFs are not the review workflow."
+  },
+  {
+    id: "m3q63",
+    domain: 4,
+    type: "single",
+    stem: "A face dataset used to train an access-control model is almost only one age and skin tone. Which responsible-AI property is weak?",
+    choices: [
+      "Inclusivity and dataset diversity",
+      "Encryption",
+      "Provisioned Throughput",
+      "Prompt caching"
+    ],
+    answer: [0],
+    explain: "Inclusive, diverse, balanced data is a Domain 4 dataset requirement. Encryption and Bedrock pricing features do not fix a skewed face set."
+  },
+  {
+    id: "m3q64",
+    domain: 5,
+    type: "single",
+    stem: "A refund agent must use a service role and must never impersonate the customer's IAM user. Which AgentCore idea is that?",
+    choices: [
+      "AgentCore Identity",
+      "AgentCore Policy only, with no identity story",
+      "Amazon Macie",
+      "ROUGE"
+    ],
+    answer: [0],
+    explain: "Identity is how the agent authenticates to tools. Policy is which tools it may call. You usually need both."
+  },
+  {
+    id: "m3q65",
+    domain: 5,
+    type: "multi",
+    stem: "The same refund agent may call the refunds API and must not call payroll. Which TWO controls enforce that?",
+    choices: [
+      "AgentCore Policy (tool allow-list)",
+      "IAM least privilege on the agent role",
+      "A polite sentence in the prompt as the only control",
+      "Raising temperature",
+      "Amazon Personalize"
+    ],
+    answer: [0, 1],
+    explain: "Tool allow-lists and IAM are hard controls. A prompt request is not enough when the stem says must not."
   }
 ];

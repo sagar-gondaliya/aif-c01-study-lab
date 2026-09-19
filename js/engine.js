@@ -105,6 +105,15 @@
     var storeKey = opts.storeKey;
     var mockN = opts.mockN;
 
+    if (timed && questions.length > 1) {
+      for (var sh = questions.length - 1; sh > 0; sh--) {
+        var sj = Math.floor(Math.random() * (sh + 1));
+        var st = questions[sh];
+        questions[sh] = questions[sj];
+        questions[sj] = st;
+      }
+    }
+
     var i = 0;
     function shuffleOrder(q) {
       var a = q.items.map(function (_, idx) { return idx; });

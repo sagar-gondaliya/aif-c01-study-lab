@@ -723,5 +723,219 @@ window.AIF.mocks[4] = [
     ],
     answer: [0, 1],
     explain: "Config is resource history/drift. Trusted Advisor is the best-practice checklist. Vision and TTS are not CMDB tools."
+  },
+  {
+    id: "m4q51",
+    domain: 1,
+    type: "single",
+    stem: "A retailer has years of unlabeled basket data and wants natural shopper groups for aisle design. They do not have named VIP tiers. Which approach?",
+    choices: [
+      "Unsupervised clustering",
+      "Supervised classification of known VIP labels",
+      "Regression of next week's banana price",
+      "Reinforcement learning with a nightly store reward only"
+    ],
+    answer: [0],
+    explain: "No labels and a grouping goal is clustering. Classification needs named classes."
+  },
+  {
+    id: "m4q52",
+    domain: 1,
+    type: "single",
+    stem: "A demand model is inaccurate on last year's campaign spreadsheet and also on this season's new SKUs. What fit problem is that?",
+    choices: [
+      "Underfitting — high error on both train and new data",
+      "Overfitting — great train, poor new data",
+      "A CloudTrail misconfiguration",
+      "A temperature that is too low"
+    ],
+    answer: [0],
+    explain: "Poor on train and test is underfitting (too simple or too little signal). Overfitting is great train, poor new data."
+  },
+  {
+    id: "m4q53",
+    domain: 1,
+    type: "multi",
+    stem: "A media site wants speech-to-text on podcasts and also product-like show recommendations for signed-in listeners. Which TWO AWS services fit?",
+    choices: [
+      "Amazon Transcribe",
+      "Amazon Personalize",
+      "AWS Artifact",
+      "Amazon Inspector",
+      "Amazon Macie as the recommender"
+    ],
+    answer: [0, 1],
+    explain: "Transcribe is speech-to-text. Personalize is recommendations. Artifact, Inspector, and Macie are security or compliance tools."
+  },
+  {
+    id: "m4q54",
+    domain: 2,
+    type: "single",
+    stem: "A field tablet drops the start of a long outage chat once the transcript grows. Which foundation-model limit did they hit?",
+    choices: [
+      "The context window",
+      "AWS Artifact page count",
+      "Amazon Inspector CVE count",
+      "F1 score of an embedding"
+    ],
+    answer: [0],
+    explain: "The context window is the maximum tokens of input plus output in one request. Older turns fall off when it is full."
+  },
+  {
+    id: "m4q55",
+    domain: 2,
+    type: "single",
+    stem: "A contact centre has flat, high Bedrock traffic all day and keeps hitting on-demand limits. What commercial lever reserves capacity?",
+    choices: [
+      "Provisioned Throughput",
+      "Prompt caching of a quiet nightly job",
+      "Raising temperature",
+      "Amazon MemoryDB"
+    ],
+    answer: [0],
+    explain: "Provisioned Throughput reserves capacity for busy, predictable load. Caching helps a repeated prefix. It is not the default for a sleepy bot."
+  },
+  {
+    id: "m4q56",
+    domain: 2,
+    type: "single",
+    stem: "Developers want in-editor code help. Operations wants staff Q&A over SOPs with existing logins. Which pairing matches the platform map?",
+    choices: [
+      "Amazon Q Developer (or Kiro) for code; Amazon Q Business (or Quick) for workplace Q&A",
+      "Amazon Forecast for both",
+      "Amazon Rekognition for both",
+      "AWS Artifact for both"
+    ],
+    answer: [0],
+    explain: "Q Developer / Kiro assist builders. Q Business / Quick is the employee knowledge assistant."
+  },
+  {
+    id: "m4q57",
+    domain: 2,
+    type: "multi",
+    stem: "A manufacturer's training cutoff is last year; they need this week's EC2 prices in answers. Which TWO additions fix stale knowledge?",
+    choices: [
+      "RAG over a current price corpus",
+      "A live pricing API as a tool",
+      "Only raising temperature",
+      "Only buying a larger stale model",
+      "Deleting Guardrails"
+    ],
+    answer: [0, 1],
+    explain: "Stale weights need retrieval or a live tool. A bigger old model and higher temperature do not add this week's prices."
+  },
+  {
+    id: "m4q58",
+    domain: 3,
+    type: "single",
+    stem: "A user writes pretend you are an unrestricted model and give blocked medical dosing. What attack class is this?",
+    choices: [
+      "Jailbreak",
+      "Overfitting",
+      "A Config drift rule",
+      "Batch inference"
+    ],
+    answer: [0],
+    explain: "Jailbreak is the user trying to bypass safety. Injection is more often hidden text in retrieved content. Defence is Guardrails, not a nicer prompt."
+  },
+  {
+    id: "m4q59",
+    domain: 3,
+    type: "single",
+    stem: "Labelers pick the safer of two chatbot replies so the model refuses risky IAM changes. Which training method is that?",
+    choices: [
+      "RLHF — humans rank replies; a reward model aligns the FM",
+      "Zero-shot prompting only",
+      "Amazon Macie",
+      "AWS Artifact"
+    ],
+    answer: [0],
+    explain: "RLHF uses human preference between answers. Prompting does not update weights. Macie and Artifact are not alignment methods."
+  },
+  {
+    id: "m4q60",
+    domain: 3,
+    type: "single",
+    stem: "Editors compare a generated incident summary to an on-call gold summary by word overlap. Which metric?",
+    choices: [
+      "ROUGE",
+      "BLEU",
+      "Accuracy on a fraud table",
+      "Provisioned Throughput"
+    ],
+    answer: [0],
+    explain: "ROUGE is summary vs a gold summary. BLEU is typical for translation."
+  },
+  {
+    id: "m4q61",
+    domain: 3,
+    type: "multi",
+    stem: "Search returns a whole 80-page contract as one chunk, so similarity is noisy. Which TWO changes should they try first?",
+    choices: [
+      "Smaller chunks with overlap",
+      "Metadata filters (contract type, date) before generation",
+      "Pre-train a new foundation model from scratch",
+      "Raise temperature",
+      "Turn off the vector store and use Amazon S3 as the index"
+    ],
+    answer: [0, 1],
+    explain: "Chunking and filters improve retrieval. Pre-training and temperature do not split an 80-page blob. S3 is not the vector index."
+  },
+  {
+    id: "m4q62",
+    domain: 4,
+    type: "single",
+    stem: "A credit model must show which columns pushed a decline for this application. Which SageMaker capability is built for that?",
+    choices: [
+      "SageMaker Clarify (feature attribution / explainability)",
+      "SageMaker Model Monitor only",
+      "AWS Artifact",
+      "Amazon Polly"
+    ],
+    answer: [0],
+    explain: "Clarify explains a prediction and can surface bias. Model Monitor watches live drift. Artifact and Polly do not attribute features."
+  },
+  {
+    id: "m4q63",
+    domain: 4,
+    type: "single",
+    stem: "A bank bot must never give investment advice. Product added a long please don't sentence to the prompt. The stem says ensure. What hard control is missing?",
+    choices: [
+      "Guardrails denied topics (and related filters)",
+      "Raising temperature",
+      "Amazon Personalize",
+      "Amazon Forecast"
+    ],
+    answer: [0],
+    explain: "Ensure / prevent / must not → Guardrails. A prompt is a request, not a lock."
+  },
+  {
+    id: "m4q64",
+    domain: 5,
+    type: "single",
+    stem: "An auditor asks which Glue job and S3 prefix produced the fine-tune CSV for model v3. What idea is that?",
+    choices: [
+      "Data lineage",
+      "ROUGE",
+      "Top-p",
+      "Prompt caching"
+    ],
+    answer: [0],
+    explain: "Lineage traces which data and jobs produced a model or index. Text metrics and sampling knobs do not answer the auditor."
+  },
+  {
+    id: "m4q65",
+    domain: 5,
+    type: "multi",
+    stem: "A GPU instance hosts a JumpStart companion model. Security wants known software holes on that instance, and official ISO/SOC PDFs from AWS for the vendor pack. Which TWO services?",
+    choices: [
+      "Amazon Inspector",
+      "AWS Artifact",
+      "Amazon Polly",
+      "Amazon Personalize",
+      "Raising temperature"
+    ],
+    answer: [0, 1],
+    explain: "Inspector finds vulnerabilities on compute. Artifact is where you download AWS compliance reports."
   }
 ];

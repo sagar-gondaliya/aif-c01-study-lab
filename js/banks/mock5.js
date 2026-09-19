@@ -723,5 +723,219 @@ window.AIF.mocks[5] = [
     ],
     answer: [0, 1],
     explain: "Trails and logs prove who called. Grounded RAG reduces hallucinations. Turning off IAM or logs increases risk."
+  },
+  {
+    id: "m5q51",
+    domain: 1,
+    type: "single",
+    stem: "A system plans steps, calls Jira or CloudWatch depending on the ticket, reads the result, and continues until the job is done. Staff call it AI. Which more precise layer is this?",
+    choices: [
+      "Agentic AI — it plans, uses tools, and acts toward a goal",
+      "A simple if-then rules table only",
+      "Deep learning only because an API exists",
+      "Generative AI only, with no tools"
+    ],
+    answer: [0],
+    explain: "An agent plans and uses tools. GenAI writes new content; a classifier or a rules table does not automatically become an agent."
+  },
+  {
+    id: "m5q52",
+    domain: 1,
+    type: "single",
+    stem: "A clinic must score 14 million overnight lab messages before 06:00. No clinician waits on each score. Which inference pattern?",
+    choices: [
+      "Batch inference",
+      "Synchronous real-time endpoints for every message",
+      "A human typing each score",
+      "AWS Artifact"
+    ],
+    answer: [0],
+    explain: "Nobody is blocked on each score, so batch. Real-time is for interactive waits."
+  },
+  {
+    id: "m5q53",
+    domain: 1,
+    type: "multi",
+    stem: "Which TWO practices protect training data integrity before a supervised job starts?",
+    choices: [
+      "Remove or mask secrets and personal data that must not be in the set",
+      "Keep labels consistent and review a sample for quality",
+      "Put access keys in the prompt so the model can reload S3",
+      "Skip any catalog or lineage because Model Cards encrypt the bucket",
+      "Use Amazon MemoryDB as the only integrity control"
+    ],
+    answer: [0, 1],
+    explain: "Integrity means clean, permitted, consistently labeled data. Secrets in prompts and treating cards as encryption are wrong."
+  },
+  {
+    id: "m5q54",
+    domain: 2,
+    type: "single",
+    stem: "Team A only uses Amazon Q Business. Team B trains and hosts its own weights on SageMaker. Which statement matches the Generative AI Security Scoping Matrix idea?",
+    choices: [
+      "Team B owns more of the stack, so Team B has more security work",
+      "Both teams have identical ownership because both sit on AWS",
+      "Team A must pre-train a new foundation model",
+      "Team B can skip IAM"
+    ],
+    answer: [0],
+    explain: "The scoping matrix is how much of the GenAI stack you own versus AWS. Packaged Q has less ownership than you-train-and-host."
+  },
+  {
+    id: "m5q55",
+    domain: 2,
+    type: "single",
+    stem: "A perfect system prompt still fails because every call attaches the wrong PDF pieces. The builder only raises temperature. Why is that the wrong first fix?",
+    choices: [
+      "Temperature changes wording randomness; it does not attach the right chunks — that is context / retrieval",
+      "Temperature always adds citations",
+      "Temperature encrypts the Knowledge Base",
+      "Temperature replaces IAM"
+    ],
+    answer: [0],
+    explain: "Wrong chunks are a context-engineering or retrieval problem. Temperature does not select documents."
+  },
+  {
+    id: "m5q56",
+    domain: 2,
+    type: "single",
+    stem: "Leadership asks whether a knowledge bot saves more support hours than it costs each quarter. Which metric family should you report?",
+    choices: [
+      "ROI / cost per interaction",
+      "BLEU only",
+      "Amazon Inspector CVE count",
+      "JumpStart star ratings"
+    ],
+    answer: [0],
+    explain: "Payback is a business metric. BLEU scores translation overlap. CVEs and star ratings do not answer the CFO."
+  },
+  {
+    id: "m5q57",
+    domain: 2,
+    type: "multi",
+    stem: "Which TWO platform picks match no-ML-team versus custom-training needs?",
+    choices: [
+      "Amazon Bedrock when you want many FMs through one API and no GPU estate",
+      "Amazon SageMaker AI when you need notebooks, training jobs, and your own endpoints",
+      "Amazon Bedrock when you must implement a new optimiser from scratch",
+      "SageMaker when you only need Q&A over Confluence tomorrow",
+      "AWS Artifact as the FM API"
+    ],
+    answer: [0, 1],
+    explain: "Bedrock is managed FM access. SageMaker is the data-science platform. Q Business is the Confluence-tomorrow path."
+  },
+  {
+    id: "m5q58",
+    domain: 3,
+    type: "single",
+    stem: "Another Claude scores whether answers stay faithful to a Knowledge Base. What evaluation pattern is that?",
+    choices: [
+      "LLM-as-a-judge",
+      "Accuracy on a fraud table",
+      "AWS Artifact",
+      "Amazon Macie"
+    ],
+    answer: [0],
+    explain: "LLM-as-a-judge is a second model scoring the first. Pair it with Bedrock Model Evaluation, humans, or a gold set."
+  },
+  {
+    id: "m5q59",
+    domain: 3,
+    type: "single",
+    stem: "The question says ensure the bot never mentions internal hostnames. A builder adds never mention hostnames to the prompt. Why is that usually not enough?",
+    choices: [
+      "A negative prompt is a request; Guardrails is the hard block",
+      "Negative prompts encrypt S3",
+      "Negative prompts replace IAM",
+      "Negative prompts are the same as RLHF"
+    ],
+    answer: [0],
+    explain: "Do not… in the prompt is soft. Ensure / must not on the exam points to Guardrails (word lists, denied topics, PII)."
+  },
+  {
+    id: "m5q60",
+    domain: 3,
+    type: "single",
+    stem: "An architect proposes Amazon S3 Standard as the vector index because the PDFs already live there. What is wrong?",
+    choices: [
+      "S3 stores files; it is not the vector database on the guide",
+      "S3 cannot hold PDFs",
+      "S3 replaces Bedrock Knowledge Bases automatically",
+      "S3 is the only in-scope vector store"
+    ],
+    answer: [0],
+    explain: "Knowledge Bases can read from S3, then embed into OpenSearch, Aurora, Neptune, or RDS PostgreSQL. S3 itself is not the similarity index."
+  },
+  {
+    id: "m5q61",
+    domain: 3,
+    type: "multi",
+    stem: "Which TWO evaluation ideas compare foundation models rather than Domain 1 accuracy on a yes/no table?",
+    choices: [
+      "Bedrock Model Evaluation for quality or toxicity",
+      "ROUGE or BLEU against a gold text",
+      "Always using accuracy as the only GenAI score",
+      "Amazon Inspector CVEs as a summary metric",
+      "Turning off CloudTrail"
+    ],
+    answer: [0, 1],
+    explain: "GenAI evaluation uses human review, gold-text overlap, model evaluation jobs, or a judge model. Accuracy is for class labels."
+  },
+  {
+    id: "m5q62",
+    domain: 4,
+    type: "single",
+    stem: "You publish data sources and known limits for a fraud model. A regulator then asks why this application scored 0.91. Which split is correct?",
+    choices: [
+      "The card is transparency; why this score is explainability (for example Clarify)",
+      "Both questions are encryption",
+      "Both questions are CloudTrail",
+      "Both questions are sustainability"
+    ],
+    answer: [0],
+    explain: "Transparent = how it was built. Explainable = why this prediction. CloudTrail is who called the API, not feature attribution."
+  },
+  {
+    id: "m5q63",
+    domain: 4,
+    type: "single",
+    stem: "After a new product launch, live precision falls though the endpoint is healthy. Which SageMaker capability watches quality in production?",
+    choices: [
+      "SageMaker Model Monitor",
+      "SageMaker Clarify only, with no monitoring",
+      "AWS Artifact",
+      "Amazon Polly"
+    ],
+    answer: [0],
+    explain: "Model Monitor watches drift and quality after deploy. Clarify is bias and explanations. Artifact and Polly are not live quality monitors."
+  },
+  {
+    id: "m5q64",
+    domain: 5,
+    type: "single",
+    stem: "A workload in eu-central-1 must not process prompts outside Frankfurt. What is the main risk of casual cross-Region inference?",
+    choices: [
+      "Data residency — prompts or retrieved text may be processed outside the approved Region",
+      "It always improves ROUGE",
+      "It disables IAM",
+      "It converts Bedrock into SageMaker"
+    ],
+    answer: [0],
+    explain: "Residency is a governance control. Cross-Region features can move content; turn them on only when policy allows."
+  },
+  {
+    id: "m5q65",
+    domain: 5,
+    type: "multi",
+    stem: "A customer wants AWS's ISO pack for Bedrock's environment, and security wants continuous evidence that encryption and logging controls still hold. Which TWO services?",
+    choices: [
+      "AWS Artifact for the official AWS reports",
+      "AWS Audit Manager for ongoing evidence against a framework",
+      "Amazon Polly lexicons",
+      "Raising temperature",
+      "Amazon Personalize as the evidence store"
+    ],
+    answer: [0, 1],
+    explain: "Artifact is the download of AWS SOC/ISO/PCI PDFs. Audit Manager collects your evidence over time. They are not the same service."
   }
 ];

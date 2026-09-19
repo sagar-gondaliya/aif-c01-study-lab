@@ -723,5 +723,219 @@ window.AIF.mocks[1] = [
     ],
     answer: [0, 1],
     explain: "Config tracks configuration; Audit Manager assembles evidence. Speech and vision APIs are not compliance evidence platforms."
+  },
+  {
+    id: "m1q51",
+    domain: 1,
+    type: "single",
+    stem: "A retailer trains a churn model. Raw logs have a last-purchase timestamp. The data scientist creates a new column, days since last purchase, before training. What is this step called?",
+    choices: [
+      "Exploratory data analysis only",
+      "Feature engineering",
+      "Reinforcement learning",
+      "Prompt caching"
+    ],
+    answer: [1],
+    explain: "Feature engineering builds useful inputs from raw fields. EDA is exploring the data; it does not by itself create the new column used for training."
+  },
+  {
+    id: "m1q52",
+    domain: 1,
+    type: "single",
+    stem: "A payroll team must apply a published tax table with no exceptions. A vendor proposes an LLM to interpret the table each month. What should the practitioner recommend?",
+    choices: [
+      "Keep a deterministic table or rules engine; do not use a generative model for a fixed lookup",
+      "Fine-tune Claude on last year's payslips",
+      "Raise temperature so each employee gets a different rate",
+      "Store the tax table in Amazon MemoryDB and call it a vector database"
+    ],
+    answer: [0],
+    explain: "If the answer is already in a published table, use rules. Generative models add cost, variation, and hallucination risk with no benefit."
+  },
+  {
+    id: "m1q53",
+    domain: 1,
+    type: "multi",
+    stem: "A supervised fraud model looks strong in a notebook but fails in production. Which TWO data issues most often cause that, even when the algorithm is fine?",
+    choices: [
+      "Incorrect or inconsistent labels on the training rows",
+      "Training rows that do not represent the live traffic",
+      "Enabling AWS CloudTrail",
+      "Turning on Bedrock Guardrails",
+      "Choosing Amazon Nova Micro for a chatbot"
+    ],
+    answer: [0, 1],
+    explain: "Label quality and representativeness decide supervised quality. Logging and Guardrails do not fix a bad training set."
+  },
+  {
+    id: "m1q54",
+    domain: 2,
+    type: "single",
+    stem: "A support bot has a clear system prompt, but every call also dumps 80 unrelated Knowledge Base chunks into the request. Answers wander. What discipline is missing?",
+    choices: [
+      "Context engineering — choosing what actually goes into the context window",
+      "Downloading AWS Artifact reports",
+      "Turning off IAM",
+      "Replacing OpenSearch with Amazon MemoryDB"
+    ],
+    answer: [0],
+    explain: "Prompt engineering is the instruction. Context engineering is the whole window: instruction, user text, retrieved chunks, history. Too many leftover chunks drown the answer."
+  },
+  {
+    id: "m1q55",
+    domain: 2,
+    type: "single",
+    stem: "A marketing team can wait overnight for 200,000 product descriptions. Nobody is waiting on an interactive chat. Which Bedrock option usually lowers cost?",
+    choices: [
+      "Batch inference",
+      "Provisioned Throughput for a job that runs once a night",
+      "Raising temperature",
+      "Cross-Region inference to satisfy a residency rule"
+    ],
+    answer: [0],
+    explain: "Batch is cheaper when you can wait. Provisioned Throughput reserves capacity for busy interactive traffic. Temperature and cross-Region do not cut a nightly batch bill."
+  },
+  {
+    id: "m1q56",
+    domain: 2,
+    type: "single",
+    stem: "Data scientists want a one-click open-source text model inside a SageMaker notebook. They do not want a Bedrock API call. Which feature fits?",
+    choices: [
+      "SageMaker JumpStart",
+      "Amazon Q Business",
+      "AWS Artifact",
+      "Amazon Macie"
+    ],
+    answer: [0],
+    explain: "JumpStart drops ready or open-source models into SageMaker. Q Business is an employee assistant. Artifact and Macie are not model catalogs."
+  },
+  {
+    id: "m1q57",
+    domain: 2,
+    type: "multi",
+    stem: "A bank steering committee asks what generative AI cannot guarantee. Which TWO limits belong on the slide?",
+    choices: [
+      "Hallucinations — fluent text that is still wrong",
+      "Weak interpretability — you often cannot say why a token was chosen",
+      "It can never draft an email",
+      "It replaces IAM for who may call the model",
+      "Tokens are free if the files sit in Amazon S3"
+    ],
+    answer: [0, 1],
+    explain: "Hallucination and weak explainability are named GenAI limits. Drafting email is a typical use case. IAM and token billing still apply."
+  },
+  {
+    id: "m1q58",
+    domain: 3,
+    type: "single",
+    stem: "A claims bot must quote only retrieved policy PDFs. A builder raises temperature to 0.9 to make answers more complete. What should they do instead?",
+    choices: [
+      "Lower temperature and instruct the model to answer only from the retrieved text",
+      "Raise temperature further",
+      "Pre-train a new foundation model from scratch",
+      "Delete the Knowledge Base"
+    ],
+    answer: [0],
+    explain: "Factual RAG needs a low temperature. Raising temperature increases variation; it does not add evidence. Pre-training is not the first fix."
+  },
+  {
+    id: "m1q59",
+    domain: 3,
+    type: "single",
+    stem: "Three teams overwrite the production system prompt in application code. Nobody can roll back Friday's wording. Which Bedrock feature were they missing?",
+    choices: [
+      "Prompt Management — store, version, and roll back prompts",
+      "Amazon Forecast",
+      "Amazon Inspector",
+      "Amazon S3 Glacier"
+    ],
+    answer: [0],
+    explain: "Prompt Management versions prompts the way you version other config. Forecast, Inspector, and Glacier do not version chat instructions."
+  },
+  {
+    id: "m1q60",
+    domain: 3,
+    type: "single",
+    stem: "A retailer wants a small cheap model in the mobile app that behaves like a large teacher model used in the lab. Which customisation matches that goal?",
+    choices: [
+      "Distillation — a small model copies a large one to cut cost and latency",
+      "Pre-train a new foundation model from scratch",
+      "Store vectors only in Amazon S3 and call S3 a vector database",
+      "Raise max output tokens"
+    ],
+    answer: [0],
+    explain: "Distillation transfers behaviour from a large teacher to a smaller student. Pre-training from scratch is almost never the AIF answer. S3 is not a vector store."
+  },
+  {
+    id: "m1q61",
+    domain: 3,
+    type: "multi",
+    stem: "A product catalog changes every day and answers must cite the source page. Which TWO statements match the exam customisation ladder?",
+    choices: [
+      "RAG with a Knowledge Base is the usual first choice",
+      "Fine-tuning every night on the price file is slower and still stale between jobs",
+      "Amazon S3 is the required vector database",
+      "Raising temperature adds citations",
+      "Amazon MemoryDB is required on the 2026 guide"
+    ],
+    answer: [0, 1],
+    explain: "Changing facts plus citations point to RAG. Nightly fine-tunes lag the catalog. S3 stores files; MemoryDB is out of scope as a vector store."
+  },
+  {
+    id: "m1q62",
+    domain: 4,
+    type: "single",
+    stem: "A workplace chatbot states a false IAM action as if it were documented fact. Which responsible-AI principle failed?",
+    choices: [
+      "Veracity — the answer was not true",
+      "Encryption at rest",
+      "IAM least privilege",
+      "Sustainability"
+    ],
+    answer: [0],
+    explain: "Veracity is truthfulness. Encryption and IAM are security controls. Sustainability is about energy and model size."
+  },
+  {
+    id: "m1q63",
+    domain: 4,
+    type: "single",
+    stem: "A 24/7 FAQ bot uses the largest Bedrock model to answer open or closed. Which change helps cost, latency, and sustainability at the same time?",
+    choices: [
+      "Switch to a small text model such as a Nova Micro-class option",
+      "Pre-train a new foundation model",
+      "Turn off AWS CloudTrail",
+      "Store embeddings in Amazon S3 Glacier"
+    ],
+    answer: [0],
+    explain: "A smaller model uses less energy and usually costs less and replies faster. Turning off CloudTrail is not a sustainability control."
+  },
+  {
+    id: "m1q64",
+    domain: 5,
+    type: "single",
+    stem: "A Bedrock agent must call an internal orders database. Where should the database password live?",
+    choices: [
+      "AWS Secrets Manager — never in the prompt",
+      "The system prompt so the model can read it",
+      "A public Amazon S3 bucket",
+      "A cookie in the end user's browser"
+    ],
+    answer: [0],
+    explain: "Tool secrets belong in Secrets Manager. Putting a password in the prompt risks exposure in outputs and logs."
+  },
+  {
+    id: "m1q65",
+    domain: 5,
+    type: "multi",
+    stem: "Security asks two questions: which IAM role called InvokeModel at 14:02, and what was the actual prompt text? Which TWO services match those needs?",
+    choices: [
+      "AWS CloudTrail for the caller and the time",
+      "Bedrock invocation logging to Amazon S3 or Amazon CloudWatch for the prompt body",
+      "AWS Artifact for the prompt body",
+      "Amazon Polly for the caller",
+      "Raising temperature to hide the caller"
+    ],
+    answer: [0, 1],
+    explain: "CloudTrail is API metadata (who/when). Invocation logging stores prompt and completion text. Artifact is AWS's own compliance PDFs."
   }
 ];

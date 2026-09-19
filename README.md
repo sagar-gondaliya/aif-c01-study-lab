@@ -2,7 +2,7 @@
 
 Local-first study site for **AWS Certified AI Practitioner (AIF-C01)**, exam guide **v1.1 (30 Apr 2026)**.
 
-41 topic lessons, exam-style quizzes, 7 practice banks, and 5 timed mocks. Progress stays in the browser (`localStorage`).
+41 topic lessons, exam-style quizzes, 7 practice banks, and 5 timed mocks (65 questions · 90 minutes each). Progress stays in the browser (`localStorage`).
 
 ## Use it
 
