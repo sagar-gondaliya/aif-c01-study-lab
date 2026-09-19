@@ -8,7 +8,7 @@ def box(cls, title, html):
 
 
 def meaning(p):
-    return box("ok", "In plain English", f"<p>{p}</p>")
+    return box("ok", "Information", f"<p>{p}</p>")
 
 
 def exam(p):
