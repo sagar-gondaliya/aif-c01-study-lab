@@ -10,16 +10,17 @@ def topics():
             "GenAI vocabulary you must say out loud",
             "If you cannot define token, embedding, and context window, Domain 2 will feel random.",
             meaning(
-                "These nouns show up in cost, RAG, and model-choice questions. Say them exactly.",
+                "These words appear in cost and RAG questions. A <b>token</b> is not the same as a word.",
                 [
-                    "<b>Token</b> — a chunk of text the model reads or writes. Bills and limits use tokens, not words. About 4 characters / 0.75 English words per token.",
-                    "<b>Context window</b> — max tokens of input + output the model can see at once.",
-                    "<b>Embedding</b> — a numeric vector of meaning. Similar text → similar vectors.",
-                    "<b>Vector store</b> — holds embeddings for similarity search (OpenSearch, Aurora pgvector, Neptune, RDS PostgreSQL). S3 is not this.",
-                    "<b>Chunking</b> — split a long document so each piece can be embedded and retrieved.",
-                    "<b>Multimodal</b> — more than one type (text + image). <b>Diffusion</b> — typical image/video generator.",
+                    "<b>Token</b> — a small piece of text the model reads or writes. AWS bills and limits use tokens. About 4 letters, or about ¾ of an English word, per token.",
+                    "<b>Context window</b> — the maximum tokens of input + output the model can see in one request.",
+                    "<b>Embedding</b> — the text turned into a list of numbers that capture meaning. Similar meaning → similar numbers.",
+                    "<b>Vector store</b> — a database that searches those numbers (OpenSearch, Aurora, Neptune, RDS PostgreSQL). <b>S3 is not this</b> — S3 only stores files.",
+                    "<b>Chunking</b> — cut a long document into smaller pieces so each piece can be stored and found.",
+                    "<b>Multimodal</b> — more than one type (text + image). <b>Diffusion</b> — a common way to generate images or video.",
                 ],
-                "A 200-page runbook cannot be pasted into Claude. You hit the context window. Split it, embed chunks, store them in OpenSearch or a Bedrock Knowledge Base, then retrieve only the top matches for each question.",
+                "A 200-page runbook cannot be pasted into Claude. That hits the <b>context window</b>.<br>"
+                "You split the file (chunk), turn each piece into numbers (embed), store them in OpenSearch or a Bedrock <b>Knowledge Base</b>, then for each question you fetch only the closest pieces.",
             )
             + exam(
                 "They swap “words” for “tokens” in cost questions. They ask why two sentences are “close” (embeddings). "
