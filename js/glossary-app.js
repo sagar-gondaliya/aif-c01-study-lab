@@ -42,18 +42,24 @@
     var shown = 0;
     var html = "";
 
+    var groupN = 0;
     data.forEach(function (sec) {
       var secHtml = "";
       var secN = 0;
-      (sec.groups || []).forEach(function (g) {
-        var rows = (g.rows || []).filter(function (r) {
+      (sec.groups || []).forEach(function (g, gi) {
+        groupN += 1;
+        var pad = groupN < 10 ? "0" + groupN : String(groupN);
+        var gid = sec.id + "-g" + (gi + 1);
+        var all = g.rows || [];
+        var rows = all.filter(function (r) {
           return match(q, { sec: sec, group: g, row: r });
         });
-        total += (g.rows || []).length;
+        total += all.length;
         if (!rows.length) return;
         secN += rows.length;
         shown += rows.length;
-        secHtml += "<h3>" + escapeHtml(g.name) + "</h3>";
+        var heading = pad + " - " + g.name + " - (" + all.length + ")";
+        secHtml += '<h3 id="' + escapeHtml(gid) + '">' + escapeHtml(heading) + "</h3>";
         secHtml += "<div class='table-wrap'><table class='gloss-table'><tr><th>Term</th><th>Meaning (simple)</th><th>Exam example</th></tr>";
         rows.forEach(function (r) {
           secHtml += "<tr><td><b>" + escapeHtml(r.term) + "</b></td><td class='gloss-mean'>" +

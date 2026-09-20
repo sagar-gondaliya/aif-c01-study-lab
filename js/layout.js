@@ -102,6 +102,28 @@
     return ((AIF.topics || []).filter(function (t) { return t.domain === domain; }));
   }
 
+  AIF.glossaryGroups = function () {
+    var out = [];
+    var n = 0;
+    (AIF.glossary || []).forEach(function (sec) {
+      (sec.groups || []).forEach(function (g, gi) {
+        n += 1;
+        var pad = n < 10 ? "0" + n : String(n);
+        var count = (g.rows || []).length;
+        out.push({
+          n: n,
+          pad: pad,
+          name: g.name,
+          count: count,
+          id: sec.id + "-g" + (gi + 1),
+          domainId: sec.id,
+          title: pad + " - " + g.name + " - (" + count + ")"
+        });
+      });
+    });
+    return out;
+  };
+
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -118,10 +140,12 @@
       group.items.forEach(function (it) {
         var active = isActive(it, ctx);
         var kids = it.domain ? topicsFor(it.domain) : [];
+        var glossKids = it.id === "glossary" ? AIF.glossaryGroups() : [];
         var showKids = !!(it.domain && (active || ctx.cur === "d" + it.domain));
         html += '<a class="nav-a' + (active ? " active" : "") + '" href="' + it.href + '">' +
           '<span class="nav-label">' + escapeHtml(it.t) + "</span>";
         if (it.pct) html += '<span class="nav-pct">' + escapeHtml(it.pct) + "</span>";
+        else if (glossKids.length) html += '<span class="nav-pct">' + glossKids.length + "</span>";
         else if (kids.length) html += '<span class="nav-pct">' + kids.length + "</span>";
         html += "</a>";
         if (showKids && kids.length) {
@@ -134,22 +158,34 @@
           });
           html += "</div>";
         }
+        if (glossKids.length) {
+          var hash = (location.hash || "").replace(/^#/, "");
+          html += '<div class="nav-sub">';
+          glossKids.forEach(function (g) {
+            var on = ctx.cur === "glossary" && hash === g.id;
+            html += '<a class="nav-sub-a' + (on ? " active" : "") + '" href="glossary.html#' +
+              g.id + '" title="' + escapeHtml(g.title) + '">' +
+              "<em>" + escapeHtml(g.pad) + "</em><span>" + escapeHtml(g.name) +
+              " (" + g.count + ")</span></a>";
+          });
+          html += "</div>";
+        }
       });
       html += "</div></div>";
     });
     return html;
   }
 
-  function ensureTopics(cb) {
-    if (AIF.topics && AIF.topics.length) { cb(); return; }
-    var existing = document.querySelector('script[src="js/topics.js"]');
+  function ensureScript(src, ready, cb) {
+    if (ready()) { cb(); return; }
+    var existing = document.querySelector('script[src="' + src + '"]');
     if (existing) {
-      existing.addEventListener("load", cb);
+      existing.addEventListener("load", function () { cb(); });
       setTimeout(cb, 80);
       return;
     }
     var s = document.createElement("script");
-    s.src = "js/topics.js";
+    s.src = src;
     s.onload = cb;
     s.onerror = cb;
     document.head.appendChild(s);
@@ -231,12 +267,25 @@
     mask.onclick = function () { setMenu(false); };
     document.getElementById("qsearch").addEventListener("input", applySearch);
 
+    window.addEventListener("hashchange", function () {
+      if (pageId() === "glossary") paint();
+    });
+
     paint();
     AIF.markRead(ctx.cur === "topic" ? "topic" : ctx.cur);
   }
 
   function start() {
-    ensureTopics(inject);
+    var left = 2;
+    function done() {
+      if (--left <= 0) inject();
+    }
+    ensureScript("js/topics.js", function () {
+      return !!(AIF.topics && AIF.topics.length);
+    }, done);
+    ensureScript("js/glossary-data.js", function () {
+      return !!(AIF.glossary && AIF.glossary.length);
+    }, done);
   }
 
   if (document.readyState === "loading") {

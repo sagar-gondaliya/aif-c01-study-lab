@@ -108,10 +108,10 @@ a:hover { color: var(--green); }
   border-left: 2px solid #c5c7c9; margin-left: 8px;
 }
 .nav-sub-a em {
-  flex: 0 0 18px; font-style: normal; color: #888; font-size: 11px; padding-top: 1px;
+  flex: 0 0 22px; font-style: normal; color: #888; font-size: 11px; padding-top: 1px;
 }
 .nav-sub-a span {
-  flex: 1; min-width: 0; display: -webkit-box; -webkit-line-clamp: 2;
+  flex: 1; min-width: 0; display: -webkit-box; -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; overflow: hidden;
 }
 .nav-sub-a.active {
@@ -260,7 +260,7 @@ select {
   font: inherit; width: 100%; max-width: 520px; height: 40px;
   border: 1px solid #bbb; border-radius: 4px; padding: 0 12px;
 }
-.gloss-sec { scroll-margin-top: calc(var(--top-h) + 16px); }
+.gloss-sec, .gloss-sec h3 { scroll-margin-top: calc(var(--top-h) + 16px); }
 .gloss-table th:nth-child(1), .gloss-table td:nth-child(1) { width: 22%; }
 .gloss-table th:nth-child(2), .gloss-table td:nth-child(2) { width: 39%; }
 .gloss-table th:nth-child(3), .gloss-table td:nth-child(3) { width: 39%; }
